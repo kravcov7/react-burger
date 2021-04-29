@@ -1,0 +1,23 @@
+.header{
+  background-color: #1C1C21;
+  align-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.container{
+  width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+}
+
+.block{
+  display: flex;
+  align-items: center;
+}
+
+/* .link{  
+  align-content: center;
+  align-items: center;  
+} */
