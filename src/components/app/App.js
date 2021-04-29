@@ -1,12 +1,15 @@
 import React from 'react';
 
-import {AppHeader} from '../appHeader/AppHeader'
+import { AppHeader } from '../appHeader/AppHeader';
+import { BurgerBlock} from '../BurgerBlock/BurgerBlock'
+
 
 
 function App() {
   return (
-    <div className="App">
+    <div className="">
       <AppHeader />
+      <BurgerBlock />
     </div>
   );
 }
