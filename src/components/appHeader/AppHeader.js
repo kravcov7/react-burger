@@ -17,7 +17,7 @@ export function AppHeader() {
             <span className={cn(styles.link, "pl-1")}>Лента заказов</span>
           </div> */}
           <BurgerIcon />
-          <span className={cn(styles.link, "pl-1", 'mr-4')}>Конструктор</span>
+          <span className={cn(styles.link, styles.link_active,  "pl-1", 'mr-4')}>Конструктор</span>
           <ListIcon className={cn("ml-2")} type="secondary" />
           <span className={cn(styles.link, "pl-1")}>Лента заказов</span>
         </div>
