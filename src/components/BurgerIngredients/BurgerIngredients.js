@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./BurgerIngredients.module.css";
-import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Tab, CurrencyIcon  } from "@ya.praktikum/react-developer-burger-ui-components";
 
 export function BurgerIngredients() {
   const [current, setCurrent] = React.useState("buns");
@@ -23,6 +23,16 @@ export function BurgerIngredients() {
 
       <section className={ styles.main}>
         <h2 className='mt-4'>Булки</h2>
+        <div className={ styles.cards }>
+          <div className={ styles. card }>
+            <img src="https://code.s3.yandex.net/react/code/bun-02.png" alt='' />
+            <p className={ styles.price }>
+              <span className='' >20</span>
+              <CurrencyIcon type="primary" />
+            </p>
+            <p>Краторная булка N-2000</p>
+          </div>
+        </div>
       </section>
     </>
   );
