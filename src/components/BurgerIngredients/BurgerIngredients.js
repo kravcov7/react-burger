@@ -1,12 +1,14 @@
 import React from "react";
 import styles from "./BurgerIngredients.module.css";
-import { Tab, CurrencyIcon  } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Tab, CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 
-export function BurgerIngredients() {
+export function BurgerIngredients({ array }) {
   const [current, setCurrent] = React.useState("buns");
+
+  const bun = array.filter((item) => item.type === "bun");
   return (
     <>
-      <section className={ styles.header}>
+      <section className={styles.header}>
         <h1>Соберите бургер</h1>
         <div className={styles.tabs}>
           <Tab value="one" active={current === "buns"} onClick={setCurrent}>
@@ -21,18 +23,25 @@ export function BurgerIngredients() {
         </div>
       </section>
 
-      <section className={ styles.main}>
-        <h2 className='mt-4'>Булки</h2>
-        <div className={ styles.cards }>
-          <div className={ styles. card }>
-            <img src="https://code.s3.yandex.net/react/code/bun-02.png" alt='' />
-            <p className={ styles.price }>
-              <span className='' >20</span>
-              <CurrencyIcon type="primary" />
-            </p>
-            <p>Краторная булка N-2000</p>
-          </div>
+      <section className={styles.main}>
+        <h2 className="mt-4">Булки</h2>
+        <div className={styles.cards}>
+          {bun.map((el) => {
+            return (
+              <div className={styles.card}>
+                <img src={ el.image } alt={el.name} />
+                <p className={styles.price}>
+                  <span className="text text_type_digits-default">{ el.price }</span>
+                  <CurrencyIcon type="primary" />
+                </p>
+                <p>{ el.name }</p>
+                <Counter count={1} size="default" />
+              </div>
+            );
+          })}
         </div>
+
+        
       </section>
     </>
   );

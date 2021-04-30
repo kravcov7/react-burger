@@ -6,3 +6,8 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+.price {
+  display: flex;
+  justify-content: center;
+}
