@@ -36,7 +36,7 @@ export function BurgerIngredients({ array }) {
                   <span className="text text_type_digits-default">{ el.price }</span>
                   <CurrencyIcon type="primary" />
                 </p>
-                <p>{ el.name }</p>
+                <p className={ styles.name }>{ el.name }</p>
                 <Counter count={1} size="default" />
               </div>
             );
@@ -53,7 +53,7 @@ export function BurgerIngredients({ array }) {
                   <span className="text text_type_digits-default">{ el.price }</span>
                   <CurrencyIcon type="primary" />
                 </p>
-                <p>{ el.name }</p>
+                <p className={ styles.name }>{ el.name }</p>
                 <Counter count={1} size="default" />
               </div>
             );
@@ -70,7 +70,7 @@ export function BurgerIngredients({ array }) {
                   <span className="text text_type_digits-default">{ el.price }</span>
                   <CurrencyIcon type="primary" />
                 </p>
-                <p>{ el.name }</p>
+                <p className={ styles.name }>{ el.name }</p>
                 <Counter count={1} size="default" />
               </div>
             );
