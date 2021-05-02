@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./burger-ingredients.module.css";
-import { Tab, CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Cards } from '../cards/cards';
 
 export function BurgerIngredients({ array }) {
   const [current, setCurrent] = React.useState("buns");
@@ -26,56 +27,9 @@ export function BurgerIngredients({ array }) {
       </section>
 
       <section className={styles.main}>
-        <h2 className="mt-4">Булки</h2>
-        <div className={styles.cards}>
-          {bun.map((el) => {
-            return (
-              <div className={styles.card}>
-                <img src={ el.image } alt={el.name} />
-                <p className={styles.price}>
-                  <span className="text text_type_digits-default">{ el.price }</span>
-                  <CurrencyIcon type="primary" />
-                </p>
-                <p className={ styles.name }>{ el.name }</p>
-                <Counter count={1} size="default" />
-              </div>
-            );
-          })}
-        </div>
-
-        <h2 className="mt-4">Соусы</h2>
-        <div className={styles.cards}>
-          {sauce.map((el) => {
-            return (
-              <div className={styles.card}>
-                <img src={ el.image } alt={el.name} />
-                <p className={styles.price}>
-                  <span className="text text_type_digits-default">{ el.price }</span>
-                  <CurrencyIcon type="primary" />
-                </p>
-                <p className={ styles.name }>{ el.name }</p>
-                <Counter count={1} size="default" />
-              </div>
-            );
-          })}
-        </div>
-
-        <h2 className="mt-4">Начинки</h2>
-        <div className={styles.cards}>
-          {main.map((el) => {
-            return (
-              <div className={styles.card}>
-                <img src={ el.image } alt={el.name} />
-                <p className={styles.price}>
-                  <span className="text text_type_digits-default">{ el.price }</span>
-                  <CurrencyIcon type="primary" />
-                </p>
-                <p className={ styles.name }>{ el.name }</p>
-                <Counter count={1} size="default" />
-              </div>
-            );
-          })}
-        </div>
+        <Cards title='Булки' ingredients={ bun } />
+        <Cards title='Соусы' ingredients={ sauce } />
+        <Cards title='Начинки' ingredients={ main } />        
 
       </section>
     </div>
