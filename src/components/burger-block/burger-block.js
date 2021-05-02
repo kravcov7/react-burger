@@ -1,9 +1,9 @@
 import React from "react";
-import styles from "./BurgerBlock.module.css";
+import styles from "./burger-block.module.css";
 import { data } from "../../utils/data";
 
-import { BurgerIngredients } from "../BurgerIngredients/BurgerIngredients";
-import { BurgerConstructor } from "../BurgerConstructor/BurgerConstructor";
+import { BurgerIngredients } from "../burger-ingredients/burger-ingredients";
+import { BurgerConstructor } from "../burger-constructor/burger-constructor";
 
 export function BurgerBlock() {
   return (

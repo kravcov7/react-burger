@@ -1,6 +1,6 @@
 import React from "react";
 import { ConstructorElement, DragIcon, Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "./BurgerConstructor.module.css";
+import styles from "./burger-constructor.module.css";
 import cn from "classnames";
 
 export function BurgerConstructor() {

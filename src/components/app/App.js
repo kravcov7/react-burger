@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { AppHeader } from '../appHeader/AppHeader';
-import { BurgerBlock} from '../BurgerBlock/BurgerBlock'
+import { AppHeader } from '../app-header/app-header';
+import { BurgerBlock} from '../burger-block/burger-block'
 
 
 
