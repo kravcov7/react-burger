@@ -7,7 +7,7 @@ import { BurgerBlock} from '../BurgerBlock/BurgerBlock'
 
 function App() {
   return (
-    <div className="">
+    <div className=''>
       <AppHeader />
       <BurgerBlock />
     </div>
