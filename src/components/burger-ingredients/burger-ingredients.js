@@ -2,8 +2,9 @@ import React from "react";
 import styles from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Cards } from '../cards/cards';
+import PropTypes from 'prop-types';
 
-export function BurgerIngredients({ array }) {
+function BurgerIngredients({ array }) {
   const [current, setCurrent] = React.useState("buns");
 
   const bun = array.filter((item) => item.type === "bun");
@@ -35,3 +36,9 @@ export function BurgerIngredients({ array }) {
     </div>
   );
 }
+
+BurgerIngredients.propTypes = {
+  name: PropTypes.string
+}
+
+export default BurgerIngredients;

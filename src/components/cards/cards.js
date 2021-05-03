@@ -1,6 +1,7 @@
 import React from "react";
 import styles from './cards.module.css';
 import {  CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
+import PropTypes from 'prop-types';
 
 export function Cards(props) {
   
