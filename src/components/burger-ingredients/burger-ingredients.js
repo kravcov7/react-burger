@@ -38,7 +38,7 @@ function BurgerIngredients({ array }) {
 }
 
 BurgerIngredients.propTypes = {
-  name: PropTypes.string
+  array: PropTypes.array
 }
 
 export default BurgerIngredients;
