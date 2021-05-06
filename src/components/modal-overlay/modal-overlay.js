@@ -7,4 +7,4 @@ function ModalOverlay() {
   );
 }
 
-export default ModaOverlay;
+export default ModalOverlay;
