@@ -1,18 +1,13 @@
 import React from "react";
 import styles from "./burger-block.module.css";
+import API from '../../utils/config'
 // import { data } from "../../utils/data";
 
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import { BurgerConstructor } from "../burger-constructor/burger-constructor";
 
 export function BurgerBlock() {
-  // const getBread = async() => {
-  //   setState({ ...state, isLoading: true, hasError: false })
-  //   try{
-
-  //   }
-  // }
-
+ 
   const [state, setState] = React.useState({
     isLoading: false,
     hasError: false,
@@ -26,7 +21,7 @@ export function BurgerBlock() {
   const getIngredients = async () => {
     setState({ ...state, hasError: false, isLoading: true });
     try {
-      const res = await fetch("https://norma.nomoreparties.space/api/ingredients");
+      const res = await fetch(API.Url);
       const data = await res.json();
       setState({ ...state, data: data.data, isLoading: false });
     } catch {
