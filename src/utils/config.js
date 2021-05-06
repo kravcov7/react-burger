@@ -1,3 +1,3 @@
-const API = { Url: "https://norma.nomoreparties.space/api/ingredients"}
+const url = "https://norma.nomoreparties.space/api/ingredients"
 
-export default API
+export default url

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./burger-block.module.css";
-import API from '../../utils/config'
+import url from '../../utils/config'
 // import { data } from "../../utils/data";
 
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
@@ -21,7 +21,7 @@ export function BurgerBlock() {
   const getIngredients = async () => {
     setState({ ...state, hasError: false, isLoading: true });
     try {
-      const res = await fetch(API.Url);
+      const res = await fetch(url);
       const data = await res.json();
       setState({ ...state, data: data.data, isLoading: false });
     } catch {
