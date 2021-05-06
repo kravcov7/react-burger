@@ -10,7 +10,7 @@ function BurgerIngredients({ array }) {
   const bun = array.filter((item) => item.type === "bun");
   const sauce = array.filter((item) => item.type === "sauce");
   const main = array.filter((item) => item.type === "main");
-  console.log(bun);
+  
   return (
     <div>
       <section className={styles.header}>
@@ -31,8 +31,7 @@ function BurgerIngredients({ array }) {
       <section className={styles.main}>
         <Cards title='Булки' ingredients={ bun } />
         <Cards title='Соусы' ingredients={ sauce } />
-        <Cards title='Начинки' ingredients={ main } />        
-
+        <Cards title='Начинки' ingredients={ main } />    
       </section>
     </div>
   );
