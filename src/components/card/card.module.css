@@ -1,0 +1,22 @@
+.box{
+  display: flex;
+}
+
+.cards{
+  display: flex;
+  flex-wrap: wrap;  
+}
+
+.card{
+  position: relative;
+}
+
+.price {
+  display: flex;
+  justify-content: center;
+}
+
+.name{
+  text-align: center;
+  max-width: 272px;
+}

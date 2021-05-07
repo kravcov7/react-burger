@@ -1,8 +1,11 @@
 import React from "react";
-import s from './order-details.module.css';
+import s from './ingredient-details.module.css';
 import cn from 'classnames';
 
-function OrderDetails({ name, image, carbohydrates, fat, proteins, calories }) {
+function IngredientsDetails({ name, image, carbohydrates, fat, proteins, calories }) {
+// function IngredientsDetails(props) {
+  // console.log(props);
+  
   return (
     <div className={s.ingredients}>
       <h1 className={s.title}>Детали ингредиента</h1>
@@ -35,4 +38,4 @@ function OrderDetails({ name, image, carbohydrates, fat, proteins, calories }) {
   );
 }
 
-export default OrderDetails;
+export default IngredientsDetails;

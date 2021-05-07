@@ -43,7 +43,7 @@ export function BurgerBlock() {
       {hasError && "Произошла ошибка"}
       {!isLoading && !hasError && data.length && (
         <>
-          <BurgerIngredients array={data} />
+          <BurgerIngredients array={data} setModal={setModal} />
           <BurgerConstructor setModal={setModal} />
         </>
       )}
