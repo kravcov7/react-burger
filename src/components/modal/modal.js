@@ -31,7 +31,7 @@ function Modal({ setModal, children }) {
         </div>
         <div>{ children }</div>
       </div>
-      <ModalOverlay onClick={close} />
+      <ModalOverlay close={close} />
     </>,
     document.getElementById("portal")
   );
