@@ -2,9 +2,18 @@ import React from "react";
 import { ConstructorElement, DragIcon, Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-constructor.module.css";
 import cn from "classnames";
+import OrderDetails from "../order-details/order-details";
 
-export function BurgerConstructor() {
+export function BurgerConstructor({ setModal }) {
   const img = "https://code.s3.yandex.net/react/code/bun-02.png";
+
+  const handleClick = () => {
+    setModal({
+      isShow: true,
+      content: <OrderDetails />
+    })
+
+  }
   return (
     <section className={cn(styles.container)}>
       <header className={cn(styles.element, "mb-5")}>
@@ -41,7 +50,7 @@ export function BurgerConstructor() {
           <span className="text text_type_digits-default">610</span>
           <CurrencyIcon type="primary" />
         </div>
-        <Button type="primary" size="large">
+        <Button type="primary" size="large" onClick={handleClick}>
           Нажми на меня
         </Button>
       </div>
