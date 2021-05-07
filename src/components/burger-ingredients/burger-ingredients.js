@@ -29,7 +29,7 @@ function BurgerIngredients({ array }) {
       </section>
 
       <section className={styles.main}>
-        <Cards title='Булки' ingredients={ bun } />
+        <Cards title='Булки' ingredients={ bun }  />
         <Cards title='Соусы' ingredients={ sauce } />
         <Cards title='Начинки' ingredients={ main } />    
       </section>
