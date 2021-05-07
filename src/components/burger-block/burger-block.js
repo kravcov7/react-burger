@@ -4,7 +4,7 @@ import url from "../../utils/config";
 // import { data } from "../../utils/data";
 
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
-import { BurgerConstructor } from "../burger-constructor/burger-constructor";
+import BurgerConstructor from "../burger-constructor/burger-constructor";
 import Modal from "../modal/modal";
 
 export function BurgerBlock() {

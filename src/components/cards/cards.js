@@ -3,7 +3,7 @@ import styles from "./cards.module.css";
 import PropTypes from "prop-types";
 import Card from "../card/card";
 
-export function Cards({ title, ingredients, openModal }) {
+function Cards({ title, ingredients, openModal }) {
   return (
     <>
       <h2 className="mt-4">{title}</h2>
@@ -15,3 +15,11 @@ export function Cards({ title, ingredients, openModal }) {
     </>
   );
 }
+
+Cards.propTypes = {
+	title: PropTypes.string,
+  openModal: PropTypes.func
+
+}
+
+export default Cards;

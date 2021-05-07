@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import ModalOverlay from "../modal-overlay/modal-overlay";
 import s from './modal.module.css';
 import cn from 'classnames';
+import PropTypes from 'prop-types';
 
 function Modal({ setModal, children }) {
   const closeEsc = (e) => {
@@ -16,7 +17,7 @@ function Modal({ setModal, children }) {
 			window.removeEventListener('keydown', closeEsc)
 		}
 	})
-
+  
   const close = () => {
     setModal({
       isShow:false,
@@ -35,6 +36,10 @@ function Modal({ setModal, children }) {
     </>,
     document.getElementById("portal")
   );
+}
+
+Modal.propTypes = {
+	children: PropTypes.element
 }
 
 export default Modal;

@@ -3,8 +3,9 @@ import { ConstructorElement, DragIcon, Button, CurrencyIcon } from "@ya.praktiku
 import styles from "./burger-constructor.module.css";
 import cn from "classnames";
 import OrderDetails from "../order-details/order-details";
+import PropTypes from 'prop-types';
 
-export function BurgerConstructor({ setModal }) {
+function BurgerConstructor({ setModal }) {
   const img = "https://code.s3.yandex.net/react/code/bun-02.png";
 
   const handleClick = () => {
@@ -57,3 +58,9 @@ export function BurgerConstructor({ setModal }) {
     </section>
   );
 }
+
+BurgerConstructor.propTypes = {
+	setModal: PropTypes.func.isRequired
+}
+
+export default BurgerConstructor;

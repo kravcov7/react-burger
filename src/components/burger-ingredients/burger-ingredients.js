@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Cards } from '../cards/cards';
+import Cards from '../cards/cards';
 import PropTypes from 'prop-types';
 import IngredientsDetails from '../ingredient-details/ingredient-details';
 
@@ -9,7 +9,6 @@ function BurgerIngredients({ array, setModal }) {
   const [current, setCurrent] = React.useState("buns");
 
   const openModal = (item) => { 
-    console.log(item.target);    
     setModal({
       isShow: true,
       content: <IngredientsDetails image={item.image_large} name={item.name} calories={item.calories} proteins={item.proteins} fat={item.fat} carbohydrates={item.carbohydrates}  />
