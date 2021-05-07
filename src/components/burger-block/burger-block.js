@@ -15,7 +15,7 @@ export function BurgerBlock() {
   });
 
   const [modal, setModal] = React.useState({
-    isShow: true,
+    isShow: false,
     content: null,
   });
 
