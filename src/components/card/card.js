@@ -1,13 +1,13 @@
 import React from 'react';
 import styles from './card.module.css';
 import {  CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
+import PropTypes from "prop-types";
 
-
-function Card( { el, openModal}) {
-
+function Card({ el, openModal}) {
   const handleClick = () => {
     openModal(el)
   }
+  
   return (
     <div className={styles.card} key={el._id} onClick={handleClick}>     
       <img src={el.image} alt={el.name} />
@@ -19,6 +19,11 @@ function Card( { el, openModal}) {
       <Counter count={1} size="default" />
     </div>
   );
+}
+
+Card.propTypes = {
+  openModal: PropTypes.func,
+  el: PropTypes.object
 }
 
 export default Card;

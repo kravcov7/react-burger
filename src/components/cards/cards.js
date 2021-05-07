@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import Card from "../card/card";
 
 function Cards({ title, ingredients, openModal }) {
+  
   return (
     <>
       <h2 className="mt-4">{title}</h2>
@@ -18,8 +19,8 @@ function Cards({ title, ingredients, openModal }) {
 
 Cards.propTypes = {
 	title: PropTypes.string,
-  openModal: PropTypes.func
-
+  openModal: PropTypes.func,
+  ingredients: PropTypes.array
 }
 
 export default Cards;
