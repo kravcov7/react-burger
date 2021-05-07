@@ -6,6 +6,16 @@ import s from './modal.module.css';
 import cn from 'classnames';
 
 function Modal({ setModal, children }) {
+  const closeEsc = (e) => {
+		if (e.keyCode === 27) close()			
+	}
+
+  React.useEffect(() => {
+		window.addEventListener('keydown', closeEsc)
+		return () => {
+			window.removeEventListener('keydown', closeEsc)
+		}
+	})
 
   const close = () => {
     setModal({
