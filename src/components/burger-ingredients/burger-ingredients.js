@@ -39,8 +39,8 @@ function BurgerIngredients({ array, setModal }) {
 
       <section className={styles.main}>
         <Cards title='Булки' ingredients={ bun } openModal={openModal} />
-        <Cards title='Соусы' ingredients={ sauce } ingredientModal={openModal} />
-        <Cards title='Начинки' ingredients={ main } ingredientModal={openModal} />    
+        <Cards title='Соусы' ingredients={ sauce } openModal={openModal} />
+        <Cards title='Начинки' ingredients={ main } openModal={openModal} />    
       </section>
     </div>
   );
