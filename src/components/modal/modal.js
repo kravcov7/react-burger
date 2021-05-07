@@ -15,7 +15,7 @@ function Modal({ setModal, children }) {
   }
   return ReactDOM.createPortal(
     <>
-      <div className={cn(s.modal)}>
+      <div className={cn(s.modal, 'pr-15', 'pl-15', 'pt-20', 'pb-15')}>
         <div className={s.close} onClick={close}>
           <CloseIcon type='primary' />
         </div>

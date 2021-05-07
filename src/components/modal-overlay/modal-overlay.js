@@ -1,8 +1,11 @@
 import React from 'react';
+import s from './modal-overlay.module.css';
 
-function ModalOverlay() {
+
+function ModalOverlay({ close }) {
   return (
-    <div className=''>      
+    <div className={s.overlay} onClick={ close }>    
+      
     </div>
   );
 }
