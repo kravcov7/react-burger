@@ -10,13 +10,13 @@ function AppHeader() {
     <header className={styles.header}>
       <nav className={styles.container}>
         <div className={cn(styles.block)}>
-          <NavLink exact to="/" className={cn(styles.link, "pt-4")} activeClassName={styles.link_active}>
+          <NavLink exact to="/" className={cn(styles.link)} activeClassName={styles.active}>
             <BurgerIcon type={pathname === "/" ? "primary" : "secondary"} />
-            <span className={cn(styles.link, styles.link_active, "pl-1", "mr-4", 'text', 'text_type_main-default')}>Конструктор</span>
+            <span className={cn( "pl-1", "mr-4", 'text', 'text_type_main-default')}>Конструктор</span>
           </NavLink> 
-          <NavLink  to="/order" className={cn(styles.link, "pt-4")} activeClassName={styles.link_active}>
+          <NavLink  to="/order" className={cn(styles.link)} activeClassName={styles.active}>
             <ListIcon  type={pathname === '/order' ? "primary" : "secondary"}  className={cn("ml-2")}  />
-            <span className={cn(styles.link, "pl-1", 'text', 'text_type_main-default')}>Лента заказов</span>
+            <span className={cn( "pl-1", 'text', 'text_type_main-default')}>Лента заказов</span>
           </NavLink>      
         </div>
         <Logo />
