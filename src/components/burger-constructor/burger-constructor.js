@@ -48,7 +48,7 @@ function BurgerConstructor({ setModal }) {
 
       <div className={styles.total}>
         <div className={cn(styles.price, 'mr-10')}>
-          <span className="text text_type_digits-default">610</span>
+          <span className="text text_type_digits-default mr-2">610</span>
           <CurrencyIcon type="primary" />
         </div>
         <Button type="primary" size="large" onClick={handleClick}>

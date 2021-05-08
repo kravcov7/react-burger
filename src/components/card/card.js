@@ -12,7 +12,7 @@ function Card({ el, openModal}) {
     <div className={styles.card} key={el._id} onClick={handleClick}>     
       <img src={el.image} alt={el.name} />
       <p className={styles.price}>
-        <span className="text text_type_digits-default">{el.price}</span>
+        <span className="text text_type_digits-default mr-2">{el.price}</span>
         <CurrencyIcon type="primary" />
       </p>
       <p className={styles.name}>{el.name}</p>

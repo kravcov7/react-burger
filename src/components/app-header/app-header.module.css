@@ -15,10 +15,15 @@
 .block{
   display: flex;
   align-items: center;
+  text-align: center;
 }
 
 .link{  
-  color: #8585AD;
+  text-decoration: none;
+	color: #8585AD;	
+	display: flex;
+	text-align: center;
+	align-items: center;
 } 
 
 .link_active{  

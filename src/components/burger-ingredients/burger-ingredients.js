@@ -4,6 +4,7 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import Cards from '../cards/cards';
 import PropTypes from 'prop-types';
 import IngredientsDetails from '../ingredient-details/ingredient-details';
+import cn from 'classnames';
 
 function BurgerIngredients({ array, setModal }) {
   const [current, setCurrent] = React.useState("buns");
@@ -22,7 +23,7 @@ function BurgerIngredients({ array, setModal }) {
   return (
     <div>
       <section className={styles.header}>
-        <h1>Соберите бургер</h1>
+        <h1 className={cn(styles.title, 'text', 'text_type_main-large', 'mt-10' )}>Соберите бургер</h1>
         <div className={styles.tabs}>
           <Tab value="buns" active={current === "buns"} onClick={setCurrent}>
             Булки
