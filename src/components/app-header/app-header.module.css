@@ -1,0 +1,31 @@
+.header{
+  background-color: #1C1C21;
+  align-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.container{
+  width: 1240px;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+}
+
+.block{
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.link{  
+  text-decoration: none;
+	color: #8585AD;	
+	display: flex;
+	text-align: center;
+	align-items: center;
+} 
+
+.active{  
+  color: #fff;
+} 
