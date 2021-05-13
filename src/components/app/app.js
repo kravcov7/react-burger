@@ -5,10 +5,10 @@ import { BurgerBlock} from '../burger-block/burger-block';
 
 function App() {  
   return (
-    <div className=''>
+    <>
       <AppHeader />
       <BurgerBlock />           
-    </div>
+    </>
   );
 }
 
