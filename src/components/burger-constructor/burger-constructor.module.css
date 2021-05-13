@@ -1,7 +1,6 @@
 .item{
   display: flex;
-  align-items: center;
-	/* justify-content: space-between; */
+  align-items: center;	
 }
 
 .container{
@@ -12,8 +11,7 @@
 
 .list{
   padding-left: 0;
-  margin: 0;
-  /* list-style-type: none; */
+  margin: 0;  
   overflow-y: auto;
 	max-height: 300px;
 }
@@ -38,14 +36,11 @@
 }
 
 .total{
-  display: flex;
-  /* text-align: center; */
+  display: flex;  
   align-items: center;
   justify-content: flex-end;
 }
 
 .price{
   display: flex;
-  /* text-align: center; */
-  /* align-items: center; */
 }
