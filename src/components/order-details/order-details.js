@@ -2,6 +2,7 @@ import React from "react";
 import s from './order-details.module.css';
 import cn from 'classnames';
 import doneOrder from '../../images/graphics.svg'
+import PropTypes from 'prop-types';
 
 function OrderDetails({ data }) {
   return (
@@ -13,6 +14,10 @@ function OrderDetails({ data }) {
       <p className={cn(s.order__subtitle, 'text', 'text_type_main-default', 'text_color_inactive')}>Дождитесь готовности на орбитальной станции</p>
     </div>
   );
+}
+
+OrderDetails.propTypes = {
+	data: PropTypes.number.isRequired
 }
 
 export default OrderDetails;
