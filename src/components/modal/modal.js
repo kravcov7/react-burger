@@ -24,6 +24,7 @@ function Modal({ setModal, children }) {
       content: null,
     })
   }
+  
   return ReactDOM.createPortal(
     <>
       <div className={cn(s.modal, 'pr-15', 'pl-15', 'pt-20', 'pb-15')}>

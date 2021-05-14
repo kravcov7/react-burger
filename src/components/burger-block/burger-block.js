@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./burger-block.module.css";
 import url from "../../utils/config";
-// import { data } from "../../utils/data";
 
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
@@ -14,8 +13,17 @@ export function BurgerBlock() {
     isLoading: false,
     hasError: false,
     data: [],
+    burger: {
+      bun: {},
+      fillings: []
+    },
   });
-
+// { bun: { name: bun, price: 200 }
+//   fillings: [
+  // { name: bun, price: 200 }
+  // { name: bun, price: 200 }
+//   ],
+//}
   const [modal, setModal] = React.useState({
     isShow: false,
     content: null,
@@ -33,7 +41,9 @@ export function BurgerBlock() {
         throw new Error(`ошибка: ` + res.status);
       }
       const data = await res.json();
-      setState({ ...state, data: data.data, isLoading: false });
+      const burger = { bun: data.data[0], fillings: [data.data[1], data.data[2], data.data[3], data.data[8], data.data[5], data.data[7]] }
+      
+      setState({ ...state, data: data.data, burger: burger, isLoading: false });
     } catch {
       setState({ ...state, hasError: true, isLoading: false });
     }
@@ -50,8 +60,8 @@ export function BurgerBlock() {
           {hasError && "Произошла ошибка"}
           {!isLoading && !hasError && data.length && (
             <>
-              <BurgerIngredients array={data} setModal={setModal} />
-              <BurgerConstructor setModal={setModal} />
+              <BurgerIngredients   />
+              <BurgerConstructor  />
             </>
           )}
           {isShow && <Modal setModal={setModal}>{content}</Modal>}
