@@ -18,12 +18,7 @@ export function BurgerBlock() {
       fillings: []
     },
   });
-// { bun: { name: bun, price: 200 }
-//   fillings: [
-  // { name: bun, price: 200 }
-  // { name: bun, price: 200 }
-//   ],
-//}
+
   const [modal, setModal] = React.useState({
     isShow: false,
     content: null,
@@ -41,8 +36,7 @@ export function BurgerBlock() {
         throw new Error(`ошибка: ` + res.status);
       }
       const data = await res.json();
-      const burger = { bun: data.data[0], fillings: [data.data[1], data.data[2], data.data[3], data.data[8], data.data[5], data.data[7]] }
-      
+      const burger = { bun: data.data[0], fillings: [data.data[1], data.data[2], data.data[3], data.data[8], data.data[5], data.data[7]] }      
       setState({ ...state, data: data.data, burger: burger, isLoading: false });
     } catch {
       setState({ ...state, hasError: true, isLoading: false });

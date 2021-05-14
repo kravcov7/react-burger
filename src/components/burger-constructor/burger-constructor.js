@@ -8,22 +8,37 @@ import { IngredientsContext, CurrentIngridientsContext } from "../context/app-co
 import { v4 as uuidv4 } from "uuid";
 
 function BurgerConstructor() {
-  const img = "https://code.s3.yandex.net/react/code/bun-02.png";
-
   const { setModal } = useContext(CurrentIngridientsContext);
   const { state } = useContext(IngredientsContext);
   const burger = state.burger;
-
-  const handleClick = () => {
-    setModal({
-      isShow: true,
-      content: <OrderDetails />,
-    });
+  
+  const handleClick = async () => {
+    try {      
+      const ingredients = burger.fillings.map(el => el._id)      
+      const res = await fetch('https://norma.nomoreparties.space/api/orders', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ingredients}),
+      });      
+      if (!res.ok) {
+        throw new Error(`ошибка: ` + res.status);
+      } 
+      const data = await res.json();    
+      setModal({
+        isShow: true,
+        content: <OrderDetails data={data.order.number }  />,
+      });
+    } catch {      
+      setModal({
+        isShow: false,
+        content: '',
+      });
+    }    
   };
-
+  
   let sum = burger.bun.price * 2;
-  burger.fillings.forEach(el => sum += el.price);
-    
+  burger.fillings.forEach(el => (sum += el.price));
+
   return (
     <section className={cn(styles.container)}>
       <header className={cn(styles.element, "mb-5")}>
@@ -43,7 +58,7 @@ function BurgerConstructor() {
 
       <div className={styles.total}>
         <div className={cn(styles.price, "mr-10")}>
-          <span className="text text_type_digits-default mr-2">{ sum }</span>
+          <span className="text text_type_digits-default mr-2">{sum}</span>
           <CurrencyIcon type="primary" />
         </div>
         <Button type="primary" size="large" onClick={handleClick}>
