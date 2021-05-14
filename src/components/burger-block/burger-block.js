@@ -7,6 +7,8 @@ import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import Modal from "../modal/modal";
 
+import { IngredientsContext, CurrentIngridientsContext } from "../context/app-context";
+
 export function BurgerBlock() {
   const [state, setState] = React.useState({
     isLoading: false,
@@ -28,7 +30,7 @@ export function BurgerBlock() {
     try {
       const res = await fetch(url);
       if (!res.ok) {
-        throw new Error(`ошибка: ` + res.status)
+        throw new Error(`ошибка: ` + res.status);
       }
       const data = await res.json();
       setState({ ...state, data: data.data, isLoading: false });
@@ -42,15 +44,19 @@ export function BurgerBlock() {
 
   return (
     <section className={styles.main}>
-      {isLoading && "Загрузка..."}
-      {hasError && "Произошла ошибка"}
-      {!isLoading && !hasError && data.length && (
-        <>
-          <BurgerIngredients array={data} setModal={setModal} />
-          <BurgerConstructor setModal={setModal} />
-        </>
-      )}
-      {isShow && <Modal setModal={setModal}>{content}</Modal>}
+      <IngredientsContext.Provider value={{ state, setState }}>
+        <CurrentIngridientsContext.Provider value={{ modal, setModal }}>
+          {isLoading && "Загрузка..."}
+          {hasError && "Произошла ошибка"}
+          {!isLoading && !hasError && data.length && (
+            <>
+              <BurgerIngredients array={data} setModal={setModal} />
+              <BurgerConstructor setModal={setModal} />
+            </>
+          )}
+          {isShow && <Modal setModal={setModal}>{content}</Modal>}
+        </CurrentIngridientsContext.Provider>
+      </IngredientsContext.Provider>
     </section>
   );
 }

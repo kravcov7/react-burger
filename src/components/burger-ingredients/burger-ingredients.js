@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useContext}  from "react";
 import styles from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import Cards from '../cards/cards';
 import PropTypes from 'prop-types';
 import IngredientsDetails from '../ingredient-details/ingredient-details';
 import cn from 'classnames';
+import { CurrentIngridientsContext } from "../context/app-context";
 
-function BurgerIngredients({ array, setModal }) {
+function BurgerIngredients({ array }) {
   const [current, setCurrent] = React.useState("buns");
+  const { setModal } = useContext(CurrentIngridientsContext)
 
   const openModal = (item) => { 
     setModal({
