@@ -4,7 +4,7 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import Cards from '../cards/cards';
 import IngredientsDetails from '../ingredient-details/ingredient-details';
 import cn from 'classnames';
-import {  IngredientsContext, CurrentIngridientsContext  } from "../context/app-context";
+import {  IngredientsContext, CurrentIngridientsContext  } from "../../context/app-context";
 
 function BurgerIngredients() {
   const [current, setCurrent] = React.useState("buns");

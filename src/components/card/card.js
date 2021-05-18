@@ -3,7 +3,7 @@ import styles from './card.module.css';
 import {  CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 // import { isTemplateExpression, setConstantValue } from 'typescript';
-import { IngredientsContext } from "../context/app-context";
+import { IngredientsContext } from "../../context/app-context";
 
 function Card({ el, openModal}) {
   const {state, setState } = useContext(IngredientsContext)

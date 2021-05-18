@@ -3,7 +3,7 @@ import { ConstructorElement, DragIcon, Button, CurrencyIcon } from "@ya.praktiku
 import styles from "./burger-constructor.module.css";
 import cn from "classnames";
 import OrderDetails from "../order-details/order-details";
-import { IngredientsContext, CurrentIngridientsContext } from "../context/app-context";
+import { IngredientsContext, CurrentIngridientsContext } from "../../context/app-context";
 import { v4 as uuidv4 } from "uuid";
 
 function BurgerConstructor() {

@@ -6,7 +6,7 @@ import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import Modal from "../modal/modal";
 
-import { IngredientsContext, CurrentIngridientsContext } from "../context/app-context";
+import { IngredientsContext, CurrentIngridientsContext } from "../../context/app-context";
 
 export function BurgerBlock() {
   const [state, setState] = React.useState({
