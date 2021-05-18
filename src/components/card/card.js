@@ -11,14 +11,16 @@ function Card({ el, openModal}) {
     // console.log(el);
     el.type === 'bun' ?
       setState({
-        ...state, burger: {
+        ...state, 
+        burger: {
           ...state.burger,
           bun: el
         }
       }) :
       setState({
-        ...state, burger: {
-          ...state.fillings, 
+        ...state, 
+        burger: {
+          ...state.burger, 
           fillings: [...state.burger.fillings, el]
         }
       })

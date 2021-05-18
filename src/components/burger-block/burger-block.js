@@ -12,7 +12,7 @@ export function BurgerBlock() {
   const [state, setState] = React.useState({
     isLoading: false,
     hasError: false,
-    data: [],
+    data: {},
     burger: {
       bun: null,
       fillings: []
@@ -36,8 +36,6 @@ export function BurgerBlock() {
         throw new Error(`ошибка: ` + res.status);
       }
       const data = await res.json();
-      // const burger = { bun: data.data[0], fillings: [data.data[1], data.data[2], data.data[3], data.data[8], data.data[5], data.data[7]] }      
-      // setState({ ...state, data: data.data, burger: burger, isLoading: false });
       setState({ ...state, data: data.data, isLoading: false });
     } catch {
       setState({ ...state, hasError: true, isLoading: false });

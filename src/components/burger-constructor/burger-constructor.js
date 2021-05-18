@@ -58,6 +58,7 @@ function BurgerConstructor() {
       <div className={styles.total}>
         <div className={cn(styles.price, "mr-10")}>
           <span className="text text_type_digits-default mr-2">{sum}</span>
+          {/* <span className="text text_type_digits-default mr-2"></span> */}
           <CurrencyIcon type="primary" />
         </div>
         <Button type="primary" size="large" onClick={handleClick}>
