@@ -1,54 +1,64 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ConstructorElement, DragIcon, Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-constructor.module.css";
 import cn from "classnames";
 import OrderDetails from "../order-details/order-details";
-import PropTypes from 'prop-types';
+import { IngredientsContext, CurrentIngridientsContext } from "../../context/app-context";
+import { v4 as uuidv4 } from "uuid";
 
-function BurgerConstructor({ setModal }) {
-  const img = "https://code.s3.yandex.net/react/code/bun-02.png";
+function BurgerConstructor() {
+  const { setModal } = useContext(CurrentIngridientsContext);
+  const { state } = useContext(IngredientsContext);
+  const burger = state.burger;
+  
+  const handleClick = async () => {
+    try {      
+      const ingredients = burger.fillings.map(el => el._id)      
+      const res = await fetch('https://norma.nomoreparties.space/api/orders', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ingredients}),
+      });      
+      if (!res.ok) {
+        throw new Error(`ошибка: ` + res.status);
+      } 
+      const data = await res.json();    
+      setModal({
+        isShow: true,
+        content: <OrderDetails data={data.order.number }  />,
+      });
+    } catch {      
+      setModal({
+        isShow: false,
+        content: '',
+      });
+    }    
+  };
+  
+  let sum = burger.bun.price * 2;
+  burger.fillings.forEach(el => (sum += el.price));
 
-  const handleClick = () => {
-    setModal({
-      isShow: true,
-      content: <OrderDetails />
-    })
-
-  }
   return (
     <section className={cn(styles.container)}>
       <header className={cn(styles.element, "mb-5")}>
-        <ConstructorElement type="top" isLocked={true} text="Краторная булка N-200i (верх)" price={200} thumbnail={img} />
+        <ConstructorElement type="top" isLocked={true} text={`${burger.bun.name} (верх)`} price={burger.bun.price} thumbnail={burger.bun.image} />
       </header>
       <ul className={styles.list}>
-        <li className={cn(styles.item, "mb-5")}>
-          <DragIcon type="primary" />
-          <ConstructorElement text="Краторная булка N-200i (верх)" price={50} thumbnail={img} />
-        </li>
-        <li className={cn(styles.item, "mb-5")}>
-          <DragIcon type="primary" />
-          <ConstructorElement text="Краторная булка N-200i (верх)" price={50} thumbnail={img} />
-        </li>
-        <li className={cn(styles.item, "mb-5")}>
-          <DragIcon type="primary" />
-          <ConstructorElement text="Краторная булка N-200i (верх)" price={50} thumbnail={img} />
-        </li>
-        <li className={cn(styles.item, "mb-5")}>
-          <DragIcon type="primary" />
-          <ConstructorElement text="Краторная булка N-200i (верх)" price={50} thumbnail={img} />
-        </li>
-        <li className={cn(styles.item, "mb-5")}>
-          <DragIcon type="primary" />
-          <ConstructorElement text="Краторная булка N-200i (верх)" price={50} thumbnail={img} />
-        </li>
+        {burger.fillings.map((el) => (
+          <li key={uuidv4()} className={cn(styles.item, "mb-5")}>
+            <DragIcon type="primary" />
+            <ConstructorElement text={el.name} price={el.price} thumbnail={el.image} />
+          </li>
+        ))}
       </ul>
       <div className={cn(styles.element, "mb-10")}>
-        <ConstructorElement type="bottom" isLocked={true} text="Краторная булка N-200i (низ)" price={200} thumbnail={img} />
+        <ConstructorElement type="bottom" isLocked={true} text={`${burger.bun.name} (низ)`} price={burger.bun.price} thumbnail={burger.bun.image} />
       </div>
 
       <div className={styles.total}>
-        <div className={cn(styles.price, 'mr-10')}>
-          <span className="text text_type_digits-default mr-2">610</span>
+        <div className={cn(styles.price, "mr-10")}>
+          <span className="text text_type_digits-default mr-2">{sum}</span>
+          {/* <span className="text text_type_digits-default mr-2"></span> */}
           <CurrencyIcon type="primary" />
         </div>
         <Button type="primary" size="large" onClick={handleClick}>
@@ -57,10 +67,6 @@ function BurgerConstructor({ setModal }) {
       </div>
     </section>
   );
-}
-
-BurgerConstructor.propTypes = {
-	setModal: PropTypes.func.isRequired
 }
 
 export default BurgerConstructor;
