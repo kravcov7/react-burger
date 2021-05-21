@@ -4,25 +4,22 @@ import {  CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-
 import PropTypes from "prop-types";
 // import { isTemplateExpression, setConstantValue } from 'typescript';
 import { IngredientsContext } from "../../context/app-context";
+import { useDispatch, useSelector } from 'react-redux';
+import { ADD_INGREDIENTS_BUN, ADD_INGREDIENTS_FILLINGS } from '../../services/actions/card';
 
 function Card({ el, openModal}) {
-  const {state, setState } = useContext(IngredientsContext)
+  // const {state, setState } = useContext(IngredientsContext)
+  const dispatch = useDispatch();
+
   const handleClick = () => {
-    // console.log(el);
     el.type === 'bun' ?
-      setState({
-        ...state, 
-        burger: {
-          ...state.burger,
-          bun: el
-        }
+      dispatch({
+        type: ADD_INGREDIENTS_BUN,
+        el
       }) :
-      setState({
-        ...state, 
-        burger: {
-          ...state.burger, 
-          fillings: [...state.burger.fillings, el]
-        }
+      dispatch({
+        type: ADD_INGREDIENTS_FILLINGS,
+        el
       })
     openModal(el)
   }

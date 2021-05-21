@@ -5,12 +5,12 @@ import Cards from '../cards/cards';
 import IngredientsDetails from '../ingredient-details/ingredient-details';
 import cn from 'classnames';
 import {  IngredientsContext, CurrentIngridientsContext  } from "../../context/app-context";
+import {  useSelector } from 'react-redux';
 
 function BurgerIngredients() {
   const [current, setCurrent] = React.useState("buns");
   const { setModal } = useContext(CurrentIngridientsContext)
-  const { state } = useContext(IngredientsContext)
-  const array = state.data
+  const { data } = useSelector(store => store.card)
 
   const openModal = (item) => {     
     setModal({
@@ -19,9 +19,9 @@ function BurgerIngredients() {
     })
   }
 
-  const bun = array.filter((item) => item.type === "bun");
-  const sauce = array.filter((item) => item.type === "sauce");
-  const main = array.filter((item) => item.type === "main");
+  const bun = data.filter((item) => item.type === "bun");
+  const sauce = data.filter((item) => item.type === "sauce");
+  const main = data.filter((item) => item.type === "main");
   
   return (
     <div>
