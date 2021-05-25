@@ -2,9 +2,11 @@ import React from "react";
 import s from './ingredient-details.module.css';
 import cn from 'classnames';
 import PropTypes from "prop-types";
+import { useSelector } from 'react-redux';
 
-function IngredientsDetails({ name, image, carbohydrates, fat, proteins, calories }) {
-
+function IngredientsDetails() {
+  console.log('name');
+  const { name, image, carbohydrates, fat, proteins, calories } = useSelector(store => store.card.currentItem)
   return (
     <div className={s.ingredient}>
       <h1 className={cn(s.title, 'text', 'text_type_main-large', 'mb-5')}>Детали ингредиента</h1>

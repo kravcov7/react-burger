@@ -1,15 +1,18 @@
 import {
-  INCREASE_INGREDIENT ,
-  DECREASE_INGREDIENT,
-  DELETE_INGREDIENT,
-  OPEN_MODAL,
-  CLOSE_MODAL, 
-  TAB_SWITCH,  
+  // INCREASE_INGREDIENT ,
+  // DECREASE_INGREDIENT,
+  // DELETE_INGREDIENT,
+  // TAB_SWITCH,  
   GET_INGREDIENTS_FAILED,
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS, 
   ADD_INGREDIENTS_BUN,
-  ADD_INGREDIENTS_FILLINGS
+  ADD_INGREDIENTS_FILLINGS,
+  ADD_CURRENT_ITEM,
+ 
+  CREATE_ORDER_FAILED,
+  CREATE_ORDER_SUCCESS,
+  CREATE_ORDER_REQUEST
 
 } from '../actions/card';
 
@@ -21,7 +24,12 @@ const initialState = {
     bun: null,
     fillings: [],
   },
+  currentItem: null,
+  currentOrder: null,
+  orderIsLoading: false,
+  orderHasError: false,
 };
+
 
 export const cardReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -32,11 +40,29 @@ export const cardReducer = (state = initialState, action) => {
         hasError: false
       };
     }
+    case CREATE_ORDER_REQUEST: {
+      return {
+        ...state,
+        orderIsLoading: true,
+        orderHasError: false
+      };
+    }
     case GET_INGREDIENTS_SUCCESS: {
       return { ...state, hasError: false, data: action.data, isLoading: false };
     }
+    case CREATE_ORDER_SUCCESS: {
+      console.log(action.data);
+      return { ...state, orderHasError: false, currentOrder: action.data, orderIsLoading: false };
+    }
+    
+    case ADD_CURRENT_ITEM: {
+      return { ...state, currentItem: action.item };
+    }
     case GET_INGREDIENTS_FAILED: {
       return { ...state, hasError: true, isLoading: false };
+    }
+    case CREATE_ORDER_FAILED: {
+      return { ...state, orderHasError: true, orderIsLoading: false };
     }
     case ADD_INGREDIENTS_BUN: {
       return {
