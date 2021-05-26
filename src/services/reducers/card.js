@@ -2,19 +2,17 @@ import {
   // INCREASE_INGREDIENT ,
   // DECREASE_INGREDIENT,
   // DELETE_INGREDIENT,
-  // TAB_SWITCH,  
+  // TAB_SWITCH,
   GET_INGREDIENTS_FAILED,
   GET_INGREDIENTS_REQUEST,
-  GET_INGREDIENTS_SUCCESS, 
+  GET_INGREDIENTS_SUCCESS,
   ADD_INGREDIENTS_BUN,
   ADD_INGREDIENTS_FILLINGS,
   ADD_CURRENT_ITEM,
- 
   CREATE_ORDER_FAILED,
   CREATE_ORDER_SUCCESS,
-  CREATE_ORDER_REQUEST
-
-} from '../actions/card';
+  CREATE_ORDER_REQUEST,
+} from "../actions/card";
 
 const initialState = {
   isLoading: false,
@@ -30,31 +28,29 @@ const initialState = {
   orderHasError: false,
 };
 
-
 export const cardReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {
       return {
         ...state,
         isLoading: true,
-        hasError: false
+        hasError: false,
       };
     }
     case CREATE_ORDER_REQUEST: {
       return {
         ...state,
         orderIsLoading: true,
-        orderHasError: false
+        orderHasError: false,
       };
     }
     case GET_INGREDIENTS_SUCCESS: {
       return { ...state, hasError: false, data: action.data, isLoading: false };
     }
     case CREATE_ORDER_SUCCESS: {
-      console.log(action.data);
       return { ...state, orderHasError: false, currentOrder: action.data, orderIsLoading: false };
     }
-    
+
     case ADD_CURRENT_ITEM: {
       return { ...state, currentItem: action.item };
     }
@@ -66,20 +62,20 @@ export const cardReducer = (state = initialState, action) => {
     }
     case ADD_INGREDIENTS_BUN: {
       return {
-        ...state, 
+        ...state,
         burger: {
           ...state.burger,
-          bun: action.el
-        }
+          bun: action.el,
+        },
       };
     }
     case ADD_INGREDIENTS_FILLINGS: {
       return {
-        ...state, 
+        ...state,
         burger: {
-          ...state.burger, 
-          fillings: [...state.burger.fillings, action.el]
-        }
+          ...state.burger,
+          fillings: [...state.burger.fillings, action.el],
+        },
       };
     }
     // case TAB_SWITCH: {

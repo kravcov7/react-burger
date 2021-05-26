@@ -2,7 +2,7 @@ import React from "react";
 import s from "./order-details.module.css";
 import cn from "classnames";
 import doneOrder from "../../images/graphics.svg";
-import PropTypes from "prop-types";
+
 import { useSelector } from "react-redux";
 
 function OrderDetails() {
@@ -25,8 +25,8 @@ function OrderDetails() {
   );
 }
 
-OrderDetails.propTypes = {
-  data: PropTypes.number.isRequired,
-};
+// OrderDetails.propTypes = {
+//   data: PropTypes.number.isRequired,
+// };
 
 export default OrderDetails;

@@ -2,13 +2,11 @@ import React from 'react';
 import styles from './card.module.css';
 import {  CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
-// import { isTemplateExpression, setConstantValue } from 'typescript';
-// import { IngredientsContext } from "../../context/app-context";
+
 import { useDispatch } from 'react-redux';
 import { ADD_INGREDIENTS_BUN, ADD_INGREDIENTS_FILLINGS } from '../../services/actions/card';
 
 function Card({ el, openModal}) {
-  // const {state, setState } = useContext(IngredientsContext)
   const dispatch = useDispatch();
 
   const handleClick = () => {

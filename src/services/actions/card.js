@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import url from "../../utils/config";
 
 export const INCREASE_INGREDIENT = "INCREASE_INGREDIENT";
@@ -60,7 +59,6 @@ export const getIngredients = () => {
 };
 
 export const addOrder = (ingredients) => {
-  console.log(ingredients);
   return function (dispatch) {
     dispatch({
       type: CREATE_ORDER_REQUEST,
@@ -78,7 +76,6 @@ export const addOrder = (ingredients) => {
         }
       })
       .then((res) => {
-        console.log(res);
         if (res && res.success) {
           dispatch({
             type: CREATE_ORDER_SUCCESS,

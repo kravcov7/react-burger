@@ -1,11 +1,9 @@
 import React from "react";
 import s from './ingredient-details.module.css';
 import cn from 'classnames';
-import PropTypes from "prop-types";
 import { useSelector } from 'react-redux';
 
 function IngredientsDetails() {
-  console.log('name');
   const { name, image, carbohydrates, fat, proteins, calories } = useSelector(store => store.card.currentItem)
   return (
     <div className={s.ingredient}>
@@ -39,13 +37,13 @@ function IngredientsDetails() {
   );
 }
 
-IngredientsDetails.propTypes = {
-  image: PropTypes.string,
-  name: PropTypes.string,
-  colories: PropTypes.number,
-  proteins: PropTypes.number,
-  fat: PropTypes.number,
-  carbohydrates: PropTypes.number,
-};
+// IngredientsDetails.propTypes = {
+//   image: PropTypes.string,
+//   name: PropTypes.string,
+//   colories: PropTypes.number,
+//   proteins: PropTypes.number,
+//   fat: PropTypes.number,
+//   carbohydrates: PropTypes.number,
+// };
 
 export default IngredientsDetails;
