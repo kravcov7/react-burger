@@ -65,7 +65,7 @@ export const cardReducer = (state = initialState, action) => {
         ...state,
         burger: {
           ...state.burger,
-          bun: action.el,
+          bun: action.item,
         },
       };
     }
@@ -74,7 +74,7 @@ export const cardReducer = (state = initialState, action) => {
         ...state,
         burger: {
           ...state.burger,
-          fillings: [...state.burger.fillings, action.el],
+          fillings: [...state.burger.fillings, action.item],
         },
       };
     }

@@ -8,6 +8,9 @@ import Modal from "../modal/modal";
 import { getIngredients } from "../../services/actions/card";
 import { useDispatch, useSelector } from "react-redux";
 
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { DndProvider } from "react-dnd";
+
 export function BurgerBlock() {
   const dispatch = useDispatch();
 
@@ -15,7 +18,7 @@ export function BurgerBlock() {
     dispatch(getIngredients());
   }, [dispatch]);
 
-  const { data, isLoading, hasError, burger } = useSelector((store) => store.card);
+  const { data, isLoading, hasError } = useSelector((store) => store.card);
   const { isShow, content } = useSelector((store) => store.modal);
 
   return (
@@ -23,10 +26,11 @@ export function BurgerBlock() {
       {isLoading && "Загрузка..."}
       {hasError && "Произошла ошибка"}
       {!isLoading && !hasError && data.length && (
-        <>
+        <DndProvider backend={HTML5Backend}>
           <BurgerIngredients />
-          {burger.bun && <BurgerConstructor />}
-        </>
+          {/* {burger.bun && <BurgerConstructor />} */}
+          <BurgerConstructor />
+        </DndProvider>
       )}
       {isShow && <Modal>{content}</Modal>}
     </section>
