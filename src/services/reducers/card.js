@@ -1,7 +1,7 @@
 import {
-  // INCREASE_INGREDIENT ,
-  // DECREASE_INGREDIENT,
-  // DELETE_INGREDIENT,
+  INCREASE_INGREDIENT ,
+  DECREASE_INGREDIENT,
+  DELETE_INGREDIENT,
   // TAB_SWITCH,
   GET_INGREDIENTS_FAILED,
   GET_INGREDIENTS_REQUEST,
@@ -22,6 +22,7 @@ const initialState = {
     bun: null,
     fillings: [],
   },
+  counts: {},
   currentItem: null,
   currentOrder: null,
   orderIsLoading: false,
@@ -60,6 +61,32 @@ export const cardReducer = (state = initialState, action) => {
     case CREATE_ORDER_FAILED: {
       return { ...state, orderHasError: true, orderIsLoading: false };
     }
+    case INCREASE_INGREDIENT: {
+      if(action.item.type === 'bun') {return state}
+      else { return {
+        ...state, 
+        counts: { ...state.counts, 
+          [action.item._id]:(state.counts[action.item._id] || 0) +1}
+      }}      
+    }
+    case DECREASE_INGREDIENT: {
+      if(action.item.type === 'bun') {return state}
+      else { return {
+        ...state, 
+        counts: { ...state.counts, 
+          [action.item._id]:(state.counts[action.item._id] || 0) -1}
+      }}      
+    }
+    case DELETE_INGREDIENT: {
+      return {
+        ...state,
+        burger: {
+          ...state.burger,
+          fillings: [...state.burger.fillings].filter(el => el)
+        }
+      }      
+    }
+    
     case ADD_INGREDIENTS_BUN: {
       return {
         ...state,

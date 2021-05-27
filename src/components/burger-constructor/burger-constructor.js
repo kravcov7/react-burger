@@ -8,7 +8,8 @@ import { useDrop } from "react-dnd";
 
 import { useSelector, useDispatch } from "react-redux";
 import { OPEN_MODAL, addOrder } from "../../services/actions/card";
-import { ADD_INGREDIENTS_BUN, ADD_INGREDIENTS_FILLINGS } from "../../services/actions/card";
+import { ADD_INGREDIENTS_BUN, ADD_INGREDIENTS_FILLINGS, INCREASE_INGREDIENT } from "../../services/actions/card";
+
 
 function BurgerConstructor() {
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
@@ -19,11 +20,16 @@ function BurgerConstructor() {
           type: ADD_INGREDIENTS_BUN,
           item,
         })
-      : dispatch({
+      : (dispatch({
           type: ADD_INGREDIENTS_FILLINGS,
           item,
-        });
+        }) &&
+        dispatch({
+          type: INCREASE_INGREDIENT,
+          item
+        }))
     },
+
     collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
@@ -46,7 +52,7 @@ function BurgerConstructor() {
   let sum = burger.bun?.price * 2;
   burger.fillings.forEach((el) => (sum += el.price));
 
-  return (
+  return (      
     <section ref={drop} className={cn(styles.container)}>
       { burger.bun && <header className={cn(styles.element, "mb-5")}>
         <ConstructorElement type="top" isLocked={true} text={`${burger.bun.name} (верх)`} price={burger.bun.price} thumbnail={burger.bun.image} />
@@ -73,7 +79,7 @@ function BurgerConstructor() {
           Нажми на меня
         </Button>}
       </div>
-    </section>
+    </section>      
   );
 }
 

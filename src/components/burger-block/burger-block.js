@@ -8,8 +8,8 @@ import Modal from "../modal/modal";
 import { getIngredients } from "../../services/actions/card";
 import { useDispatch, useSelector } from "react-redux";
 
-import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 export function BurgerBlock() {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ export function BurgerBlock() {
       {!isLoading && !hasError && data.length && (
         <DndProvider backend={HTML5Backend}>
           <BurgerIngredients />
-          {/* {burger.bun && <BurgerConstructor />} */}
+          {/* {burger.bun && <BurgerConstructor />}     -   if   */}
           <BurgerConstructor />
         </DndProvider>
       )}

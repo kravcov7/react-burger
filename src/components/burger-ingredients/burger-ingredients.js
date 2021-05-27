@@ -6,13 +6,9 @@ import IngredientsDetails from '../ingredient-details/ingredient-details';
 import cn from 'classnames';
 import {  useSelector, useDispatch } from 'react-redux';
 import { OPEN_MODAL, ADD_CURRENT_ITEM } from "../../services/actions/card";
-import { useDrag } from 'react-dnd'
+
 
 function BurgerIngredients() {
-  // const [collected, drag, dragPreview] = useDrag(() => ({
-  //   type,
-  //   item: { id }
-  // }))
   const dispatch = useDispatch();
 
   const [current, setCurrent] = React.useState("buns");
