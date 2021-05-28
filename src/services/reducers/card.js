@@ -1,7 +1,9 @@
+import { v4 as uuidv4 } from "uuid";
+
 import {
-  INCREASE_INGREDIENT ,
+  INCREASE_INGREDIENT,
   DECREASE_INGREDIENT,
-  DELETE_INGREDIENT,
+  DELETE_ITEM,
   // TAB_SWITCH,
   GET_INGREDIENTS_FAILED,
   GET_INGREDIENTS_REQUEST,
@@ -62,31 +64,44 @@ export const cardReducer = (state = initialState, action) => {
       return { ...state, orderHasError: true, orderIsLoading: false };
     }
     case INCREASE_INGREDIENT: {
-      if(action.item.type === 'bun') {return state}
-      else { return {
-        ...state, 
-        counts: { ...state.counts, 
-          [action.item._id]:(state.counts[action.item._id] || 0) +1}
-      }}      
+      if (action.item.type === "bun") {
+        return state;
+      } else {
+        return {
+          ...state,
+          counts: { ...state.counts, [action.item._id]: (state.counts[action.item._id] || 0) + 1 },
+        };
+      }
     }
+    // case DECREASE_INGREDIENT: {
+    //   if(action.item.type === 'bun') {return state}
+    //   else { return {
+    //     ...state,
+    //     counts: { ...state.counts,
+    //       [action.item._id]:(state.counts[action.item._id] || 0) -1}
+    //   }}
+    // }
     case DECREASE_INGREDIENT: {
-      if(action.item.type === 'bun') {return state}
-      else { return {
-        ...state, 
-        counts: { ...state.counts, 
-          [action.item._id]:(state.counts[action.item._id] || 0) -1}
-      }}      
+      const { typeItem } = action;
+      if (typeItem !== "bun") {
+        return {
+          ...state,
+          counts: {
+            ...state.counts,
+            [action.key]: state.counts[action.key] - 1,
+          },
+        };
+      } else return state;
     }
-    case DELETE_INGREDIENT: {
+    case DELETE_ITEM: {
       return {
         ...state,
         burger: {
           ...state.burger,
-          fillings: [...state.burger.fillings].filter(el => el.productId !== action.id)
-        }
-      }      
+          fillings: [...state.burger.fillings].filter((el) => el.productId !== action.id),
+        },
+      };
     }
-    
     case ADD_INGREDIENTS_BUN: {
       return {
         ...state,
@@ -97,26 +112,16 @@ export const cardReducer = (state = initialState, action) => {
       };
     }
     case ADD_INGREDIENTS_FILLINGS: {
+      const element = { ...action.item, productId: uuidv4() };
       return {
         ...state,
         burger: {
           ...state.burger,
-          fillings: [...state.burger.fillings, action.item],
+          fillings: [...state.burger.fillings, element],
         },
       };
     }
-    // case TAB_SWITCH: {
-    //   return {
-    //     ...state,
-    //     currentTab: state.currentTab === 'items' ? 'postponed' : 'items'
-    //   };
-    // }
-    // case GET_RECOMMENDED_ITEMS_REQUEST: {
-    //   return {
-    //     ...state,
-    //     recommendedItemsRequest: true
-    //   };
-    // }
+
     // case GET_RECOMMENDED_ITEMS_SUCCESS: {
     //   return {
     //     ...state,
@@ -136,14 +141,7 @@ export const cardReducer = (state = initialState, action) => {
     //     )
     //   };
     // }
-    // case DECREASE_ITEM: {
-    //   return {
-    //     ...state,
-    //     items: [...state.items].map(item =>
-    //       item.id === action.id ? { ...item, qty: --item.qty } : item
-    //     )
-    //   };
-    // }
+
     // case DELETE_ITEM: {
     //   return { ...state, items: [...state.items].filter(item => item.id !== action.id) };
     // }
