@@ -82,7 +82,7 @@ export const cardReducer = (state = initialState, action) => {
         ...state,
         burger: {
           ...state.burger,
-          fillings: [...state.burger.fillings].filter(el => el)
+          fillings: [...state.burger.fillings].filter(el => el.productId !== action.id)
         }
       }      
     }

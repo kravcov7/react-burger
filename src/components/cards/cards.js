@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 import Card from "../card/card";
 import cn from "classnames";
 
-function Cards({ title, ingredients, openModal }) {
+function Cards({ title, ingredients, openModal, childRef }) {
   return (
     <>
-      <h2 className={cn("text", "text_type_main-medium", "mb-6", "mt-10")}>{title}</h2>
+      <h2 className={cn("text", "text_type_main-medium", "mb-6", "mt-10")} ref={ childRef }>{title}</h2>
       <div className={styles.cards}>
         {ingredients.map((el) => (
           <Card el={el} openModal={openModal} key={el._id} />
