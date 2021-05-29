@@ -21,6 +21,7 @@ Cards.propTypes = {
   title: PropTypes.string,
   openModal: PropTypes.func,
   ingredients: PropTypes.array,
+  childRef: PropTypes.object,
 };
 
 export default Cards;

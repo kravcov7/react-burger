@@ -8,7 +8,6 @@ import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burg
 import { useDrag, useDrop } from 'react-dnd';
 
 function BurgerConstructorElements({ item, index, moveItem, deleteItem}) {
-  console.log(index);
   const id = item._id
   const ref = useRef(null);
   
