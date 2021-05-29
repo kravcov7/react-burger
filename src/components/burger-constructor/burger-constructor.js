@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { ConstructorElement, DragIcon, Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-constructor.module.css";
 import cn from "classnames";
 import OrderDetails from "../order-details/order-details";
 import { v4 as uuidv4 } from "uuid";
-import { useDrop } from "react-dnd";
+import { useDrag, useDrop } from 'react-dnd';
 
 import { useSelector, useDispatch } from "react-redux";
 import { OPEN_MODAL, addOrder, DELETE_ITEM, DECREASE_INGREDIENT } from "../../services/actions/card";
-import { ADD_INGREDIENTS_BUN, ADD_INGREDIENTS_FILLINGS, INCREASE_INGREDIENT } from "../../services/actions/card";
+import { ADD_INGREDIENTS_BUN, ADD_INGREDIENTS_FILLINGS, INCREASE_INGREDIENT, MOVE_ITEM } from "../../services/actions/card";
+import BurgerConstructorElements from "../burg-constr-elements/burger-constructor-elements";
 
 function BurgerConstructor() {
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
@@ -50,6 +51,14 @@ function BurgerConstructor() {
 
   let sum = burger.bun?.price * 2;
   burger.fillings.forEach((el) => (sum += el.price));
+  
+  const moveItem = useCallback((dragIndex, hoverIndex) => {
+    dispatch({
+      type: MOVE_ITEM,
+			toIndex: hoverIndex,
+			fromIndex: dragIndex
+		})
+	}, [dispatch]);  
 
   return (
     <section ref={drop} className={cn(styles.container)}>
@@ -72,10 +81,11 @@ function BurgerConstructor() {
             });
           };
           return (
-            <li key={el.productId}  className={cn(styles.item, "mb-5")}>
-              <DragIcon type="primary" />
-              <ConstructorElement text={el.name} price={el.price} thumbnail={el.image}  handleClose={deleteItem} />
-            </li>
+            <BurgerConstructorElements deleteItem={ deleteItem } key={el.productId} item={el} moveItem={moveItem}  />
+            // <li key={el.productId} moveItem={ moveItem } className={cn(styles.item, "mb-5")}>
+            //   <DragIcon type="primary" />
+            //   <ConstructorElement text={el.name} price={el.price} thumbnail={el.image}  handleClose={deleteItem} />
+            // </li>
           );
         })}
       </ul>

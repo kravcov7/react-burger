@@ -3,6 +3,7 @@ import url from "../../utils/config";
 export const INCREASE_INGREDIENT = "INCREASE_INGREDIENT";
 export const DECREASE_INGREDIENT = "DECREASE_INGREDIENT";
 export const DELETE_ITEM = "DELETE_ITEM";
+export const MOVE_ITEM = "MOVE_ITEM";
 
 export const GET_INGREDIENTS_FAILED = "GET_INGREDIENTS_FAILED";
 export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";

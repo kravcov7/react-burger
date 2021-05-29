@@ -4,6 +4,7 @@ import {
   INCREASE_INGREDIENT,
   DECREASE_INGREDIENT,
   DELETE_ITEM,
+  MOVE_ITEM,
   // TAB_SWITCH,
   GET_INGREDIENTS_FAILED,
   GET_INGREDIENTS_REQUEST,
@@ -99,6 +100,17 @@ export const cardReducer = (state = initialState, action) => {
         burger: {
           ...state.burger,
           fillings: [...state.burger.fillings].filter((el) => el.productId !== action.id),
+        },
+      };
+    }
+    case MOVE_ITEM: {
+      const fillings = [...state.burger.fillings];
+      fillings.splice(action.toIndex, 0, fillings.splice(action.fromIndex, 1)[0]);
+      return {
+        ...state,
+        burger: {
+          ...state.burger,
+          fillings: fillings
         },
       };
     }
