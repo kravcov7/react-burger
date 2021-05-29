@@ -24,7 +24,7 @@ function BurgerConstructorElements({ item, index, moveItem, deleteItem}) {
 			}
 			const dragIndex = el.index;
 			const hoverIndex = index;
-			if (dragIndex === hoverIndex) {
+      if (dragIndex === hoverIndex) {
         return;
 			}
 			const hoverBoundingRect = ref.current?.getBoundingClientRect();
@@ -32,8 +32,7 @@ function BurgerConstructorElements({ item, index, moveItem, deleteItem}) {
 			const clientOffset = monitor.getClientOffset();
 			const hoverClientY = clientOffset.y - hoverBoundingRect.top;
 			if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-        console.log('hoverClientY')
-				return;
+        return;
 			}
 			if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
 				return;
@@ -51,10 +50,11 @@ function BurgerConstructorElements({ item, index, moveItem, deleteItem}) {
 			isDrag: monitor.isDragging(),      
 		}),
 	});
+  const opacity = isDrag ? 0 : 1;
   drag(drop(ref))
 
   return (
-    <li ref={ref} className={cn(styles.item, "mb-5")}>
+    <li ref={ref}  style={{ opacity }} className={cn(styles.item, "mb-5")}>
       <DragIcon type="primary" />
       <ConstructorElement text={item.name} price={item.price} thumbnail={item.image} handleClose={deleteItem} />
     </li>
