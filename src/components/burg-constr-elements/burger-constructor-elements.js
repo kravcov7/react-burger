@@ -8,6 +8,7 @@ import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burg
 import { useDrag, useDrop } from 'react-dnd';
 
 function BurgerConstructorElements({ item, index, moveItem, deleteItem}) {
+  console.log(index);
   const id = item._id
   const ref = useRef(null);
   
@@ -60,5 +61,27 @@ function BurgerConstructorElements({ item, index, moveItem, deleteItem}) {
     </li>
   );
 }
+
+BurgerConstructorElements.propTypes = {
+	item: PropTypes.shape({
+		calories: PropTypes.number.isRequired,
+		carbohydrates: PropTypes.number.isRequired,
+		fat: PropTypes.number.isRequired,
+		image_large: PropTypes.string.isRequired,
+		image: PropTypes.string.isRequired,
+		image_mobile: PropTypes.string.isRequired,
+		name: PropTypes.string.isRequired,
+		price: PropTypes.number.isRequired,
+		productId: PropTypes.string.isRequired,
+		proteins: PropTypes.number.isRequired,
+		type: PropTypes.string.isRequired,
+		__v: PropTypes.number,
+		_id: PropTypes.string.isRequired,
+	}).isRequired,
+	moveItem: PropTypes.func.isRequired,
+	index: PropTypes.number.isRequired,
+	deleteItem: PropTypes.func.isRequired,
+}
+
 
 export default BurgerConstructorElements;
