@@ -16,6 +16,7 @@
   margin: 0;  
   overflow-y: auto;
 	max-height: 300px;
+  flex-grow: 1;
 }
 
 ::-webkit-scrollbar {

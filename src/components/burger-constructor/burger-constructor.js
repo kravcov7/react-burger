@@ -1,10 +1,9 @@
 import React, { useCallback } from "react";
-import { ConstructorElement, DragIcon, Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { ConstructorElement, Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-constructor.module.css";
 import cn from "classnames";
 import OrderDetails from "../order-details/order-details";
-import { v4 as uuidv4 } from "uuid";
-import { useDrag, useDrop } from 'react-dnd';
+import {  useDrop } from 'react-dnd';
 
 import { useSelector, useDispatch } from "react-redux";
 import { OPEN_MODAL, addOrder, DELETE_ITEM, DECREASE_INGREDIENT } from "../../services/actions/card";
@@ -29,7 +28,6 @@ function BurgerConstructor() {
             item,
           });
     },
-
     collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
@@ -68,7 +66,7 @@ function BurgerConstructor() {
         </header>
       )}
       <ul className={styles.list}>
-        {burger.fillings.map((el) => {
+        {burger.fillings.map((el, index) => {
           const deleteItem = () => {
             dispatch({
               type: DECREASE_INGREDIENT,
@@ -81,7 +79,7 @@ function BurgerConstructor() {
             });
           };
           return (
-            <BurgerConstructorElements deleteItem={ deleteItem } key={el.productId} item={el} moveItem={moveItem}  />
+            <BurgerConstructorElements deleteItem={ deleteItem } index={index} key={el.productId} item={el} moveItem={moveItem}  />
             // <li key={el.productId} moveItem={ moveItem } className={cn(styles.item, "mb-5")}>
             //   <DragIcon type="primary" />
             //   <ConstructorElement text={el.name} price={el.price} thumbnail={el.image}  handleClose={deleteItem} />
