@@ -28,7 +28,6 @@ export function BurgerBlock() {
       {!isLoading && !hasError && data.length && (
         <DndProvider backend={HTML5Backend}>
           <BurgerIngredients />
-          {/* {burger.bun && <BurgerConstructor />}     -   if   */}
           <BurgerConstructor />
         </DndProvider>
       )}

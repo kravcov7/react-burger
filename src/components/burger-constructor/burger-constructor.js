@@ -3,7 +3,7 @@ import { ConstructorElement, Button, CurrencyIcon } from "@ya.praktikum/react-de
 import styles from "./burger-constructor.module.css";
 import cn from "classnames";
 import OrderDetails from "../order-details/order-details";
-import {  useDrop } from 'react-dnd';
+import { useDrop } from "react-dnd";
 
 import { useSelector, useDispatch } from "react-redux";
 import { OPEN_MODAL, addOrder, DELETE_ITEM, DECREASE_INGREDIENT } from "../../services/actions/card";
@@ -49,14 +49,17 @@ function BurgerConstructor() {
 
   let sum = burger.bun?.price * 2;
   burger.fillings.forEach((el) => (sum += el.price));
-  
-  const moveItem = useCallback((dragIndex, hoverIndex) => {
-    dispatch({
-      type: MOVE_ITEM,
-			toIndex: hoverIndex,
-			fromIndex: dragIndex
-		})
-	}, [dispatch]);  
+
+  const moveItem = useCallback(
+    (dragIndex, hoverIndex) => {
+      dispatch({
+        type: MOVE_ITEM,
+        toIndex: hoverIndex,
+        fromIndex: dragIndex,
+      });
+    },
+    [dispatch]
+  );
 
   return (
     <section ref={drop} className={cn(styles.container)}>
@@ -71,20 +74,14 @@ function BurgerConstructor() {
             dispatch({
               type: DECREASE_INGREDIENT,
               key: el._id,
-              typeItem: el.type
-            })
+              typeItem: el.type,
+            });
             dispatch({
               type: DELETE_ITEM,
               id: el.productId,
             });
           };
-          return (
-            <BurgerConstructorElements deleteItem={ deleteItem } index={index} key={el.productId} item={el} moveItem={moveItem}  />
-            // <li key={el.productId} moveItem={ moveItem } className={cn(styles.item, "mb-5")}>
-            //   <DragIcon type="primary" />
-            //   <ConstructorElement text={el.name} price={el.price} thumbnail={el.image}  handleClose={deleteItem} />
-            // </li>
-          );
+          return <BurgerConstructorElements deleteItem={deleteItem} index={index} key={el.productId} item={el} moveItem={moveItem} />;
         })}
       </ul>
       {burger.bun && (

@@ -25,8 +25,4 @@ function OrderDetails() {
   );
 }
 
-// OrderDetails.propTypes = {
-//   data: PropTypes.number.isRequired,
-// };
-
 export default OrderDetails;

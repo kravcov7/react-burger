@@ -82,5 +82,4 @@ BurgerConstructorElements.propTypes = {
 	deleteItem: PropTypes.func.isRequired,
 }
 
-
 export default BurgerConstructorElements;
