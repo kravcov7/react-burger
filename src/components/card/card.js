@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styles from "./card.module.css";
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { useDrag } from "react-dnd";
 
-function Card({ el, openModal }) {
+const Card = React.memo(({ el, openModal }) => {
   const [{ isDrag }, drag] = useDrag({
     type: "product",
     item: el,
@@ -18,9 +18,11 @@ function Card({ el, openModal }) {
   const handleClick = () => {
     openModal(el);
   };
+  const id = useSelector(store => store.card.counts[el._id])
 
   const { counts, burger } = useSelector((store) => store.card);
-  let count = el.type==='bun' && burger.bun?._id===el._id ? 2 : counts[el._id] ;
+  let count = el.type==='bun' && burger.bun?._id===el._id ? 2 : counts[el._id];
+  // let count = el.type==='bun' && burger.bun?._id===el._id ? 2 : id;
   
   return (
     <div ref={drag} className={styles.card} key={el._id} onClick={handleClick}>
@@ -33,7 +35,7 @@ function Card({ el, openModal }) {
       {count ? <Counter count={count} size="default" /> : null}
     </div>
   );
-}
+})
 
 Card.propTypes = {
   openModal: PropTypes.func,
