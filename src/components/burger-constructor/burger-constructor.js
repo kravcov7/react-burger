@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { OPEN_MODAL, addOrder, DELETE_ITEM, DECREASE_INGREDIENT } from "../../services/actions/card";
 import { ADD_INGREDIENTS_BUN, ADD_INGREDIENTS_FILLINGS, INCREASE_INGREDIENT, MOVE_ITEM } from "../../services/actions/card";
 import BurgerConstructorElements from "../burg-constr-elements/burger-constructor-elements";
+import ConstructorEmpty from "../constructor-empty/constuctor-empty";
 
 function BurgerConstructor() {
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
@@ -47,7 +48,7 @@ function BurgerConstructor() {
     });
   };
 
-  let sum = burger.bun?.price * 2;
+  let sum = (burger.bun?.price || 0) * 2;
   burger.fillings.forEach((el) => (sum += el.price));
 
   const moveItem = useCallback(
@@ -63,47 +64,51 @@ function BurgerConstructor() {
 
   return (
     <section ref={drop} className={cn(styles.container)}>
-      {burger.bun && (
-        <header className={cn(styles.element, "mb-5")}>
-          <ConstructorElement type="top" isLocked={true} text={`${burger.bun.name} (верх)`} price={burger.bun.price} thumbnail={burger.bun.image} />
-        </header>
-      )}
-      <ul className={styles.list}>
-        {burger.fillings.map((el, index) => {
-          const deleteItem = () => {
-            dispatch({
-              type: DECREASE_INGREDIENT,
-              key: el._id,
-              typeItem: el.type,
-            });
-            dispatch({
-              type: DELETE_ITEM,
-              id: el.productId,
-            });
-          };
-          return <BurgerConstructorElements deleteItem={deleteItem} index={index} key={el.productId} item={el} moveItem={moveItem} />;
-        })}
-      </ul>
-      {burger.bun && (
-        <div className={cn(styles.element, "mb-10")}>
-          <ConstructorElement type="bottom" isLocked={true} text={`${burger.bun.name} (низ)`} price={burger.bun.price} thumbnail={burger.bun.image} />
-        </div>
-      )}
+      {burger.bun || burger.fillings.length ? (
+        <>
+          {burger.bun && (
+            <header className={cn(styles.element, "mb-5")}>
+              <ConstructorElement type="top" isLocked={true} text={`${burger.bun.name} (верх)`} price={burger.bun.price} thumbnail={burger.bun.image} />
+            </header>
+          )}
+          <ul className={styles.list}>
+            {burger.fillings.map((el, index) => {
+              const deleteItem = () => {
+                dispatch({
+                  type: DECREASE_INGREDIENT,
+                  key: el._id,
+                  typeItem: el.type,
+                });
+                dispatch({
+                  type: DELETE_ITEM,
+                  id: el.productId,
+                });
+              };
+              return <BurgerConstructorElements deleteItem={deleteItem} index={index} key={el.productId} item={el} moveItem={moveItem} />;
+            })}
+          </ul>
+          {burger.bun && (
+            <div className={cn(styles.element, "mb-10")}>
+              <ConstructorElement type="bottom" isLocked={true} text={`${burger.bun.name} (низ)`} price={burger.bun.price} thumbnail={burger.bun.image} />
+            </div>
+          )}
 
-      <div className={styles.total}>
-        {burger.bun && (
-          <div className={cn(styles.price, "mr-10")}>
-            <span className="text text_type_digits-default mr-2">{sum}</span>
-            <CurrencyIcon type="primary" />
+          <div className={styles.total}>
+            <div className={cn(styles.price, "mr-10")}>
+              <span className="text text_type_digits-default mr-2">{sum}</span>
+              <CurrencyIcon type="primary" />
+            </div>
+
+            {burger.bun && (
+              <Button type="primary" size="large" onClick={handleClick}>
+                Нажми на меня
+              </Button>
+            )}
           </div>
-        )}
-
-        {burger.bun && (
-          <Button type="primary" size="large" onClick={handleClick}>
-            Нажми на меня
-          </Button>
-        )}
-      </div>
+        </>
+      ) : (
+        <ConstructorEmpty />
+      )}
     </section>
   );
 }

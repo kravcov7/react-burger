@@ -3,6 +3,7 @@ import styles from "./burger-block.module.css";
 
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
+import ConstructorEmpty from '../constructor-empty/constuctor-empty';
 import Modal from "../modal/modal";
 
 import { getIngredients } from "../../services/actions/card";
@@ -18,7 +19,7 @@ export function BurgerBlock() {
     dispatch(getIngredients());
   }, [dispatch]);
 
-  const { data, isLoading, hasError } = useSelector((store) => store.card);
+  const { data, isLoading, hasError, burger } = useSelector((store) => store.card);
   const { isShow, content } = useSelector((store) => store.modal);
 
   return (
@@ -28,6 +29,7 @@ export function BurgerBlock() {
       {!isLoading && !hasError && data.length && (
         <DndProvider backend={HTML5Backend}>
           <BurgerIngredients />
+          {/* { burger.bun || burger.fillings.length ? <BurgerConstructor /> : <ConstructorEmpty /> } */}
           <BurgerConstructor />
         </DndProvider>
       )}
