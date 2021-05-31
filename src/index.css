@@ -12,3 +12,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.constructor-element {
+  width: 100% !important;
+}
+.constructor-element__price {
+  margin-left: auto !important;
+}
