@@ -19,3 +19,9 @@ code {
 .constructor-element__price {
   margin-left: auto !important;
 }
+
+#root {
+  height: 100vh;  
+  display: flex;
+  flex-direction: column;
+}
