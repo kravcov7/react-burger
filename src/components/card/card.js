@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import styles from "./card.module.css";
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
@@ -18,7 +18,7 @@ const Card = React.memo(({ el, openModal }) => {
   const handleClick = () => {
     openModal(el);
   };
-  const id = useSelector(store => store.card.counts[el._id])
+  // const id = useSelector(store => store.card.counts[el._id])
 
   const { counts, burger } = useSelector((store) => store.card);
   let count = el.type==='bun' && burger.bun?._id===el._id ? 2 : counts[el._id];

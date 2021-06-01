@@ -1,5 +1,4 @@
 import React from 'react';
-import { setConstantValue } from 'typescript';
 
 import AppHeader from '../app-header/app-header';
 import { BurgerBlock} from '../burger-block/burger-block';
