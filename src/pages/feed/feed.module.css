@@ -1,0 +1,21 @@
+/* .main {
+  max-width: 1240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} */
+
+.main {
+  max-width: 1240px;
+  /* margin: 0 auto; */
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-gap: 40px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.link {
+  text-decoration: none;
+  color: #4c4cff;
+}
