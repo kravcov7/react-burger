@@ -9,8 +9,6 @@
 	display: flex;
 	flex-direction: column;
 	box-sizing: border-box;
-	/* width: 600px; */
-  /* align-items: center; */
 }
 .container {
 	display: flex;
@@ -19,7 +17,6 @@
 
 .container__subtitle{
   text-align: center;
-  /* align-items: center; */
 }
 .box__item {
 	list-style-type: none;

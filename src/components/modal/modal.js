@@ -6,7 +6,12 @@ import s from './modal.module.css';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
 
-function Modal({ setModal, children }) {
+import { useDispatch } from 'react-redux';
+import { CLOSE_MODAL } from '../../services/actions/modal';
+
+function Modal({  children }) {
+  const dispatch = useDispatch();
+
   const closeEsc = (e) => {
 		if (e.keyCode === 27) close()			
 	}
@@ -19,9 +24,8 @@ function Modal({ setModal, children }) {
 	})
   
   const close = () => {
-    setModal({
-      isShow:false,
-      content: null,
+    dispatch({
+      type: CLOSE_MODAL
     })
   }
   
