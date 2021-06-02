@@ -20,14 +20,10 @@ function AppHeader() {
           </NavLink>
         </div>
         <Logo />
-        <NavLink to="/profile" className={cn(styles.block)} activeClassName={styles.active}>
+        <NavLink to="/profile" className={cn(styles.link)} activeClassName={styles.active}>
           <ProfileIcon type={pathname === "/profile" ? "primary" : "secondary"} className={cn("ml-2")} />
-          <span className={cn(styles.link, "pl-1")}>Личный кабинет</span>
-        </NavLink>
-        {/* <div className={styles.block}>
-          <ProfileIcon type="secondary" />
-          <span className={cn(styles.link, "pl-1")}>Личный кабинет</span>
-        </div> */}
+          <span className={cn("text", "text_type_main-default", "pl-1")}>Личный кабинет</span>
+        </NavLink>        
       </nav>
     </header>
   );
