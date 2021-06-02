@@ -12,18 +12,22 @@ function AppHeader() {
         <div className={cn(styles.block)}>
           <NavLink exact to="/" className={cn(styles.link)} activeClassName={styles.active}>
             <BurgerIcon type={pathname === "/" ? "primary" : "secondary"} />
-            <span className={cn( "pl-1", "mr-4", 'text', 'text_type_main-default')}>Конструктор</span>
-          </NavLink> 
-          <NavLink  to="/order" className={cn(styles.link)} activeClassName={styles.active}>
-            <ListIcon  type={pathname === '/order' ? "primary" : "secondary"}  className={cn("ml-2")}  />
-            <span className={cn( "pl-1", 'text', 'text_type_main-default')}>Лента заказов</span>
-          </NavLink>      
+            <span className={cn("pl-1", "mr-4", "text", "text_type_main-default")}>Конструктор</span>
+          </NavLink>
+          <NavLink to="/feed" className={cn(styles.link)} activeClassName={styles.active}>
+            <ListIcon type={pathname === "/feed" ? "primary" : "secondary"} className={cn("ml-2")} />
+            <span className={cn("pl-1", "text", "text_type_main-default")}>Лента заказов</span>
+          </NavLink>
         </div>
         <Logo />
-        <div className={styles.block}>
+        <NavLink to="/profile" className={cn(styles.block)} activeClassName={styles.active}>
+          <ProfileIcon type={pathname === "/profile" ? "primary" : "secondary"} className={cn("ml-2")} />
+          <span className={cn(styles.link, "pl-1")}>Личный кабинет</span>
+        </NavLink>
+        {/* <div className={styles.block}>
           <ProfileIcon type="secondary" />
           <span className={cn(styles.link, "pl-1")}>Личный кабинет</span>
-        </div>
+        </div> */}
       </nav>
     </header>
   );
