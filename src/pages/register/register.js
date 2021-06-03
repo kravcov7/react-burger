@@ -1,12 +1,26 @@
 import React from "react";
+import { EmailInput, Input, Button, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
+import cn from "classnames";
 
-// import styles from "./.module.css";
+import s from "./register.module.css";
 
 function Register() {
   return (
-    <h1>страница регистрации</h1>
+    <section className={cn(s.main, "mt-30")}>
+      <form className={s.form}>
+        <h1 className="text text_type_main-large mb-6">Регистрация</h1>
+        <Input type={"text"} placeholder={"Имя"} size={"default"} />
+        <EmailInput name={"E-ddddil"} className="mb-5" />
+        <PasswordInput name={"password"} />
+        <Button type="primary" size="large" className="mt-6">
+          Зарегистрироваться
+        </Button>
+      </form>
+      <p className="text text_type_main-default text_color_inactive mt-20">
+        Уже зарегистрированы?<Button type="secondary" className={s.link}>Войти</Button>
+      </p>
+    </section>
   );
 }
 
 export default Register;
-

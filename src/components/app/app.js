@@ -22,10 +22,9 @@ function App() {
             <BurgerBlock />
           </Route>
           <Route path="/login" exact={true}>
-            {/* вход             */}           
-            <Login />      
+            <Login />
           </Route>
-          <Route path="/register " exact={true}>
+          <Route path="/register" exact={true}>
             <Register />
           </Route>
           <Route path="/forgot-password" exact={true}>

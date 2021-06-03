@@ -1,7 +1,5 @@
 import React from "react";
-import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import cn from "classnames";
-import { Link } from "react-router-dom";
 import Orders from '../../components/orders/orders';
 import BurgerReady from '../../components/burger-ready/burger-ready';
 

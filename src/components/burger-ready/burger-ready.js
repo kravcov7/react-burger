@@ -1,6 +1,6 @@
 import React from "react";
 
-import cn from "classnames";
+// import cn from "classnames";
 import s from "./burger-ready.module.css";
 
 export function BurgerReady() {

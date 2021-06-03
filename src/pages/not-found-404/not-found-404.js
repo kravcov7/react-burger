@@ -1,7 +1,6 @@
 import React from "react";
-import { useHistory, Link, useLocation } from "react-router-dom";
 
-import styles from "./not-found-404.module.css";
+// import styles from "./not-found-404.module.css";
 
 export function NotFound404() {
   return (

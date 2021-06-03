@@ -1,6 +1,8 @@
 .main {
   max-width: 1240px;
   display: flex;
+  margin-left: auto;
+  margin-right: auto;
   flex-direction: column;
   align-items: center;
 }
@@ -8,4 +10,10 @@
 .link {
   text-decoration: none;
   color: #4c4cff;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
