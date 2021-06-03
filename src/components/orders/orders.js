@@ -5,7 +5,7 @@ import s from "./orders.module.css";
 
 export function Orders() {
   return (
-    <section className={s.main}>
+    <section className='mt-25'>
       <div className={s.table}>
         <div className={s.ready}>
           <h2 className={cn(s.title, "text text_type_main-medium mb-6")}>Готовы:</h2>
