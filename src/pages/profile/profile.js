@@ -11,24 +11,24 @@ export function Profile() {
         <h2 className="text text_type_main-large mb-6">Регистрация</h2>
         <h2 className="text text_type_main-large mb-6">История заказов</h2>
         <h2 className="text text_type_main-large mb-6">Выход</h2>
-        <p className="text text_type_main-default text_color_inactive mt-20">В этом разделе вы моежете ...</p>
+        <p className="text text_type_main-default text_color_inactive mt-20">В этом разделе вы моежете изменить свои персональные данные</p>
       </div>
-      <div className={s.inputs}>
+      <div className={cn(s.inputs, 'ml-15')}>
 
-        {/* <Switch>
-          route
-            профиль
-          route
-          route
-            история заказов
-          route
-        </Switch> */}
+         {/* //<Switch>
+        //   route
+        //     профиль
+        //   route
+        //   route
+        //     история заказов
+        //   route
+        // </Switch>  */}
 
 
         <Input type={"text"} placeholder={"Имя"} size={"default"} />
         <EmailInput name={"E-ddddil"} className="mb-5" />
         <PasswordInput name={"password"} />
-      </div>
+      </div> 
     </section>
   );
 }
