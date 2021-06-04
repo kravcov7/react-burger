@@ -39,11 +39,8 @@ function App() {
           <Route path="/feed/:id" exact={true}>
             <h1>страница заказа в ленте.</h1>
           </Route>
-          <Route path="/profile" exact={true}>
+          <Route path="/profile">
             <Profile />
-          </Route>
-          <Route path="/profile/orders" exact={true}>
-            <h1>страница истории заказов пользователя</h1>
           </Route>
           <Route path="/profile/orders/:id" exact={true}>
             <h1>страница заказа в истории заказов</h1>

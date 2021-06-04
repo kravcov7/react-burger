@@ -16,6 +16,12 @@ function ResetPassword() {
           Сохранить
         </Button>
       </form>
+      {/* <div>
+				<span className={'text text_type_main-default text_color_inactive'}>Вы - новый пользователь?</span>
+				<Button type="secondary" size="medium" className='p-0'>
+					Зарегистрироваться
+				</Button>
+			</div> */}
       <p className="text text_type_main-default text_color_inactive mt-20">
         Вспомнили пароль?
         <Button type="secondary" className={s.link}>
