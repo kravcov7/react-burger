@@ -16,3 +16,12 @@
 .price{
   display: flex;
 }
+.image{
+  display: flex;
+}
+.container{
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  padding-left: 0;
+}

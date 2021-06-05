@@ -7,7 +7,7 @@ import bun01 from "../../images/bun-01.png";
 export function BurgerImage() {
   return (
     <section className={s.main}>
-      <ul className={s.container}>
+      {/* <ul className={s.container}>
         <li className={s.item} style={{ zIndex: 4 }}>
           <div className={s.img}>
             <img src={bun01} alt="фото" />
@@ -33,7 +33,10 @@ export function BurgerImage() {
             <img src={bun01} alt="фото" />
           </div>
         </li>
-      </ul>
+      </ul> */}
+          <div className={s.img}>
+            <img src={bun01} alt="фото" />
+          </div>
     </section>
   );
 }
