@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 import { EmailInput, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import cn from "classnames";
 import { NavLink } from "react-router-dom";
@@ -6,6 +6,7 @@ import { Switch, Route } from "react-router-dom";
 
 import s from "./profile.module.css";
 import Burger from "../../components/burger/burger";
+import ProfileOrders from "../../components/profile-orders/profile-orders";
 
 export function Profile() {
   return (
@@ -31,12 +32,7 @@ export function Profile() {
             <PasswordInput name={"password"} />
           </Route>
           <Route path="/profile/orders" exact>
-            <div className={s.burgers}>
-              <Burger />
-              <Burger />
-              <Burger />
-              <Burger />
-            </div>
+            <ProfileOrders />
           </Route>
         </Switch>
       </div>

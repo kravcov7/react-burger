@@ -12,6 +12,7 @@ import Feed from "../../pages/feed/feed";
 import Profile from "../../pages/profile/profile";
 import Ingredients from "../../pages/ingredients/ingredients";
 import ItemDetails from "../item-detail/item-detail";
+import ProfileOrders from "../profile-orders/profile-orders";
 
 function App() {
   return (
@@ -39,14 +40,16 @@ function App() {
           </Route>
           <Route path="/feed/:id" exact={true}>
             <ItemDetails />
-            
+          </Route>
+          <Route path="/profile/orders/:id" exact={true}>
+            <ItemDetails />
           </Route>
           <Route path="/profile">
             <Profile />
           </Route>
-          <Route path="/profile/orders/:id" exact={true}>
-            <h1>страница заказа в истории заказов</h1>
-          </Route>
+          {/* <Route path="/profile/orders" >
+            <ProfileOrders />
+          </Route> */}
           <Route path="/ingredients/:id" exact={true}>
             <Ingredients />
           </Route>
