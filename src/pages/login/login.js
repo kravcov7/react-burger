@@ -1,6 +1,7 @@
 import React from "react";
 import { EmailInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import cn from "classnames";
+import {Link} from 'react-router-dom';
 
 import s from "./login.module.css";
 
@@ -16,10 +17,10 @@ function Login() {
         </Button>
       </form>
       <p className="text text_type_main-default text_color_inactive mt-20">
-        Вы - новый пользователь?<Button type="secondary" className={s.link}>Зарегестрироваться</Button>{" "}
+        Вы - новый пользователь?<Link to="/register" type="secondary" className={cn(s.link, 'ml-2')}>Зарегестрироваться</Link>{" "}
       </p>
       <p className="text text_type_main-default text_color_inactive mt-4">
-        Забыли пароль?<Button type="secondary" className={s.link}>Восстановить пароль</Button>
+        Забыли пароль?<Link  to="/forgot-password" type="secondary" className={cn(s.link, 'ml-2')}>Восстановить пароль</Link>
       </p>
     </section>
   );

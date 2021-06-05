@@ -12,7 +12,19 @@ function ItemDetails() {
         <h1 className={cn(s.title, "text text_type_main-medium mt-10")}>Black Hole Singularity острый бургер</h1>
         <p className={cn(s.status, "mt-3 mb-15")}>Выполнен</p>
         <h3 className={cn(s.structure, "text text_type_main-medium mb-6")}>Состав:</h3>
-        <ul className={s.ingrid}>
+        <ul className={cn(s.ingrid, 'mr-6')}>
+          <li className={s.item}>
+            <ItemStructure />
+          </li>
+          <li className={s.item}>
+            <ItemStructure />
+          </li>
+          <li className={s.item}>
+            <ItemStructure />
+          </li>
+          <li className={s.item}>
+            <ItemStructure />
+          </li>
           <li className={s.item}>
             <ItemStructure />
           </li>

@@ -1,6 +1,7 @@
 import React from "react";
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import cn from "classnames";
+import {Link} from 'react-router-dom';
 
 import s from "./forgot-password.module.css";
 
@@ -15,7 +16,7 @@ function ForgotPassword() {
         </Button>
       </form>
       <p className="text text_type_main-default text_color_inactive mt-20">
-        Вспомнили пароль?<Button type="secondary" className={s.link}>Войти</Button>
+        Вспомнили пароль?<Link to="/login" type="secondary" className={cn(s.link, 'ml-2')}>Войти</Link>
       </p>
     </section>
   );
