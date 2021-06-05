@@ -1,0 +1,35 @@
+.main {
+  max-width: 1240px;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 122px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.link {
+  text-decoration: none;
+  color: #4c4cff;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.total{
+  display: flex;
+  justify-content: space-between;
+}
+.sum{
+  display: flex;
+  align-items: center;
+}
+.status{
+  color: #00CCCC;
+}
+.span{
+  display: flex;
+  justify-content: center;
+}

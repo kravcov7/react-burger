@@ -1,8 +1,8 @@
 import React from "react";
 import { EmailInput, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import cn from "classnames";
-import { Link, NavLink } from "react-router-dom";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 import s from "./profile.module.css";
 import Burger from "../../components/burger/burger";

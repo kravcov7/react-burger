@@ -11,6 +11,7 @@ import ResetPassword from "../../pages/reset-password/reset-password";
 import Feed from "../../pages/feed/feed";
 import Profile from "../../pages/profile/profile";
 import Ingredients from "../../pages/ingredients/ingredients";
+import ItemDetails from "../item-detail/item-detail";
 
 function App() {
   return (
@@ -37,7 +38,8 @@ function App() {
             <Feed />
           </Route>
           <Route path="/feed/:id" exact={true}>
-            <h1>страница заказа в ленте.</h1>
+            <ItemDetails />
+            
           </Route>
           <Route path="/profile">
             <Profile />
