@@ -1,7 +1,11 @@
+.link {
+  text-decoration: none;
+  color: #F2F2F3;
+}
 .main{
   overflow-y: scroll;
   max-height: 600px;
-  /* max-height: calc(100vh - 285px ); */
+  
 }
 ::-webkit-scrollbar {
   width: 12px;	
