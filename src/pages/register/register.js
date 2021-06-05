@@ -1,6 +1,7 @@
 import React from "react";
 import { EmailInput, Input, Button, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import cn from "classnames";
+import {Link} from 'react-router-dom';
 
 import s from "./register.module.css";
 
@@ -17,7 +18,7 @@ function Register() {
         </Button>
       </form>
       <p className="text text_type_main-default text_color_inactive mt-20">
-        Уже зарегистрированы?<Button type="secondary" className={s.link}>Войти</Button>
+        Уже зарегистрированы?<Link to="/login"  type="secondary" className={cn(s.link, 'ml-2')}>Войти</Link>
       </p>
     </section>
   );
