@@ -8,17 +8,35 @@ import s from "./forgot-password.module.css";
 function ForgotPassword() {
   const [email, setEmail] = useState('');
 
-  const recoveryClick = (event) => {
-    // event.preventDefault;
+  const forgot = (email) => {
+    fetch("https://norma.nomoreparties.space/api/password-reset", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`ошибка: ` + res.status);
+        } else {
+          return res.json();
+        }
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
+  const submit = (e) => {
+    e.preventDefault();
     console.log(email);
+    forgot(email);
   };
 
   return (
     <section className={cn(s.main, "mt-30")}>
-      <form className={s.form}>
+      <form onSubmit={submit}  className={s.form}>
         <h1 className="text text_type_main-large mb-6">Восстановление пароля</h1>
         <Input type={"email"} placeholder={"Укажите e-mail"} value={email} onChange={(event) => setEmail(event.target.value)} />
-        <Button onClick={recoveryClick} type="primary" size="large" className="mt-6">
+        <Button type="primary" size="large" className="mt-6">
           Восстановить
         </Button>
       </form>
