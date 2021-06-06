@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { EmailInput, Input, Button, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Input, Button, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import cn from "classnames";
 import {Link} from 'react-router-dom';
 
