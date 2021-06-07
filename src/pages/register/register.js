@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Input, Button, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import cn from "classnames";
-import {Link} from 'react-router-dom';
-import url from "../../utils/config";
+import { Link } from "react-router-dom";
+import { register } from "../../utils/api";
 
 import s from "./register.module.css";
 
@@ -12,23 +12,6 @@ function Register() {
     email: "",
     password: "",
   });
-
-  const register = ({ name, password, email }) => {
-    fetch(`${url}/auth/register`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, password, email }),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`ошибка: ` + res.status);
-        } else {
-          return res.json();
-        }
-      })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-  };
 
   const handleInputChange = (event) => {
     const target = event.target;
@@ -58,7 +41,10 @@ function Register() {
         </Button>
       </form>
       <p className="text text_type_main-default text_color_inactive mt-20">
-        Уже зарегистрированы?<Link to="/login"  type="secondary" className={cn(s.link, 'ml-2')}>Войти</Link>
+        Уже зарегистрированы?
+        <Link to="/login" type="secondary" className={cn(s.link, "ml-2")}>
+          Войти
+        </Link>
       </p>
     </section>
   );

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { PasswordInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import cn from "classnames";
 import { Link } from "react-router-dom";
-import url from "../../utils/config";
+import { login } from "../../utils/api";
 
 import s from "./login.module.css";
 
@@ -12,30 +12,11 @@ function Login() {
     password: "",
   });
 
-  const login = ({ name, password }) => {
-    fetch(`${url}/auth`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, password }),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`ошибка: ` + res.status);
-        } else {
-          return res.json();
-        }
-      })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-  };
-
   const handleInputChange = (event) => {
     const target = event.target;
-    // Определяем, откуда пришло событие: из чекбокса или текстового поля ввода
     const value = target.value;
     const name = target.name;
 
-    // Применяем вычисляемые имена свойств
     setState({
       ...state,
       [name]: value,

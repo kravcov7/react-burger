@@ -1,4 +1,3 @@
-import React from "react";
 import cn from "classnames";
 import Orders from '../../components/orders/orders';
 import BurgerReady from '../../components/burger-ready/burger-ready';

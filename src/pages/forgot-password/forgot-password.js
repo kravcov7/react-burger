@@ -2,36 +2,19 @@ import {useState} from 'react';
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import cn from "classnames";
 import { Link } from "react-router-dom";
-import url from "../../utils/config";
+import { forgot } from "../../utils/api";
 
 import s from "./forgot-password.module.css";
 
 function ForgotPassword() {
   const [email, setEmail] = useState('');
-  
-  const forgot = (email) => {
-    fetch(`${url}/password-reset`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`ошибка: ` + res.status);
-        } else {
-          return res.json();
-        }
-      })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-  };
 
   const submit = (e) => {
     e.preventDefault();
     console.log(email);
     forgot(email);
   };
-
+  
   return (
     <section className={cn(s.main, "mt-30")}>
       <form onSubmit={submit}  className={s.form}>
