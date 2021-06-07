@@ -1,18 +1,22 @@
 import { Link } from "react-router-dom";
 // import cn from "classnames";
 import Burger from "../burger/burger";
+import { data } from '../../utils/data'
 
 import s from "./profile-orders.module.css";
 
 export function ProfileOrders() {
-  const burgers = [ 1, 2, 3, 4, 5]
+  console.log(data);
   return (
     <div className={s.burgers}>
-    {burgers.map((element, index) => (
+    {data.map((element, index) => {
+      console.log(element.name);
+    return (
       <Link key={index} className={s.burgerlink} to={`/profile/orders/${index}`}>
-        <Burger />
+        <Burger name={element.name} />
       </Link>
-    ))}
+    )}
+    )}
   </div>
   );
 }
