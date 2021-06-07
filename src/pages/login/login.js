@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { PasswordInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import cn from "classnames";
 import { Link } from "react-router-dom";
+import url from "../../utils/config";
 
 import s from "./login.module.css";
 
@@ -12,7 +13,7 @@ function Login() {
   });
 
   const login = ({ name, password }) => {
-    fetch("https://norma.nomoreparties.space/api/auth", {
+    fetch(`${url}/auth`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, password }),

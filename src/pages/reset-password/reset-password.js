@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Input, Button, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import cn from "classnames";
 import { Link } from 'react-router-dom';
+import url from "../../utils/config";
 
 import s from "./reset-password.module.css";
 
@@ -12,7 +13,7 @@ function ResetPassword() {
   });
 
   const reset = ({ token, password }) => {
-    fetch("https://norma.nomoreparties.space/api/password-reset/reset", {
+    fetch(`${url}/password-reset/reset`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token, password }),

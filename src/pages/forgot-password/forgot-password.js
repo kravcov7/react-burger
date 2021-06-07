@@ -2,14 +2,15 @@ import {useState} from 'react';
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import cn from "classnames";
 import { Link } from "react-router-dom";
+import url from "../../utils/config";
 
 import s from "./forgot-password.module.css";
 
 function ForgotPassword() {
   const [email, setEmail] = useState('');
-
+  
   const forgot = (email) => {
-    fetch("https://norma.nomoreparties.space/api/password-reset", {
+    fetch(`${url}/password-reset`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),
