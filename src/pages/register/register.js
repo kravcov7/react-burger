@@ -32,11 +32,9 @@ function Register() {
 
   const handleInputChange = (event) => {
     const target = event.target;
-    // Определяем, откуда пришло событие: из чекбокса или текстового поля ввода
     const value = target.value;
     const name = target.name;
 
-    // Применяем вычисляемые имена свойств
     setState({
       ...state,
       [name]: value,
