@@ -29,3 +29,12 @@
   text-decoration: none;
   color: #f2f2f3;
 }
+.status_color_red {
+  color: #E52B1A;
+}
+.status_color_green {
+  color: #00CCCC;
+}
+.status_color_white {
+  color: #F2F2F3;
+}
