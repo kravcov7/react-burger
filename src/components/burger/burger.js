@@ -7,11 +7,11 @@ import BurgerImage from "../burger-image/burger-image";
 import PropTypes from "prop-types";
 
 export function Burger({ name, status }) {
-  let text = "";
+  let stat = {};
   
-  if (status === "completed") text = "Выполнен";
-  // if (status === "completed") return { text: 'Выполнен', color: 'green'};
-  if (status === "canceled") text = "Отменен";
+  if (status === "completed") stat= { text: "Выполнен", colorText: "green" };
+  if (status === "cancelled") stat= { text: "Отменен", colorText: "red" };
+  if (status === "inProgress") stat= { text: "Готовится", colorText: "white" };
  
   return (
     <section className={s.main}>
@@ -21,8 +21,7 @@ export function Burger({ name, status }) {
           <div className="text text_type_main-default text_color_inactive">Сегодня, 16:20 i-GMT+3</div>
         </div>
         <h2 className="text text_type_main-medium mt-6 mb-2">{name}</h2>
-        {/* <h2 className={cn(s[`status_color_${color}`], "text text_type_main-default mb-26")}>{ st.text }</h2> */}
-        <h2 className={cn(s.status_color_green, "text text_type_main-default mb-26")}>{text}</h2>
+        <h2 className={cn(s[`status_color_${stat.colorText}`], "text text_type_main-default mb-26")}>{stat.text}</h2>
         <div className={s.footer}>
           <ul className={s.container}>
             <li className={s.item} style={{ zIndex: 4 }}>
