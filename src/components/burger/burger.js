@@ -52,6 +52,7 @@ export function Burger({ name, status }) {
 
 Burger.propTypes = {
   name: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
 };
 
 export default Burger;
