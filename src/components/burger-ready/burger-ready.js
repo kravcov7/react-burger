@@ -3,7 +3,6 @@ import Burger from "../burger/burger";
 
 import cn from "classnames";
 import s from "./burger-ready.module.css";
-import BurgerConstructorElements from "../burg-constr-elements/burger-constructor-elements";
 
 export function BurgerReady() {
   const burgers = [ 1, 2, 3, 4, 5]
