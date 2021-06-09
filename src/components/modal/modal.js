@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { CLOSE_MODAL } from '../../services/actions/modal';
 
-function Modal({  children }) {
+function Modal({ children }) {
   const dispatch = useDispatch();
 
   const closeEsc = (e) => {

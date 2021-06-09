@@ -25,3 +25,6 @@ code {
   display: flex;
   flex-direction: column;
 }
+.input__container .input_size_default {
+  width: 480px;
+}

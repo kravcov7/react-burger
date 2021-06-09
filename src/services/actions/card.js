@@ -31,7 +31,8 @@ export const getIngredients = () => {
     dispatch({
       type: GET_INGREDIENTS_REQUEST,
     });
-    fetch(url)
+    // fetch(url)
+    fetch(`${url}/ingredients`)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`ошибка: ` + res.status);
@@ -64,7 +65,8 @@ export const addOrder = (ingredients) => {
     dispatch({
       type: CREATE_ORDER_REQUEST,
     });
-    fetch("https://norma.nomoreparties.space/api/orders", {
+    // fetch("https://norma.nomoreparties.space/api/orders", {
+    fetch(`${url}/orders`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ingredients }),
