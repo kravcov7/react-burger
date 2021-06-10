@@ -30,8 +30,7 @@ export const getIngredients = () => {
   return function (dispatch) {
     dispatch({
       type: GET_INGREDIENTS_REQUEST,
-    });
-    // fetch(url)
+    });    
     fetch(`${url}/ingredients`)
       .then((res) => {
         if (!res.ok) {
@@ -64,8 +63,7 @@ export const addOrder = (ingredients) => {
   return function (dispatch) {
     dispatch({
       type: CREATE_ORDER_REQUEST,
-    });
-    // fetch("https://norma.nomoreparties.space/api/orders", {
+    });    
     fetch(`${url}/orders`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
