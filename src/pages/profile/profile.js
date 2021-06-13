@@ -1,4 +1,4 @@
-import { EmailInput, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
+import { EmailInput, Input, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import cn from "classnames";
 import { NavLink } from "react-router-dom";
 import { Switch, Route } from "react-router-dom";
@@ -28,6 +28,14 @@ export function Profile() {
             <Input type={"text"} placeholder={"Имя"} size={"default"} />
             <EmailInput name={"E-ddddil"} className="mb-5" />
             <PasswordInput name={"password"} />
+            <div className={s.button}>
+              <Button type="secondary" size="large" className="mt-6">
+                Отмена
+              </Button>
+              <Button type="primary" size="large" className="mt-6">
+                Сохранить
+              </Button>
+            </div>
           </Route>
           <Route path="/profile/orders" exact>
             <ProfileOrders />

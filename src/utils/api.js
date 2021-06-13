@@ -68,3 +68,27 @@ export const forgot = (email) => {
     .catch((err) => console.log(err));
 };
 
+export const signUp = ({ email, password, name }) => {
+
+	return fetch(`${url}/auth/register`, {
+		method: 'POST',
+		mode: 'cors',
+		cache: 'no-cache',
+		credentials: 'same-origin',
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(
+			{ email, password, name }
+		),
+		redirect: 'follow',
+		referrerPolicy: 'no-referrer',
+	})
+  .then((res) => console.log('res - ', res))
+  .catch((err) => console.log('err - ', err));
+  // .then((res) => requestHandler(res))
+}
+
+const requestHandler = (res) => {
+	if (res.ok) return res.json()
+	if (res.json) return res.json().then((err) => Promise.reject(err))
+	return Promise.reject(res)
+}
