@@ -2,7 +2,8 @@ import { useState } from "react";
 import { PasswordInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import cn from "classnames";
 import { Link } from "react-router-dom";
-import { login } from "../../utils/api";
+import { login } from "../../services/actions/auth";
+import { useDispatch } from 'react-redux';
 
 import s from "./login.module.css";
 
@@ -22,11 +23,13 @@ function Login() {
       [name]: value,
     });
   };
+console.log(state);
+  const dispatch = useDispatch();
 
   const submit = (e) => {
     e.preventDefault();
     console.log(state);
-    login(state);
+    dispatch(login(state));
   };
 
   return (

@@ -2,17 +2,20 @@ import {useState} from 'react';
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import cn from "classnames";
 import { Link } from "react-router-dom";
-import { forgot } from "../../utils/api";
+import { forgotPassword } from "../../services/actions/auth";
+import { useDispatch } from 'react-redux';
 
 import s from "./forgot-password.module.css";
 
 function ForgotPassword() {
   const [email, setEmail] = useState('');
 
+  const dispatch = useDispatch();
+
   const submit = (e) => {
     e.preventDefault();
     console.log(email);
-    forgot(email);
+    dispatch(forgotPassword(email));
   };
   
   return (

@@ -2,11 +2,21 @@ import { EmailInput, Input, PasswordInput, Button } from "@ya.praktikum/react-de
 import cn from "classnames";
 import { NavLink } from "react-router-dom";
 import { Switch, Route } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { loadUser } from '../../services/actions/auth'
 
 import s from "./profile.module.css";
 import ProfileOrders from "../../components/profile-orders/profile-orders";
 
 export function Profile() {
+  const dispatch = useDispatch();
+
+	useEffect(() => {
+		if(localStorage.getItem('refreshToken')) dispatch(loadUser()) 
+	}, [dispatch])
+
+
   return (
     <section className={cn(s.main, "mt-30")}>
       <div className={s.menu}>
