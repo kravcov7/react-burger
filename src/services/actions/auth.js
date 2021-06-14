@@ -1,5 +1,5 @@
-import { deleteCookie, setCookie } from "../../utils/cookie";
-import { loginRequest, getUser, logoutRequest, signUp, signIn, forgotPasswordR } from "../../utils/api";
+import {  setCookie } from "../../utils/cookie";
+import {  getUser, signUp, signIn, forgotPasswordR } from "../../utils/api";
 export const REGISTER_REQUEST = "REGISTER_REQUEST";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAILED = "REGISTER_FAILED";

@@ -1,8 +1,8 @@
-import { EmailInput, Input, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import cn from "classnames";
 import { NavLink } from "react-router-dom";
 import { Switch, Route } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loadUser } from '../../services/actions/auth'
 
@@ -10,11 +10,67 @@ import s from "./profile.module.css";
 import ProfileOrders from "../../components/profile-orders/profile-orders";
 
 export function Profile() {
+  const [state, setState] = useState({
+		name: '',
+		email: '',
+		password: '',
+		nameDisabled: true,
+		emailDisabled: true,
+		passwordDisabled: true,
+	})
+
   const dispatch = useDispatch();
 
 	useEffect(() => {
 		if(localStorage.getItem('refreshToken')) dispatch(loadUser()) 
 	}, [dispatch])
+
+
+
+  const handleInputChange = (event) => {
+		const target = event.target;
+		const value = target.value;
+		const name = target.name;
+		setState({
+			...state,
+			[name]: value
+		});
+	}
+
+  const nameInputRef = React.useRef(null)
+	const emailInputRef = React.useRef(null)
+	const passwordInputRef = React.useRef(null)
+
+  const activeNameInput = () => {
+		setState({
+			...state,
+			nameDisabled: state.nameDisabled ? false : true
+		});
+		nameInputRef.current.disabled = false
+		setTimeout(() => nameInputRef.current.focus(), 0)
+	}
+
+  const activeEmailInput = () => {
+		setState({
+			...state,
+			emailDisabled: state.emailDisabled ? false : true
+		});
+		emailInputRef.current.disabled = false
+		setTimeout(() => emailInputRef.current.focus(), 0)
+	}
+
+	const activePasswordInput = () => {
+		setState({
+			...state,
+			passwordDisabled: state.passwordDisabled ? false : true
+		});
+		passwordInputRef.current.disabled = false
+		setTimeout(() => passwordInputRef.current.focus(), 0)
+	};
+
+  const nameIcon = state.nameDisabled ? 'EditIcon' : 'CloseIcon';
+	const emailIcon = state.emailDisabled ? 'EditIcon' : 'CloseIcon';
+	const passwordIcon = state.passwordDisabled ? 'EditIcon' : 'CloseIcon';
 
 
   return (
@@ -35,9 +91,9 @@ export function Profile() {
       <div className={cn(s.inputs, "ml-15")}>
         <Switch>
           <Route path="/profile" exact>
-            <Input type={"text"} placeholder={"Имя"} size={"default"} />
-            <EmailInput name={"E-ddddil"} className="mb-5" />
-            <PasswordInput name={"password"} />
+            <Input type={"text"} placeholder={"Имя"} size={"default"} onChange={handleInputChange} value={state.name} icon={'EditIcon'} name={'name'} errorText={'Ошибка'} disabled={state.nameDisabled} onIconClick={activeNameInput} icon={nameIcon} ref={nameInputRef} />
+            <Input type={"email"} placeholder={"Логин"} size={"default"} onChange={handleInputChange} value={state.email} name={'email'} errorText={'Неправильный email'} icon={emailIcon} disabled={state.emailDisabled} ref={emailInputRef} onIconClick={activeEmailInput} onIconClick={activeEmailInput}/>
+            <Input type={"password"} placeholder={"Пароль"} size={"default"} onChange={handleInputChange} value={state.password} name={'password'} errorText={'Ошибка в пароле'} icon={passwordIcon} ref={passwordInputRef}	onIconClick={activePasswordInput} disabled={state.passwordDisabled} onIconClick={activePasswordInput} />
             <div className={s.button}>
               <Button type="secondary" size="large" className="mt-6">
                 Отмена
