@@ -130,14 +130,14 @@ export function Profile() {
               <Input type={"text"} placeholder="Имя" size={"default"} onChange={handleInputChange} value={state.name} icon={"EditIcon"} name="name" errorText={"Ошибка"} disabled={state.nameDisabled} onIconClick={activeNameInput} icon={nameIcon} ref={nameInputRef} />
               <Input type={"email"} placeholder="Почта" size={"default"} onChange={handleInputChange} value={state.email} name="email" errorText={"Неправильный email"} icon={emailIcon} disabled={state.emailDisabled} ref={emailInputRef} onIconClick={activeEmailInput} onIconClick={activeEmailInput} />
               <Input name="password" type="password" placeholder="Пароль" size={"default"} onChange={handleInputChange} value={state.password} errorText={"Ошибка в пароле"} icon={passwordIcon} ref={passwordInputRef} onIconClick={activePasswordInput} disabled={state.passwordDisabled} onIconClick={activePasswordInput} />
-              <div className={s.button}>
+              { state.name !== currentUserName || state.email !== currentUserEmail || state.password.length !== 0 ? <div className={s.button}>
                 <Button type="secondary" size="large" className="mt-6">
                   Отмена
                 </Button>
                 <Button type="primary" size="large" className="mt-6">
                   Сохранить
                 </Button>
-              </div>
+              </div> : null}
             </form>
           </Route>
           <Route path="/profile/orders" exact>
