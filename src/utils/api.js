@@ -111,7 +111,7 @@ const requestHandler = (res) => {
   return Promise.reject(res);
 };
 
-export const refreshToken = () => {
+export const refreshTokenR = () => {
   return fetch(`${url}/auth/token`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -128,9 +128,9 @@ export const fetchWithRefresh = async (url, options) => {
   } catch(err) {
     console.log(err.message);
     if (err.message === 'jwt expired'){
-      const refreshData = await refreshToken();
+      const refreshData = await refreshTokenR();
       localStorage.setItem('refreshToken', refreshData.refreshToken);
-      const accessToken = refreshData.accessToken.split("Bearer")[1];
+      const accessToken = refreshData.accessToken.split("Bearer ")[1];
       setCookie('token', accessToken)
       options.headers.authorization = refreshData.refreshToken;
       const res = await fetch(url, options)

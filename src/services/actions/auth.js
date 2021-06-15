@@ -1,5 +1,6 @@
 import {  setCookie, deleteCookie } from "../../utils/cookie";
-import {  getUser, signUp, signIn, forgotPasswordR, updateUserCookie, signOutCookie } from "../../utils/api";
+import {  getUser, signUp, signIn, forgotPasswordR, updateUserCookie, signOutCookie, refreshTokenR } from "../../utils/api";
+import { push } from 'connected-react-router';
 export const REGISTER_REQUEST = "REGISTER_REQUEST";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAILED = "REGISTER_FAILED";
@@ -10,6 +11,7 @@ export const LOGIN_FAILED = "LOGIN_FAILED";
 
 export const FORGOT_PASSWORD_REQUEST = "FORGOT_PASSWORD_REQUEST";
 export const FORGOT_PASSWORD_FAILED = "FORGOT_PASSWORD_FAILED";
+export const FORGOT_PASSWORD_SUCCESS = "FORGOT_PASSWORD_SUCCESS";
 
 export const LOAD_USER_REQUEST = "LOAD_USER_REQUEST";
 export const LOAD_USER_SUCCESS = "LOAD_USER_SUCCESS";
@@ -23,6 +25,10 @@ export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const LOGOUT_FAILED = "LOGOUT_FAILED";
 
+export const REFRESH_TOKEN_REQUEST = 'REFRESH_TOKEN_REQUEST';
+export const REFRESH_TOKEN_SUCCESS = 'REFRESH_TOKEN_SUCCESS';
+export const REFRESH_TOKEN_FAILED = 'REFRESH_TOKEN_FAILED';
+
 export function register(newUser) {
   return function (dispatch) {
     dispatch({
@@ -32,7 +38,7 @@ export function register(newUser) {
       .then((res) => {
         console.log(res);
         if (res && res.success) {
-          const accessToken = res.accessToken.split("Bearer")[1];
+          const accessToken = res.accessToken.split("Bearer ")[1];
           const refreshToken = res.refreshToken;
           setCookie("token", accessToken);
           localStorage.setItem("refreshToken", refreshToken);
@@ -90,9 +96,12 @@ export const forgotPassword = (email) => {
 			type: FORGOT_PASSWORD_REQUEST
 		})
 		forgotPasswordR(email)
-			.then((res) => {
-				console.log(res)
-			}).catch(err => {
+		.then((res) => {
+			dispatch({
+				type: FORGOT_PASSWORD_SUCCESS,
+			});
+			dispatch(push('/reset-password'));
+		}).catch(err => {
 				console.log(err)
 				dispatch({
 					type: FORGOT_PASSWORD_FAILED
@@ -170,5 +179,27 @@ export const logOut = () => {
 					type: LOGOUT_FAILED
 				})
 			})
+	};
+}
+
+export const refreshToken = () => {
+	return function (dispatch) {
+		dispatch({
+			type: REFRESH_TOKEN_REQUEST,
+		});
+		refreshTokenR().then((res) => {
+			if (res && res.success) {
+				localStorage.setItem('refreshToken', res.refreshToken);
+				const authToken = res.accessToken.split('Bearer ')[1];
+				setCookie('token', authToken);
+				dispatch({
+					type: REFRESH_TOKEN_SUCCESS,
+				});
+			} else {
+				dispatch({
+					type: REFRESH_TOKEN_FAILED,
+				});
+			}
+		})
 	};
 }

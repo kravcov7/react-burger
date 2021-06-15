@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import AppHeader from "../app-header/app-header";
 import { BurgerBlock } from "../burger-block/burger-block";
 import s from "./App.module.css";
@@ -12,27 +12,37 @@ import Feed from "../../pages/feed/feed";
 import Profile from "../../pages/profile/profile";
 import Ingredients from "../../pages/ingredients/ingredients";
 import ItemDetails from "../item-detail/item-detail";
+import { getRefreshToken } from "../../utils/token";
+import { useSelector } from "react-redux";
+import { ProtectedRoute } from '../protected-route';
+
 // import ProfileOrders from "../profile-orders/profile-orders";
 
 function App() {
+  const hasToken = !!getRefreshToken();
+  const isforgotPasswordSaccess = useSelector(store => store.auth.isforgotPasswordSaccess);
+  console.log("token = ", hasToken);
   return (
-    <div className={s.container}>
-      <Router>
+    <div className={s.container}>     
         <AppHeader />
         <Switch>
           <Route path="/" exact={true}>
             <BurgerBlock />
           </Route>
           <Route path="/login" exact={true}>
+            {hasToken && <Redirect to="/" />}
             <Login />
           </Route>
           <Route path="/register" exact={true}>
+            {hasToken && <Redirect to="/" />}
             <Register />
           </Route>
           <Route path="/forgot-password" exact={true}>
+            {!hasToken && <Redirect to="/" />}
             <ForgotPassword />
           </Route>
           <Route path="/reset-password" exact={true}>
+          {!hasToken && !isforgotPasswordSaccess && <Redirect to="/" />}
             <ResetPassword />
           </Route>
           <Route path="/feed" exact={true}>
@@ -44,9 +54,9 @@ function App() {
           <Route path="/profile/orders/:id" exact={true}>
             <ItemDetails />
           </Route>
-          <Route path="/profile">
+          <ProtectedRoute path="/profile">
             <Profile />
-          </Route>
+          </ProtectedRoute>
           <Route path="/ingredients/:id" exact={true}>
             <Ingredients />
           </Route>
@@ -54,7 +64,7 @@ function App() {
             <NotFound404 />
           </Route>
         </Switch>
-      </Router>
+     
     </div>
   );
 }

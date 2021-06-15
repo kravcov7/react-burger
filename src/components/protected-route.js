@@ -1,35 +1,32 @@
-import { useAuth } from '../services/reducers/auth';
-import { Redirect, Route } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from "react-redux";
+import { Redirect, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { getRefreshToken } from "./../utils/token";
+import { refreshToken } from '../services/actions/auth'
 
 export function ProtectedRoute({ children, ...rest }) {
-  let { getUser, ...auth } = useAuth();
-  const [isUserLoaded, setUserLoaded] = useState(false);
-
-  const init = async () => {
-    await getUser();
-    setUserLoaded(true);
-  };
+  const dispatch = useDispatch();
+  const hasToken = !!getRefreshToken();
+  const isTokenUpdated = useSelector((store) => store.auth.isTokenUpdated);
+  const tokenUpdateDate = useSelector((store) => store.auth.tokenUpdateDate);
 
   useEffect(() => {
-    init();
-  }, []);
-
-  if (!isUserLoaded) {
-    return null;
-  }
+    if (hasToken && !isTokenUpdated) {
+      dispatch(refreshToken());
+    }
+  }, [dispatch, hasToken, isTokenUpdated]);
 
   return (
     <Route
       {...rest}
       render={({ location }) =>
-        auth.user ? (
+        hasToken && tokenUpdateDate ? (
           children
         ) : (
           <Redirect
             to={{
-              pathname: '/login',
-              state: { from: location }
+              pathname: "/login",
+              state: { from: location },
             }}
           />
         )
