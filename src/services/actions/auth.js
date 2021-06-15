@@ -1,5 +1,5 @@
-import {  setCookie } from "../../utils/cookie";
-import {  getUser, signUp, signIn, forgotPasswordR, updateUserCookie } from "../../utils/api";
+import {  setCookie, deleteCookie } from "../../utils/cookie";
+import {  getUser, signUp, signIn, forgotPasswordR, updateUserCookie, signOutCookie } from "../../utils/api";
 export const REGISTER_REQUEST = "REGISTER_REQUEST";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAILED = "REGISTER_FAILED";
@@ -147,28 +147,28 @@ export const updateUser = (data) => {
 	};
 }
 
-// export const logOut = () => {
-// 	return function (dispatch) {
-// 		dispatch({
-// 			type: LOGOUT_REQUEST
-// 		})
-// 		signOutRequest()
-// 			.then((res) => {
-// 				if (res && res.success) {
-// 					deleteCookie('token');
-// 					localStorage.removeItem('refreshToken')
-// 					dispatch({
-// 						type: LOGOUT_SUCCESS
-// 					});
-// 				} else {
-// 					dispatch({
-// 						type: LOGOUT_FAILED
-// 					});
-// 				}
-// 			}).catch(err => {
-// 				dispatch({
-// 					type: LOGOUT_FAILED
-// 				})
-// 			})
-// 	};
-// }
+export const logOut = () => {
+	return function (dispatch) {
+		dispatch({
+			type: LOGOUT_REQUEST
+		})
+		signOutCookie()
+			.then((res) => {
+				if (res && res.success) {
+					deleteCookie('token');
+					localStorage.removeItem('refreshToken')
+					dispatch({
+						type: LOGOUT_SUCCESS
+					});
+				} else {
+					dispatch({
+						type: LOGOUT_FAILED
+					});
+				}
+			}).catch(err => {
+				dispatch({
+					type: LOGOUT_FAILED
+				})
+			})
+	};
+}

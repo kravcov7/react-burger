@@ -171,3 +171,19 @@ export const updateUserCookie = (data) => {
 	})
 	.then((res) => requestHandler(res))
 }
+
+export const signOutCookie = () => {
+	return fetch(`${url}/auth/logout`, {
+		method: 'POST',
+		mode: 'cors',
+		cache: 'no-cache',
+		credentials: 'same-origin',
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(
+			{ token: localStorage.getItem('refreshToken') }
+		),
+		redirect: 'follow',
+		referrerPolicy: 'no-referrer',
+	})
+		.then((res) => requestHandler(res))
+}

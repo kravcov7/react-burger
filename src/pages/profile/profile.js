@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "../../services/actions/auth";
 import { updateUser } from '../../services/actions/auth';
+import { logOut } from '../../services/actions/auth';
 
 import s from "./profile.module.css";
 import ProfileOrders from "../../components/profile-orders/profile-orders";
@@ -103,6 +104,10 @@ export function Profile() {
     dispatch(updateUser({...data}))
   }
 
+  const clickHandler = () => {
+		dispatch(logOut())
+	}
+
   return (
     <section className={cn(s.main, "mt-30")}>
       <div className={s.menu}>
@@ -112,7 +117,7 @@ export function Profile() {
         <NavLink to="/profile/orders" exact activeClassName={s.active} className={cn(s.link, "text text_type_main-large mb-6")}>
           История заказов
         </NavLink>
-        <NavLink to="" exact activeClassName={s.active} className={cn(s.link, "text text_type_main-large mb-6")}>
+        <NavLink to="/" exact activeClassName={s.active} onClick={clickHandler} className={cn(s.link, "text text_type_main-large mb-6")}>
           Выход
         </NavLink>
 

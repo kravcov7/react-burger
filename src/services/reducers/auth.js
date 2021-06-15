@@ -14,6 +14,8 @@ const initialState = {
 	loginFailed: false,
   loadUserRequest: false,
 	loadUserFailed: false,
+  logoutRequest: false,
+	logoutFailed: false,
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -98,19 +100,20 @@ export const authReducer = (state = initialState, action) => {
     case LOGOUT_REQUEST: {
       return {
         ...state,
-				loginFailed: true,
+				logoutRequest: true,
       }
     }
     case LOGOUT_SUCCESS: {
       return {
         ...state,
-				loginFailed: true,
+				name: '', 
+        email: '',
       }
     }
     case LOGOUT_FAILED: {
       return {
         ...state,
-				loginFailed: true,
+				logoutFailed: true,
       }
     }
     default: {
