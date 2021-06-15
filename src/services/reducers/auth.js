@@ -1,11 +1,12 @@
 
 import { REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILED,
   LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED, LOAD_USER_REQUEST,
-  LOAD_USER_SUCCESS, LOAD_USER_FAILED } from "../actions/auth";
+  LOAD_USER_SUCCESS, LOAD_USER_FAILED,
+  UPDATE_USER_REQUEST, UPDATE_USER_SUCCESS, UPDATE_USER_FAILED,
+  LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILED } from "../actions/auth";
 
 const initialState = {
   email: "",
-  password: "",
   name: "",
   registerRequest: false,
 	registerFailed: false,
@@ -73,6 +74,43 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
 				loadUserFailed: true,
+      }
+    }
+    case UPDATE_USER_REQUEST: {
+      return {
+        ...state,
+				loginRequest: true,
+      }
+    }
+    case UPDATE_USER_SUCCESS: {
+      return {
+        ...state,
+				name: action.user.name, 
+        email: action.user.email,
+      }
+    }
+    case UPDATE_USER_FAILED: {
+      return {
+        ...state,
+				loginFailed: true,
+      }
+    }
+    case LOGOUT_REQUEST: {
+      return {
+        ...state,
+				loginFailed: true,
+      }
+    }
+    case LOGOUT_SUCCESS: {
+      return {
+        ...state,
+				loginFailed: true,
+      }
+    }
+    case LOGOUT_FAILED: {
+      return {
+        ...state,
+				loginFailed: true,
       }
     }
     default: {

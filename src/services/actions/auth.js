@@ -1,5 +1,5 @@
 import {  setCookie } from "../../utils/cookie";
-import {  getUser, signUp, signIn, forgotPasswordR } from "../../utils/api";
+import {  getUser, signUp, signIn, forgotPasswordR, updateUserCookie } from "../../utils/api";
 export const REGISTER_REQUEST = "REGISTER_REQUEST";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAILED = "REGISTER_FAILED";
@@ -14,6 +14,14 @@ export const FORGOT_PASSWORD_FAILED = "FORGOT_PASSWORD_FAILED";
 export const LOAD_USER_REQUEST = "LOAD_USER_REQUEST";
 export const LOAD_USER_SUCCESS = "LOAD_USER_SUCCESS";
 export const LOAD_USER_FAILED = "LOAD_USER_FAILED";
+
+export const UPDATE_USER_REQUEST = "UPDATE_USER_REQUEST";
+export const UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS";
+export const UPDATE_USER_FAILED = "UPDATE_USER_FAILED";
+
+export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
+export const LOGOUT_FAILED = "LOGOUT_FAILED";
 
 export function register(newUser) {
   return function (dispatch) {
@@ -115,3 +123,52 @@ export const loadUser = () => {
 		})
 	};
 }
+
+export const updateUser = (data) => {
+	return function (dispatch) {
+		dispatch({
+			type: UPDATE_USER_REQUEST
+		})
+		updateUserCookie(data).then((res) => {
+			if (res && res.success) {
+				dispatch({
+					type: UPDATE_USER_SUCCESS,
+					user: res.user
+				});
+			} else {
+				throw res;
+			}
+		}).catch(err => {
+      console.log(err)
+      dispatch({
+        type: UPDATE_USER_FAILED
+      })
+		})
+	};
+}
+
+// export const logOut = () => {
+// 	return function (dispatch) {
+// 		dispatch({
+// 			type: LOGOUT_REQUEST
+// 		})
+// 		signOutRequest()
+// 			.then((res) => {
+// 				if (res && res.success) {
+// 					deleteCookie('token');
+// 					localStorage.removeItem('refreshToken')
+// 					dispatch({
+// 						type: LOGOUT_SUCCESS
+// 					});
+// 				} else {
+// 					dispatch({
+// 						type: LOGOUT_FAILED
+// 					});
+// 				}
+// 			}).catch(err => {
+// 				dispatch({
+// 					type: LOGOUT_FAILED
+// 				})
+// 			})
+// 	};
+// }

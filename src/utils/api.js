@@ -14,8 +14,7 @@ export const resetPassword = ({ token, password }) => {
         return res.json();
       }
     })
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
+    .then((res) => requestHandler(res));
 };
 
 export const register = ({ name, password, email }) => {
@@ -31,8 +30,7 @@ export const register = ({ name, password, email }) => {
         return res.json();
       }
     })
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
+    .then((res) => requestHandler(res));
 };
 
 export const login = ({ name, password }) => {
@@ -48,8 +46,7 @@ export const login = ({ name, password }) => {
         return res.json();
       }
     })
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
+    .then((res) => requestHandler(res));
 };
 
 export const forgot = (email) => {
@@ -65,8 +62,7 @@ export const forgot = (email) => {
         return res.json();
       }
     })
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
+    .then((res) => requestHandler(res));
 };
 
 export const signUp = ({ email, password, name }) => {
@@ -80,9 +76,8 @@ export const signUp = ({ email, password, name }) => {
     redirect: "follow",
     referrerPolicy: "no-referrer",
   })
-    .then((res) => console.log("res - ", res))
-    .catch((err) => console.log("err - ", err));
-  // .then((res) => requestHandler(res))
+    
+  .then((res) => requestHandler(res))
 };
 
 export const signIn = ({ name, password }) => {
@@ -94,8 +89,7 @@ export const signIn = ({ name, password }) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email: name, password }),
   })
-    .then((res) => console.log("res - ", res))
-    .catch((err) => console.log("err - ", err));
+  .then((res) => requestHandler(res));
 };
 
 export const forgotPasswordR = (value) => {
@@ -158,4 +152,22 @@ export const getUser = () => {
     redirect: "follow",
     referrerPolicy: "no-referrer",
   })
+}
+
+export const updateUserCookie = (data) => {
+  console.log(getCookie('token'));
+	return fetch(`${url}/auth/user`, {
+		method: 'PATCH',
+		mode: 'cors',
+		cache: 'no-cache',
+		credentials: 'same-origin',
+		headers: {
+			"Content-Type": "application/json",
+			Authorization: 'Bearer ' + getCookie('token')
+		},
+		body: JSON.stringify(data),
+		redirect: 'follow',
+		referrerPolicy: 'no-referrer',
+	})
+	.then((res) => requestHandler(res))
 }
