@@ -16,6 +16,10 @@ export function ProtectedRoute({ children, ...rest }) {
     }
   }, [dispatch, hasToken, isTokenUpdated]);
 
+  if (hasToken && !isTokenUpdated) {
+    return (<p>Идет загрузка...</p>);
+  }
+
   return (
     <Route
       {...rest}

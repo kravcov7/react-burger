@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 
 function OrderDetails() {
   const { currentOrder, orderIsLoading, orderHasError } = useSelector((store) => store.card);
+  console.log(currentOrder);
   
   return (
     <div className={s.order}>

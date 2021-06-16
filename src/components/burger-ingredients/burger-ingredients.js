@@ -18,10 +18,7 @@ function BurgerIngredients() {
       type: ADD_CURRENT_ITEM,
       item
     })    
-    dispatch({
-      type: OPEN_MODAL,
-      content: <IngredientsDetails />
-    })
+    
   }
 
   const bun = data.filter((item) => item.type === "bun");

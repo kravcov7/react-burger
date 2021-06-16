@@ -117,6 +117,7 @@ export const loadUser = () => {
 		})
 		getUser().then((res) => {
 			if (res && res.success) {
+				console.log(res);
 				dispatch({
 					type: LOAD_USER_SUCCESS,
 					user: res.user

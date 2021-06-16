@@ -8,6 +8,7 @@ import { loadUser } from "../../services/actions/auth";
 import { updateUser } from '../../services/actions/auth';
 import { logOut } from '../../services/actions/auth';
 
+
 import s from "./profile.module.css";
 import ProfileOrders from "../../components/profile-orders/profile-orders";
 
@@ -19,14 +20,14 @@ export function Profile() {
     nameDisabled: true,
     emailDisabled: true,
     passwordDisabled: true,
-  });
+  });  
 
   const dispatch = useDispatch();
   const currentUserName = useSelector(store => store.auth.name);
 	const currentUserEmail = useSelector(store => store.auth.email);
 
   useEffect(() => {
-    if (localStorage.getItem("refreshToken")) dispatch(loadUser());
+    dispatch(loadUser());
   }, [dispatch]);
 
   useEffect(() => {
@@ -47,7 +48,7 @@ export function Profile() {
       ...state,
       [name]: value,
     });
-  };
+  };  
 
   const nameInputRef = React.useRef(null);
   const emailInputRef = React.useRef(null);
@@ -107,6 +108,12 @@ export function Profile() {
   const clickHandler = () => {
 		dispatch(logOut())
 	}
+
+  const loadUserRequest = useSelector(store => store.auth)
+
+  // if (loadUserRequest) {
+  //   return (<p>333</p>)
+  // }
 
   return (
     <section className={cn(s.main, "mt-30")}>
