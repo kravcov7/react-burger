@@ -30,7 +30,7 @@ function IngredientsDetails() {
   return (
     <div className={s.ingredient}>
       <h1 className={cn(s.title, "text", "text_type_main-large", "mb-5")}>Детали ингредиента</h1>
-      {isLoading && 'идет загрузка'}
+      {isLoading && 'Идет загрузка...'}
       { hasError && 'произошла ошибка'}
       { item && (<div className={s.container}>
         <img className={s.container__image} src={item.image} alt="ингредиент" />

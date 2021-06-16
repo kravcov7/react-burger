@@ -15,7 +15,7 @@ function Cards({ title, ingredients, openModal, childRef }) {
       </h2>
       <div className={styles.cards}>
         {ingredients.map((el) => (
-          <Link  key={el._id} to={{pathname: `/ingredients/${el._id}`, 
+          <Link className={styles.link} key={el._id} to={{pathname: `/ingredients/${el._id}`, 
           state: {background: location}}}>
             <Card el={el} openModal={openModal} />
           </Link>

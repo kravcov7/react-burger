@@ -3,6 +3,7 @@ import { Redirect, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { getRefreshToken } from "./../utils/token";
 import { refreshToken } from '../services/actions/auth'
+import cn from 'classnames'
 
 export function ProtectedRoute({ children, ...rest }) {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ export function ProtectedRoute({ children, ...rest }) {
   }, [dispatch, hasToken, isTokenUpdated]);
 
   if (hasToken && !isTokenUpdated) {
-    return (<p>Идет загрузка...</p>);
+    return (<p className="text text_type_main-large" >Идет загрузка...</p>);
   }
 
   return (
