@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Redirect, useHistory, useLocation } from "react-router-dom";
+import {  Switch, Route, Redirect, useHistory, useLocation } from "react-router-dom";
 import AppHeader from "../app-header/app-header";
 import { BurgerBlock } from "../burger-block/burger-block";
 import s from "./App.module.css";
@@ -10,7 +10,7 @@ import ForgotPassword from "../../pages/forgot-password/forgot-password";
 import ResetPassword from "../../pages/reset-password/reset-password";
 import Feed from "../../pages/feed/feed";
 import Profile from "../../pages/profile/profile";
-import Ingredients from "../../pages/ingredients/ingredients";
+// import Ingredients from "../../pages/ingredients/ingredients";
 import ItemDetails from "../item-detail/item-detail";
 import { getRefreshToken } from "../../utils/token";
 import { useSelector } from "react-redux";

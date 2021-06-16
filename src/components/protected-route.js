@@ -3,7 +3,6 @@ import { Redirect, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { getRefreshToken } from "./../utils/token";
 import { refreshToken } from '../services/actions/auth'
-import cn from 'classnames'
 
 export function ProtectedRoute({ children, ...rest }) {
   const dispatch = useDispatch();

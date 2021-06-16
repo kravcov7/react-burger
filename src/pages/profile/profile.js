@@ -109,12 +109,7 @@ export function Profile() {
 		dispatch(logOut())
 	}
 
-  const loadUserRequest = useSelector(store => store.auth)
-
-  // if (loadUserRequest) {
-  //   return (<p>333</p>)
-  // }
-
+ 
   return (
     <section className={cn(s.main, "mt-30")}>
       <div className={s.menu}>

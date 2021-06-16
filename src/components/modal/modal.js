@@ -6,13 +6,12 @@ import s from './modal.module.css';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
 
-import { useDispatch } from 'react-redux';
-import { CLOSE_MODAL } from '../../services/actions/modal';
+// import { CLOSE_MODAL } from '../../services/actions/modal';
 import { useHistory } from "react-router-dom";
 
 function Modal({ children }) {
   let history = useHistory();
-  const dispatch = useDispatch();
+ 
 
   const closeEsc = (e) => {
 		if (e.keyCode === 27) close()			
