@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Input, Button, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import cn from "classnames";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { resetPassword } from "../../utils/api";
+import { Redirect } from "react-router-dom";
 
 import s from "./reset-password.module.css";
 
@@ -28,6 +29,18 @@ function ResetPassword() {
     resetPassword(state);
   };
 
+  const hasToken = localStorage.getItem("refreshToken");
+
+  if (hasToken) {
+    return (
+      <Redirect
+        to={{
+          pathname: "/",
+        }}
+      />
+    );
+  }
+
   return (
     <section className={cn(s.main, "mt-30")}>
       <form onSubmit={submit} className={s.form}>
@@ -38,10 +51,10 @@ function ResetPassword() {
           Сохранить
         </Button>
       </form>
-      
+
       <p className="text text_type_main-default text_color_inactive mt-20">
         Вспомнили пароль?
-        <Link to='/login'  type="secondary" className={cn(s.link, 'ml-2')}>
+        <Link to="/login" type="secondary" className={cn(s.link, "ml-2")}>
           Войти
         </Link>
       </p>
