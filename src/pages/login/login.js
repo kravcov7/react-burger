@@ -3,7 +3,8 @@ import { PasswordInput, Input, Button } from "@ya.praktikum/react-developer-burg
 import cn from "classnames";
 import { Link } from "react-router-dom";
 import { login } from "../../services/actions/auth";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import s from "./login.module.css";
 
@@ -23,7 +24,7 @@ function Login() {
       [name]: value,
     });
   };
-console.log(state);
+
   const dispatch = useDispatch();
 
   const submit = (e) => {
@@ -31,6 +32,19 @@ console.log(state);
     console.log(state);
     dispatch(login(state));
   };
+
+  const hasToken = localStorage.getItem('refreshToken')
+  const user = useSelector(store => store.auth.name)
+
+  if (user || hasToken) {
+    return (
+      <Redirect
+        to={{
+          pathname: '/'
+        }}
+      />
+    );
+  }
 
   return (
     <section className={cn(s.main, "mt-30")}>
