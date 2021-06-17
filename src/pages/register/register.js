@@ -4,6 +4,7 @@ import cn from "classnames";
 import { Link } from "react-router-dom";
 import { register } from "../../services/actions/auth";
 import { useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import s from "./register.module.css";
 
@@ -32,6 +33,19 @@ function Register() {
     console.log(state);
     dispatch(register(state));
   };
+  
+  const hasToken = localStorage.getItem('refreshToken')
+  console.log(hasToken);
+  if (hasToken) {
+    return (
+      <Redirect
+        to={{
+          pathname: '/'
+        }}
+      />
+    );
+  }
+  
   return (
     <section className={cn(s.main, "mt-30")}>
       <form onSubmit={submit} className={s.form}>

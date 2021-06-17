@@ -36,7 +36,7 @@ export function register(newUser) {
     });
     signUp(newUser)
       .then((res) => {
-        console.log(res);
+        
         if (res && res.success) {
           const accessToken = res.accessToken.split("Bearer ")[1];
           const refreshToken = res.refreshToken;
@@ -46,6 +46,7 @@ export function register(newUser) {
             type: REGISTER_SUCCESS,
             user: res.user,
           });
+					dispatch(push('/'));
         } else
           dispatch({
             type: REGISTER_FAILED,
