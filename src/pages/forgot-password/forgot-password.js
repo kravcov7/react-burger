@@ -4,6 +4,7 @@ import cn from "classnames";
 import { Link } from "react-router-dom";
 import { forgotPassword } from "../../services/actions/auth";
 import { useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import s from "./forgot-password.module.css";
 
@@ -17,6 +18,17 @@ function ForgotPassword() {
     console.log(email);
     dispatch(forgotPassword(email));
   };
+
+  const hasToken = localStorage.getItem('refreshToken');
+  if (hasToken) {
+    return (
+      <Redirect
+        to={{
+          pathname: '/'
+        }}
+      />
+    );
+  }
   
   return (
     <section className={cn(s.main, "mt-30")}>
