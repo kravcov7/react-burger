@@ -6,9 +6,21 @@
 	gap: 20px
 }
 .ingredient {
-	display: flex;
+	/* display: flex;
+	align-self: center;
 	flex-direction: column;
 	box-sizing: border-box;
+	width: 640px;
+	justify-content: center; */
+	/* text-align: center; */
+
+	display: flex;
+  align-self: center;
+  justify-content: center;
+  flex-grow: 1;
+  flex-direction: column;
+  text-align: center;
+  width: 640px;
 }
 .container {
 	display: flex;

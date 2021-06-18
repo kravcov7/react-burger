@@ -26,6 +26,12 @@ export const cardReducer = (state = initialState, action) => {
         hasError: false,
       };
     }
+    case GET_INGREDIENTS_SUCCESS: {
+      return { ...state, hasError: false, data: action.data, isLoading: false };
+    }
+    case GET_INGREDIENTS_FAILED: {
+      return { ...state, hasError: true, isLoading: false };
+    }
     case CREATE_ORDER_REQUEST: {
       return {
         ...state,
@@ -33,18 +39,12 @@ export const cardReducer = (state = initialState, action) => {
         orderHasError: false,
       };
     }
-    case GET_INGREDIENTS_SUCCESS: {
-      return { ...state, hasError: false, data: action.data, isLoading: false };
-    }
     case CREATE_ORDER_SUCCESS: {
       return { ...state, orderHasError: false, currentOrder: action.data, orderIsLoading: false };
     }
 
     case ADD_CURRENT_ITEM: {
       return { ...state, currentItem: action.item };
-    }
-    case GET_INGREDIENTS_FAILED: {
-      return { ...state, hasError: true, isLoading: false };
     }
     case CREATE_ORDER_FAILED: {
       return { ...state, orderHasError: true, orderIsLoading: false };

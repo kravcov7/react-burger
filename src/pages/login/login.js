@@ -2,7 +2,9 @@ import { useState } from "react";
 import { PasswordInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import cn from "classnames";
 import { Link } from "react-router-dom";
-import { login } from "../../utils/api";
+import { login } from "../../services/actions/auth";
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import s from "./login.module.css";
 
@@ -23,11 +25,26 @@ function Login() {
     });
   };
 
+  const dispatch = useDispatch();
+
   const submit = (e) => {
     e.preventDefault();
     console.log(state);
-    login(state);
+    dispatch(login(state));
   };
+
+  const hasToken = localStorage.getItem('refreshToken')
+  const user = useSelector(store => store.auth.name)
+
+  if (user || hasToken) {
+    return (
+      <Redirect
+        to={{
+          pathname: '/'
+        }}
+      />
+    );
+  }
 
   return (
     <section className={cn(s.main, "mt-30")}>

@@ -2,10 +2,10 @@ import React, { useRef }  from "react";
 import styles from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import Cards from '../cards/cards';
-import IngredientsDetails from '../ingredient-details/ingredient-details';
+// import IngredientsDetails from '../ingredient-details/ingredient-details';
 import cn from 'classnames';
 import {  useSelector, useDispatch } from 'react-redux';
-import { OPEN_MODAL, ADD_CURRENT_ITEM } from "../../services/actions/card";
+import { ADD_CURRENT_ITEM } from "../../services/actions/card";
 
 function BurgerIngredients() {
   const dispatch = useDispatch();
@@ -17,11 +17,7 @@ function BurgerIngredients() {
     dispatch({
       type: ADD_CURRENT_ITEM,
       item
-    })    
-    dispatch({
-      type: OPEN_MODAL,
-      content: <IngredientsDetails />
-    })
+    })       
   }
 
   const bun = data.filter((item) => item.type === "bun");

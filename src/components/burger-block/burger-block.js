@@ -3,7 +3,7 @@ import styles from "./burger-block.module.css";
 
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
-import Modal from "../modal/modal";
+// import Modal from "../modal/modal";
 
 import { getIngredients } from "../../services/actions/card";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,7 +19,7 @@ export function BurgerBlock() {
   }, [dispatch]);
 
   const { data, isLoading, hasError} = useSelector((store) => store.card);
-  const { isShow, content } = useSelector((store) => store.modal);
+  // const { isShow, content } = useSelector((store) => store.modal);
 
   return (
     <section className={styles.main}>
@@ -31,7 +31,7 @@ export function BurgerBlock() {
           <BurgerConstructor />
         </DndProvider>
       )}
-      {isShow && <Modal>{content}</Modal>}
+      {/* {isShow && <Modal>{content}</Modal>} */}
     </section>
   );
 }

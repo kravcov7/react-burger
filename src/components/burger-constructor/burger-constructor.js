@@ -2,16 +2,19 @@ import React, { useCallback } from "react";
 import { ConstructorElement, Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-constructor.module.css";
 import cn from "classnames";
-import OrderDetails from "../order-details/order-details";
+// import OrderDetails from "../order-details/order-details";
 import { useDrop } from "react-dnd";
 
 import { useSelector, useDispatch } from "react-redux";
-import { OPEN_MODAL, addOrder, DELETE_ITEM, DECREASE_INGREDIENT } from "../../services/actions/card";
+import { addOrder, DELETE_ITEM, DECREASE_INGREDIENT } from "../../services/actions/card";
 import { ADD_INGREDIENTS_BUN, ADD_INGREDIENTS_FILLINGS, INCREASE_INGREDIENT, MOVE_ITEM } from "../../services/actions/card";
 import BurgerConstructorElements from "../burg-constr-elements/burger-constructor-elements";
 import ConstructorEmpty from "../constructor-empty/constuctor-empty";
+import { useLocation, useHistory } from 'react-router-dom';
 
 function BurgerConstructor() {
+  let location = useLocation();
+  const history = useHistory();
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: "product",
     drop: (item) => {
@@ -42,10 +45,13 @@ function BurgerConstructor() {
     const ingredients = [...burger.fillings.map((el) => el._id), burger.bun, burger.bun];
 
     dispatch(addOrder(ingredients));
-    dispatch({
-      type: OPEN_MODAL,
-      content: <OrderDetails />,
+    history.push({
+      pathname: '/',
+      state: {
+        background: location
+      }
     });
+    
   };
 
   let sum = (burger.bun?.price || 0) * 2;

@@ -4,7 +4,7 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import cn from "classnames";
 import s from "./burger.module.css";
 import BurgerImage from "../burger-image/burger-image";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 export function Burger({ name, status }) {
   let stat = {};
@@ -51,8 +51,8 @@ export function Burger({ name, status }) {
 }
 
 Burger.propTypes = {
-  name: PropTypes.string.isRequired,
-  status: PropTypes.string.isRequired,
+  // name: PropTypes.string.isRequired,
+  // status: PropTypes.string.isRequired,
 };
 
 export default Burger;

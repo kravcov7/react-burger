@@ -13,28 +13,28 @@ function ItemDetails() {
         <p className={cn(s.status, "mt-3 mb-15")}>Выполнен</p>
         <h3 className={cn(s.structure, "text text_type_main-medium mb-6")}>Состав:</h3>
         <ul className={cn(s.ingrid)}>
-          <li className={cn(s.item, 'mr-5')}>
+          <li className={cn(s.item, "mr-5")}>
             <ItemStructure />
           </li>
-          <li className={cn(s.item, 'mr-5')}>
+          <li className={cn(s.item, "mr-5")}>
             <ItemStructure />
           </li>
-          <li className={cn(s.item, 'mr-5')}>
+          <li className={cn(s.item, "mr-5")}>
             <ItemStructure />
           </li>
-          <li className={cn(s.item, 'mr-5')}>
+          <li className={cn(s.item, "mr-5")}>
             <ItemStructure />
           </li>
-          <li className={cn(s.item, 'mr-5')}>
+          <li className={cn(s.item, "mr-5")}>
             <ItemStructure />
           </li>
-          <li className={cn(s.item, 'mr-5')}>
+          <li className={cn(s.item, "mr-5")}>
             <ItemStructure />
           </li>
-          <li className={cn(s.item, 'mr-5')}>
+          <li className={cn(s.item, "mr-5")}>
             <ItemStructure />
           </li>
-          <li className={cn(s.item, 'mr-5')}>
+          <li className={cn(s.item, "mr-5")}>
             <ItemStructure />
           </li>
         </ul>
