@@ -14,10 +14,10 @@ function BurgerIngredients() {
   const { data } = useSelector(store => store.card)
 
   const openModal = (item) => { 
-    dispatch({
-      type: ADD_CURRENT_ITEM,
-      item
-    })       
+    // dispatch({
+    //   type: ADD_CURRENT_ITEM,
+    //   item
+    // })       
   }
 
   const bun = data.filter((item) => item.type === "bun");
