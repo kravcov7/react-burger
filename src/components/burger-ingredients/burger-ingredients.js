@@ -2,23 +2,15 @@ import React, { useRef }  from "react";
 import styles from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import Cards from '../cards/cards';
-// import IngredientsDetails from '../ingredient-details/ingredient-details';
+
 import cn from 'classnames';
 import {  useSelector, useDispatch } from 'react-redux';
-import { ADD_CURRENT_ITEM } from "../../services/actions/card";
 
 function BurgerIngredients() {
   const dispatch = useDispatch();
 
   const [current, setCurrent] = React.useState("buns");
   const { data } = useSelector(store => store.card)
-
-  const openModal = (item) => { 
-    // dispatch({
-    //   type: ADD_CURRENT_ITEM,
-    //   item
-    // })       
-  }
 
   const bun = data.filter((item) => item.type === "bun");
   const sauce = data.filter((item) => item.type === "sauce");
@@ -56,9 +48,9 @@ function BurgerIngredients() {
       </section>
 
       <section className={styles.main}  ref={headerRef} onScroll={handleScroll}>
-        <Cards title='Булки' ingredients={ bun } id="buns" openModal={openModal} childRef={bunRef}  />
-        <Cards title='Соусы' ingredients={ sauce } id="sauces" openModal={openModal} childRef={sauceRef}  />
-        <Cards title='Начинки' ingredients={ main } id="mains" openModal={openModal}  childRef={mainRef} />    
+        <Cards title='Булки' ingredients={ bun } id="buns"  childRef={bunRef}  />
+        <Cards title='Соусы' ingredients={ sauce } id="sauces"  childRef={sauceRef}  />
+        <Cards title='Начинки' ingredients={ main } id="mains"   childRef={mainRef} />    
       </section>
     </div>
   );

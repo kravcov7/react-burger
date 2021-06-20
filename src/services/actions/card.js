@@ -19,8 +19,6 @@ export const CREATE_ORDER_REQUEST = "CREATE_ORDER_REQUEST";
 export const CREATE_ORDER_SUCCESS = "CREATE_ORDER_SUCCESS";
 export const CREATE_ORDER_FAILED = "CREATE_ORDER_FAILED";
 
-export const ADD_CURRENT_ITEM = "ADD_CURRENT_ITEM";
-
 export const OPEN_MODAL = "OPEN_MODAL";
 export const CLOSE_MODAL = "CLOSE_MODAL";
 
@@ -77,7 +75,7 @@ export const addOrder = (ingredients) => {
         }
       })
       .then((res) => {
-        if (res && res.success) {
+        if (res && res.success) {          
           dispatch({
             type: CREATE_ORDER_SUCCESS,
             data: res.order,
