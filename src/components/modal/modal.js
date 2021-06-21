@@ -10,8 +10,7 @@ import PropTypes from 'prop-types';
 import { useHistory } from "react-router-dom";
 
 function Modal({ children }) {
-  let history = useHistory();
- 
+  const history = useHistory(); 
 
   const closeEsc = (e) => {
 		if (e.keyCode === 27) close()			
