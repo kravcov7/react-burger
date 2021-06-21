@@ -1,4 +1,4 @@
-import React, { useRef }  from "react";
+import React, {  useEffect, useRef }  from "react";
 import styles from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import Cards from '../cards/cards';
@@ -29,6 +29,12 @@ function BurgerIngredients() {
 		const currentHeader = minDistance === bunDistance ? 'buns' : minDistance === sauceDistance ? 'sauces' : 'mains';
 		setCurrent(prevState => (currentHeader === prevState.current ? prevState.current : currentHeader))
 	}
+
+  useEffect(() => {
+    if (current === 'buns') bunRef?.current?.scrollIntoView();
+    if (current === 'sauces') sauceRef?.current?.scrollIntoView();
+    if (current === 'mains') mainRef?.current?.scrollIntoView();
+  }, [current]);
 
   return (
     <div>
