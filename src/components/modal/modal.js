@@ -6,7 +6,6 @@ import s from './modal.module.css';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
 
-// import { CLOSE_MODAL } from '../../services/actions/modal';
 import { useHistory } from "react-router-dom";
 
 function Modal({ children }) {
