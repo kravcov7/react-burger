@@ -6,7 +6,7 @@ import { getIngredients } from "../../services/actions/card";
 import { useParams } from "react-router-dom";
 
 function IngredientsDetails() {
-  let { id } = useParams();
+  const { id } = useParams();
   const dispatch = useDispatch();
   React.useEffect(() => {
 
