@@ -24,7 +24,7 @@ import OrderDetails from "../order-details/order-details";
 function App() {
   const location = useLocation();
   const history = useHistory();
-  let background = (history.action === "PUSH" || history.action === "REPLACE") && location.state && location.state.background;
+  const background = (history.action === "PUSH" || history.action === "REPLACE") && location.state && location.state.background;
 
   const hasToken = !!getRefreshToken();
   const isforgotPasswordSaccess = useSelector((store) => store.auth.isforgotPasswordSaccess);
