@@ -13,7 +13,7 @@ import ConstructorEmpty from "../constructor-empty/constuctor-empty";
 import { useLocation, useHistory } from 'react-router-dom';
 
 function BurgerConstructor() {
-  let location = useLocation();
+  const location = useLocation();
   const history = useHistory();
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: "product",

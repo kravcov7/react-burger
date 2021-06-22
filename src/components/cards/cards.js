@@ -7,7 +7,7 @@ import { Link, useLocation } from 'react-router-dom'
 
 
 function Cards({ title, ingredients, openModal, childRef }) {
-  let location = useLocation()
+  const location = useLocation()
   return (
     <>
       <h2 className={cn("text", "text_type_main-medium", "mb-6", "mt-10")} ref={childRef}>

@@ -6,7 +6,7 @@ import {	useLocation} from 'react-router-dom';
 import s from "./profile-orders.module.css";
 
 export function ProfileOrders() {
-  let location = useLocation();
+  const location = useLocation();
   return (
     <div className={s.burgers}>
       {data.map((element, index) => (
