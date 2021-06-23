@@ -5,7 +5,7 @@ import cn from "classnames";
 import BurgerImage from "../burger-image/burger-image";
 
 function ItemStructure() {
-  let count =2
+const count =2
   return (
     <section className={s.main}>
       <div className={s.name}>

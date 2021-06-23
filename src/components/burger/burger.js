@@ -7,7 +7,7 @@ import BurgerImage from "../burger-image/burger-image";
 // import PropTypes from "prop-types";
 
 export function Burger({ name, status }) {
-  let stat = {};
+  const stat = {};
   
   if (status === "completed") stat= { text: "Выполнен", colorText: "green" };
   if (status === "cancelled") stat= { text: "Отменен", colorText: "red" };

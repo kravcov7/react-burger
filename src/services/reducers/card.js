@@ -1,6 +1,9 @@
 import { v4 as uuidv4 } from "uuid";
 
-import { INCREASE_INGREDIENT, DECREASE_INGREDIENT, DELETE_ITEM, MOVE_ITEM, GET_INGREDIENTS_FAILED, GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS, ADD_INGREDIENTS_BUN, ADD_INGREDIENTS_FILLINGS, ADD_CURRENT_ITEM, CREATE_ORDER_FAILED, CREATE_ORDER_SUCCESS, CREATE_ORDER_REQUEST } from "../actions/card";
+import { INCREASE_INGREDIENT, DECREASE_INGREDIENT, DELETE_ITEM, MOVE_ITEM, 
+  GET_INGREDIENTS_FAILED, GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS, 
+  ADD_INGREDIENTS_BUN, ADD_INGREDIENTS_FILLINGS, CREATE_ORDER_FAILED, 
+  CREATE_ORDER_SUCCESS, CREATE_ORDER_REQUEST } from "../actions/card";
 
 const initialState = {
   isLoading: false,
@@ -10,8 +13,7 @@ const initialState = {
     bun: null,
     fillings: [],
   },
-  counts: {},
-  currentItem: null,
+  counts: {},  
   currentOrder: null,
   orderIsLoading: false,
   orderHasError: false,
@@ -40,15 +42,16 @@ export const cardReducer = (state = initialState, action) => {
       };
     }
     case CREATE_ORDER_SUCCESS: {
+      console.log(action.data);
       return { ...state, orderHasError: false, currentOrder: action.data, orderIsLoading: false };
-    }
-
-    case ADD_CURRENT_ITEM: {
-      return { ...state, currentItem: action.item };
     }
     case CREATE_ORDER_FAILED: {
       return { ...state, orderHasError: true, orderIsLoading: false };
     }
+
+    // case ADD_CURRENT_ITEM: {
+    //   return { ...state, currentItem: action.item };
+    // }
     case INCREASE_INGREDIENT: {
       if (action.item.type === "bun") {
         return state;

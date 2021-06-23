@@ -13,7 +13,7 @@ import ConstructorEmpty from "../constructor-empty/constuctor-empty";
 import { useLocation, useHistory } from 'react-router-dom';
 
 function BurgerConstructor() {
-  let location = useLocation();
+  const location = useLocation();
   const history = useHistory();
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: "product",
@@ -69,15 +69,15 @@ function BurgerConstructor() {
   );
 
   return (
-    <section ref={drop} className={cn(styles.container)}>
+    <section ref={drop} data-cy='drop-container' className={cn(styles.container)}>
       {burger.bun || burger.fillings.length ? (
         <>
           {burger.bun && (
-            <header className={cn(styles.element, "mb-5")}>
+            <header className={cn(styles.element, "mb-5")}  data-cy='bun1'>
               <ConstructorElement type="top" isLocked={true} text={`${burger.bun.name} (верх)`} price={burger.bun.price} thumbnail={burger.bun.image} />
             </header>
           )}
-          <ul className={styles.list}>
+          <ul className={styles.list}  data-cy='fillings'>
             {burger.fillings.map((el, index) => {
               const deleteItem = () => {
                 dispatch({
@@ -94,7 +94,7 @@ function BurgerConstructor() {
             })}
           </ul>
           {burger.bun && (
-            <div className={cn(styles.element, "mb-10")}>
+            <div className={cn(styles.element, "mb-10")}  data-cy='bun2'> 
               <ConstructorElement type="bottom" isLocked={true} text={`${burger.bun.name} (низ)`} price={burger.bun.price} thumbnail={burger.bun.image} />
             </div>
           )}
