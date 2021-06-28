@@ -4,7 +4,7 @@ import {
   WS_CONNECTION_ERROR,
   WS_CONNECTION_CLOSED,
   WS_GET_MESSAGE
-} from '../action-types';
+} from '../actions/socket';
 
 const initialState = {
   wsConnected: false,
@@ -34,7 +34,7 @@ export const wsReducer = (state = initialState, action) => {
     case WS_GET_MESSAGE:
       return {
         ...state,
-        messages: []
+        messages: action.payload,
       };
     case WS_USER_NAME_UPDATE:
       return {

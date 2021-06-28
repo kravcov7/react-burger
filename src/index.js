@@ -4,7 +4,7 @@ import "./index.css";
 import { Provider } from "react-redux";
 import { routerMiddleware, ConnectedRouter } from "connected-react-router";
 import { rootReducer, history } from './services/reducers';
-import socketMiddleware from './services/middlewares/socketMiddleware';
+import {socketMiddleware} from './services/middlewares/socketMiddleware';
 
 import App from "./components/app/app";
 import reportWebVitals from "./reportWebVitals";
@@ -20,7 +20,7 @@ import {
   WS_CONNECTION_SUCCESS,
   WS_GET_MESSAGE,
   WS_SEND_MESSAGE
-} from './services/actions/socketsActions';
+} from './services/actions/socket';
 
 const wsActions = {
   wsInit: WS_CONNECTION_START,
