@@ -4,6 +4,7 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import cn from "classnames";
 import s from "./burger.module.css";
 import BurgerImage from "../burger-image/burger-image";
+import {getTimeOrders} from '../../utils/helpers'
 
 export function Burger({ el, data }) {
   // console.log(data);
@@ -22,12 +23,14 @@ export function Burger({ el, data }) {
   const price = itemOrders.reduce((acc, curr) => acc += curr.price, 0)
   console.log(price);
 
+  const dateOrders = getTimeOrders(el.createdAt);
+
   return (
     <section className={s.main}>
       <div className="p-6">
         <div className={s.data}>
           <span className="text text_type_digits-default">#{el.number}</span>
-          <div className="text text_type_main-default text_color_inactive">Сегодня, 16:20 i-GMT+3</div>
+          <div className="text text_type_main-default text_color_inactive">{ dateOrders }</div>
         </div>
         <h2 className="text text_type_main-medium mt-6 mb-2">{el.name}</h2>
         <h2 className={cn(s[`status_color_${stat.colorText}`], "text text_type_main-default mb-26")}>{stat.text}</h2>

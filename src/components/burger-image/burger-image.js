@@ -5,7 +5,7 @@ export function BurgerImage({ image }) {
   return (
     <section className={s.main}>
       <div className={s.img}>
-        <img src={image} alt="фото" />
+        <img className={s.icon} src={image} alt="фото" />
       </div>
     </section>
   );
