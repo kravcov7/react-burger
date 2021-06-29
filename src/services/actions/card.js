@@ -1,4 +1,5 @@
 import url from "../../utils/config";
+import { getCookie } from "../../utils/cookie";
 
 export const INCREASE_INGREDIENT = "INCREASE_INGREDIENT";
 export const DECREASE_INGREDIENT = "DECREASE_INGREDIENT";
@@ -64,7 +65,10 @@ export const addOrder = (ingredients) => {
     });    
     fetch(`${url}/orders`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: 'Bearer ' + getCookie('token')
+      },
       body: JSON.stringify({ ingredients }),
     })
       .then((res) => {
