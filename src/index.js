@@ -21,6 +21,14 @@ import {
   WS_GET_MESSAGE,
   WS_SEND_MESSAGE
 } from './services/actions/socket';
+import {
+  WS_CONNECTION_CLOSED_AUTH,
+  WS_CONNECTION_ERROR_AUTH,
+  WS_CONNECTION_START_AUTH,
+  WS_CONNECTION_SUCCESS_AUTH,
+  WS_GET_MESSAGE_AUTH,
+  WS_SEND_MESSAGE_AUTH
+} from './services/actions/socketAuth';
 
 const wsActions = {
   wsInit: WS_CONNECTION_START,
@@ -30,13 +38,23 @@ const wsActions = {
   onError: WS_CONNECTION_ERROR,
   onMessage: WS_GET_MESSAGE
 };
+const wsActionsAuth = {
+  wsInit: WS_CONNECTION_START_AUTH,
+  wsSendMessage: WS_SEND_MESSAGE_AUTH,
+  onOpen: WS_CONNECTION_SUCCESS_AUTH,
+  onClose: WS_CONNECTION_CLOSED_AUTH,
+  onError: WS_CONNECTION_ERROR_AUTH,
+  onMessage: WS_GET_MESSAGE_AUTH
+};
+
 
 const composeEnhancers = typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
 
 const wsUrl = 'wss://norma.nomoreparties.space/orders/all';
+const wsUrlAuth = 'wss://norma.nomoreparties.space/orders';
 
 const enhancer = composeEnhancers(
-  applyMiddleware(thunk, routerMiddleware(history), socketMiddleware(wsUrl, wsActions))
+  applyMiddleware(thunk, routerMiddleware(history), socketMiddleware(wsUrl, wsActions, false), socketMiddleware(wsUrlAuth, wsActionsAuth, true))
 );
 
 const store = createStore(rootReducer, enhancer);

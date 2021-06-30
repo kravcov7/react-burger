@@ -8,7 +8,7 @@ import {getTimeOrders} from '../../utils/helpers'
 
 export function Burger({ el, data }) {
   const stat = {};
-  console.log(el);
+  // console.log(el);
 
   // if (el.status === "completed") stat = { text: "Выполнен", colorText: "green" };
   // if (el.status === "cancelled") stat = { text: "Отменен", colorText: "red" };
