@@ -3,9 +3,12 @@ export const socketMiddleware = (wsUrl, wsActions) => {
     let socket = null;
 
     return next => action => {
-      const { dispatch, getState } = store;
-      const { type, payload } = action;
-      const { wsInit, wsSendMessage, onOpen, onClose, onError, onMessage } = wsActions;
+      // const { dispatch, getState } = store;
+      const { dispatch } = store;
+      const { type } = action;
+      // const { type, payload } = action;
+      // const { wsInit, wsSendMessage, onOpen, onClose, onError, onMessage } = wsActions;
+      const { wsInit, onOpen, onClose, onError, onMessage } = wsActions;
       // const { user } = getState().user;
       if (type === wsInit) {
         socket = new WebSocket(wsUrl);

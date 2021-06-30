@@ -7,7 +7,6 @@ import BurgerImage from "../burger-image/burger-image";
 import {getTimeOrders} from '../../utils/helpers'
 
 export function Burger({ el, data }) {
-  // console.log(data);
   const stat = {};
 
   if (el.status === "completed") stat = { text: "Выполнен", colorText: "green" };
@@ -17,12 +16,10 @@ export function Burger({ el, data }) {
   const itemOrders = el.ingredients
     .map((el) => {
       return data.filter((item) => item._id === el);
-    })
-    .flat();
-  // console.log(itemOrders);
+    }).flat();
+  
   const price = itemOrders.reduce((acc, curr) => acc += curr.price, 0)
-  console.log(price);
-
+  
   const dateOrders = getTimeOrders(el.createdAt);
 
   return (

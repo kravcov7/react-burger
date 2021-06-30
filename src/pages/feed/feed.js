@@ -8,16 +8,14 @@ import s from "./feed.module.css";
 import { WS_CONNECTION_START } from "../../services/actions/socket";
 import { getIngredients} from '../../services/actions/card'
 
-export function Feed() {
-  
+export function Feed() {  
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getIngredients());
   }, [dispatch]);
   const {data} = useSelector((store) => store.card);
-  console.log(data);
-  
+    
   useEffect(() => {
     dispatch({
       type: WS_CONNECTION_START
