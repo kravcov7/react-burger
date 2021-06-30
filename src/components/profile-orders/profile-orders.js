@@ -1,11 +1,30 @@
 import { Link } from "react-router-dom";
 import Burger from "../burger/burger";
 import { data } from "../../utils/data";
-import {	useLocation} from 'react-router-dom';
+import { useLocation } from "react-router-dom";
+import { WS_CONNECTION_START_AUTH } from "../../services/actions/socketAuth";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import s from "./profile-orders.module.css";
 
 export function ProfileOrders() {
+  const dispatch = useDispatch();
+
+  // const dispatch = useDispatch();
+  // const { id } = useParams();
+
+  // useEffect(() => {
+  //   dispatch(getIngredients());
+  // }, [dispatch]);
+  // const { data } = useSelector((store) => store.card);
+
+  useEffect(() => {
+    dispatch({
+      type: WS_CONNECTION_START_AUTH,
+    });
+  }, [dispatch]);
+
   const location = useLocation();
   return (
     <div className={s.burgers}>
