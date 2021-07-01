@@ -6,27 +6,39 @@ import ItemStructure from "../item-structure/item-structure";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { WS_CONNECTION_START } from "../../services/actions/socket";
+import { WS_CONNECTION_START_AUTH } from "../../services/actions/socketAuth";
 import { getIngredients } from "../../services/actions/card";
 import { useParams } from "react-router-dom";
+import { useRouteMatch } from "react-router-dom";
+import { getStat } from "../../utils/helpers";
 
 function ItemDetails() {
   const dispatch = useDispatch();
+  const isProfile = !!useRouteMatch("/profile");
   const { id } = useParams();
+  console.log(id);
 
   useEffect(() => {
     dispatch(getIngredients());
   }, [dispatch]);
   const { data } = useSelector((store) => store.card);
-  
+
   useEffect(() => {
-    dispatch({
-      type: WS_CONNECTION_START,
-    });
+    isProfile
+      ? dispatch({
+          type: WS_CONNECTION_START_AUTH,
+        })
+      : dispatch({
+          type: WS_CONNECTION_START,
+        });
   }, [dispatch]);
 
-  const { messages } = useSelector((store) => store.ws);
+  const { messages } = useSelector((store) => (isProfile ? store.wsAuth : store.ws));
+  // const { messages } = useSelector((store) => store.wsAuth);
+  // console.log(messages);
+
   const getItem = (arr, id) => {
-    return arr?.filter((el) => {      
+    return arr?.filter((el) => {
       return el.number === Number(id);
     })[0];
   };
@@ -44,6 +56,9 @@ function ItemDetails() {
       return data.filter((item) => item._id === el);
     })
     .flat();
+ 
+  const status = order?.status;
+  const stat = getStat(status);
 
   const sum = itemOrders.reduce((acc, curr) => (acc += curr.price * countItems[curr._id]), 0);
 
@@ -52,7 +67,7 @@ function ItemDetails() {
       <div>
         <span className={cn(s.span, "text text_type_digits-default")}>#{id}</span>
         <h1 className={cn(s.title, "text text_type_main-medium mt-10")}>{order?.name}</h1>
-        <p className={cn(s.status, "mt-3 mb-15")}>Выполнzzzzzzен</p>
+        <p className={cn(s.status, "mt-3 mb-15")}>{stat.text}</p>
         <h3 className={cn(s.structure, "text text_type_main-medium mb-6")}>Состав:</h3>
         <ul className={cn(s.ingrid)}>
           {itemOrders.map((el, index) => (

@@ -15,3 +15,5 @@ export const getTimeOrders = (date) => {
 
   return `${getDaysOrders(diffTime)}, ${hours}:${min} i-GMT+${dayCreated.getTimezoneOffset() * (-1) / 60}`;
 };
+
+export const getStat = status => (status === "done") ? { text: "Выполнен", colorText: "green" } : status === "pending" ? { text: "Отменен", colorText: "red" } : { text: "Готовится", colorText: "white" };

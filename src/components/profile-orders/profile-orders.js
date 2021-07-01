@@ -29,7 +29,7 @@ export function ProfileOrders() {
   return (
     <div className={s.burgers}>
       {messages.orders?.map((el, index) => (
-         <Link to={{ pathname: `/profile/orders/${index}`, state: { background: location } }} key={index} className={s.burgerlink}>
+         <Link to={{ pathname: `/profile/orders/${el.number}`, state: { background: location } }} key={index} className={s.burgerlink}>
            <Burger el={el} data={data} />
          </Link> 
       ))}
