@@ -6,8 +6,7 @@ import s from "./burger-ready.module.css";
 import {	useLocation} from 'react-router-dom';
 
 export function BurgerReady({ messages, data }) {
-  const location = useLocation();
-  
+  const location = useLocation();  
   
   return (
     <section className={cn(s.main, "mt-10")}>

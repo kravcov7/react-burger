@@ -115,7 +115,6 @@ export function Profile() {
   const clickHandler = () => {
 		dispatch(logOut())
 	}
-
  
   return (
     <section className={cn(s.main, "mt-30")}>

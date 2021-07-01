@@ -16,8 +16,8 @@ export function Burger({ el, data }) {
 
   const itemOrders = el?.ingredients
     .map((el) => {
-      return data.filter((item) => item._id === el);
-    }).flat();
+      return data?.filter((item) => item._id === el);
+    }).flat() 
   
   const price = itemOrders?.reduce((acc, curr) => acc += curr.price, 0)
   

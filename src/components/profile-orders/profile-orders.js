@@ -28,10 +28,10 @@ export function ProfileOrders() {
   const location = useLocation();
   return (
     <div className={s.burgers}>
-      {data.map((element, index) => (
-        <Link to={{ pathname: `/profile/orders/${index}`, state: { background: location } }} key={index} className={s.burgerlink}>
-          <Burger name={element.name} status={"completed"} />
-        </Link>
+      {messages.orders?.map((el, index) => (
+         <Link to={{ pathname: `/profile/orders/${index}`, state: { background: location } }} key={index} className={s.burgerlink}>
+           <Burger el={el} data={data} />
+         </Link> 
       ))}
     </div>
   );
