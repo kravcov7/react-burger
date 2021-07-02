@@ -6,11 +6,10 @@ import s from "./burger.module.css";
 import BurgerImage from "../burger-image/burger-image";
 import { getTimeOrders } from "../../utils/helpers";
 import { getStat } from "../../utils/helpers";
-import { useCallback } from "react";
 
 export function Burger({ el, data }) {
   const status = el.status;  
-  const stat = useCallback(getStat(status), [status])
+  const stat = getStat(status)
 
   const itemOrders = el?.ingredients
     .map((el) => {
