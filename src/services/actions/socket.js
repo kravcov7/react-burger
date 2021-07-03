@@ -8,3 +8,11 @@ export const WS_USER_NAME_UPDATE = 'WS_USER_NAME_UPDATE';
 
 export const WS_CONNECTION_START = 'WS_CONNECTION_START';
 
+export const wsActions = {
+	wsInit: WS_CONNECTION_START,
+	wsSendMessage: WS_SEND_MESSAGE,
+	onOpen: WS_CONNECTION_SUCCESS,
+	onClose: WS_CONNECTION_CLOSED,
+	onError: WS_CONNECTION_ERROR,
+	onMessage: WS_GET_MESSAGE
+};
