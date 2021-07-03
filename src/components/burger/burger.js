@@ -6,11 +6,12 @@ import s from "./burger.module.css";
 import BurgerImage from "../burger-image/burger-image";
 import { getTimeOrders } from "../../utils/helpers";
 import { getStat } from "../../utils/helpers";
+import PropTypes from 'prop-types';
 
 export function Burger({ el, data }) {
   const status = el.status;  
   const stat = getStat(status)
-
+  
   const itemOrders = el?.ingredients
     .map((el) => {
       return data?.filter((item) => item._id === el);
@@ -49,8 +50,8 @@ export function Burger({ el, data }) {
 }
 
 Burger.propTypes = {
-  // name: PropTypes.string.isRequired,
-  // status: PropTypes.string.isRequired,
+  el: PropTypes.object.isRequired,
+  data: PropTypes.array.isRequired,
 };
 
 export default Burger;

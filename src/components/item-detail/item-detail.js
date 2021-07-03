@@ -71,7 +71,8 @@ function ItemDetails() {
         <ul className={cn(s.ingrid)}>
           {itemOrders.map((el, index) => (
             <li key={index} className={cn(s.item, "mr-5")}>
-              <ItemStructure count={countItems[el._id]} price={el.price} image={el.image_mobile} />
+              {/* <ItemStructure count={countItems[el._id]} price={el.price} image={el.image_mobile} /> */}
+              <ItemStructure count={countItems[el._id]} el={el} />
             </li>
           ))}
         </ul>

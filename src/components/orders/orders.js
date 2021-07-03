@@ -1,13 +1,10 @@
-import React from "react";
-
 import cn from "classnames";
 import s from "./orders.module.css";
 
 export function Orders({ messages }) {
   
   const doneOrders = messages.orders?.filter((el) => el.status === "done");
-  const pendingOrders = messages.orders?.filter((el) => el.status !== "done");
- 
+  const pendingOrders = messages.orders?.filter((el) => el.status !== "done"); 
 
   return (
     <section className="mt-25">
