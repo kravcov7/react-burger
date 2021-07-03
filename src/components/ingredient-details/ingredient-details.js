@@ -8,16 +8,17 @@ import { useParams } from "react-router-dom";
 function IngredientsDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const { data, isLoading, hasError, dataReceived } = useSelector((store) => store.card);
   React.useEffect(() => {
-    dispatch(getIngredients());
-  }, [dispatch]);
-  const { data, isLoading, hasError } = useSelector((store) => store.card);
+    if (!dataReceived) {
+      dispatch(getIngredients());
+    }
+  }, [dispatch, dataReceived]);
   const item = data.find((el) => el._id === id);
 
   // const orderIsLoading = useSelector(store => store.card.orderIsLoading)
   // const { name, image, carbohydrates, fat, proteins, calories } = item;
-  console.log(item, isLoading);
-
+  
   return (
     <div className={s.ingredient}>
       <h1 className={cn(s.title, "text", "text_type_main-large", "mb-5")}>Детали ингредиента</h1>

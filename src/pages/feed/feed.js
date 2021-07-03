@@ -10,11 +10,13 @@ import { getIngredients} from '../../services/actions/card'
 
 export function Feed() {  
   const dispatch = useDispatch();
+  const {data, dataReceived } = useSelector((store) => store.card);
 
   useEffect(() => {
-    dispatch(getIngredients());
-  }, [dispatch]);
-  const {data} = useSelector((store) => store.card);
+    if (!dataReceived) {
+      dispatch(getIngredients());
+    }
+  }, [dispatch, dataReceived]);
     
   useEffect(() => {
     dispatch({

@@ -11,11 +11,13 @@ import s from "./profile-orders.module.css";
 
 export function ProfileOrders() {
   const dispatch = useDispatch();
+  const { data, dataReceived } = useSelector((store) => store.card);
 
   useEffect(() => {
-    dispatch(getIngredients());
-  }, [dispatch]);
-  const { data } = useSelector((store) => store.card);
+    if (!dataReceived) {
+      dispatch(getIngredients());
+    }
+  }, [dispatch, dataReceived]);
 
   useEffect(() => {
     dispatch({
@@ -23,8 +25,7 @@ export function ProfileOrders() {
     });
   }, [dispatch]);
   const { messages } = useSelector((store) => store.wsAuth);
-  console.log(messages);
-
+  
   const location = useLocation();
   return (
     <div className={s.burgers}>

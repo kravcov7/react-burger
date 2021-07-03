@@ -12,12 +12,13 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 
 export function BurgerBlock() {
   const dispatch = useDispatch();
+  const { data, isLoading, hasError, dataReceived } = useSelector((store) => store.card);
 
   React.useEffect(() => {
-    dispatch(getIngredients());
-  }, [dispatch]);
-
-  const { data, isLoading, hasError} = useSelector((store) => store.card);
+    if (!dataReceived) {
+      dispatch(getIngredients());
+    }
+  }, [dispatch, dataReceived]);
 
   return (
     <section className={styles.main}>
@@ -25,10 +26,10 @@ export function BurgerBlock() {
       {hasError && "Произошла ошибка"}
       {!isLoading && !hasError && data.length && (
         <DndProvider backend={HTML5Backend}>
-          <BurgerIngredients />          
+          <BurgerIngredients />
           <BurgerConstructor />
         </DndProvider>
-      )}     
+      )}
     </section>
   );
 }

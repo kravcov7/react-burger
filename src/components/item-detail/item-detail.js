@@ -16,12 +16,13 @@ function ItemDetails() {
   const dispatch = useDispatch();
   const isProfile = !!useRouteMatch("/profile");
   const { id } = useParams();
-  console.log(id);
+  const { data, dataReceived } = useSelector((store) => store.card);
 
-  useEffect(() => {
-    dispatch(getIngredients());
-  }, [dispatch]);
-  const { data } = useSelector((store) => store.card);
+  React.useEffect(() => {
+    if (!dataReceived) {
+      dispatch(getIngredients());
+    }
+  }, [dispatch, dataReceived]);
 
   useEffect(() => {
     isProfile
@@ -34,9 +35,7 @@ function ItemDetails() {
   }, [dispatch]);
 
   const { messages } = useSelector((store) => (isProfile ? store.wsAuth : store.ws));
-  // const { messages } = useSelector((store) => store.wsAuth);
-  // console.log(messages);
-
+    
   const getItem = (arr, id) => {
     return arr?.filter((el) => {
       return el.number === Number(id);
