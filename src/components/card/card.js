@@ -16,6 +16,7 @@ const Card = React.memo(({ el }) => {
   }); 
 
   const { counts, burger } = useSelector((store) => store.card);
+  // console.log(counts);
   const count = el.type==='bun' && burger.bun?._id===el._id ? 2 : counts[el._id];
   // count = el.type==='bun' && burger.bun?._id===el._id ? 2 : id;
   
