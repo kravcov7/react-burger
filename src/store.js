@@ -1,18 +1,32 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
+import { compose, createStore, applyMiddleware } from 'redux';
+import { rootReducer, history } from './services/reducers';
+import { socketMiddleware } from './services/middleware';
+import { routerMiddleware } from 'connected-react-router';
+import thunk from 'redux-thunk';
+import { wsActions } from './services/actions/ws-actions';
+import { wsActionsAuth } from './services/actions/ws-actions-auth';
+import { WS_URL, WS_URL_AUTH } from './constants/config';
+
+const composeEnhancers =
+	typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+		? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+		: compose;
+
+const enhancer = composeEnhancers(
+	applyMiddleware(thunk, routerMiddleware(history), socketMiddleware(WS_URL, wsActions, false), socketMiddleware(WS_URL_AUTH, wsActionsAuth, true))
+);
+
+export const store = createStore(rootReducer, enhancer);
+
 import { Provider } from "react-redux";
 import { routerMiddleware, ConnectedRouter } from "connected-react-router";
 import { rootReducer, history } from './services/reducers';
 import {socketMiddleware} from './services/middlewares/socketMiddleware';
-// import { store } from './store';
+import { store } from './store';
 
 import App from "./components/app/app";
 import reportWebVitals from "./reportWebVitals";
-
 import { compose, createStore, applyMiddleware } from "redux";
-
-import thunk from "redux-thunk";
 
 import {
   WS_CONNECTION_CLOSED,
@@ -48,7 +62,6 @@ const wsActionsAuth = {
   onMessage: WS_GET_MESSAGE_AUTH
 };
 
-
 const composeEnhancers = typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
 
 const wsUrl = 'wss://norma.nomoreparties.space/orders/all';
@@ -59,19 +72,3 @@ const enhancer = composeEnhancers(
 );
 
 const store = createStore(rootReducer, enhancer);
-
-ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <App />
-      </ConnectedRouter>
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById("root")
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

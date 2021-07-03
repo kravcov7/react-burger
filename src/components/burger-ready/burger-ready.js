@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 
 export function BurgerReady({ messages, data }) {
   const location = useLocation();  
+  // console.log(messages);
     
   return (
     <section className={cn(s.main, "mt-10")}>
@@ -22,7 +23,7 @@ export function BurgerReady({ messages, data }) {
 }
 
 BurgerReady.propTypes = {
-  // messages: PropTypes.object,
+  // messages: PropTypes.array,
   data: PropTypes.array.isRequired,
 };
 
