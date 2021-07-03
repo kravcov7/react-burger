@@ -20,7 +20,7 @@ const Card = React.memo(({ el }) => {
   // count = el.type==='bun' && burger.bun?._id===el._id ? 2 : id;
   
   return (
-    <div ref={drag} data-cy={el._id} className={styles.card} key={el._id} >
+    <div ref={drag} data-cy='ingredient' className={styles.card} key={el._id} >
       <img src={el.image} alt={el.name} />
       <p className={styles.price}>
         <span className="text text_type_digits-default mr-2">{el.price}</span>

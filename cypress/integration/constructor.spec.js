@@ -3,13 +3,13 @@ describe("service is available", function () {
     cy.visit("http://localhost:3000");
   });
 
-  function remove(id) {
-    cy.get(`[data-cy=${id}]`).trigger("dragstart");
+  function remove(index) {
+    cy.get(`[data-cy='ingredient']`).eq(index).trigger("dragstart");
     cy.get('[data-cy="drop-container"]').trigger("drop");
   }
 
   it("Перемещение булки", function () {
-    remove("60cb6564fce49c00269d4018");
+    remove(0);
     cy.get('[data-cy="bun1"]')
       .children()
       .should(($children) => {
@@ -22,7 +22,7 @@ describe("service is available", function () {
       });
   });
   it("Замещение булки", function () {
-    remove("60cb6564fce49c00269d4017");
+    remove(1);
     cy.get('[data-cy="bun1"]')
       .children()
       .should(($children) => {
@@ -35,10 +35,10 @@ describe("service is available", function () {
       });
   });
   it("Перемещение начинки", function () {
-    remove("60cb6564fce49c00269d4020");
-    remove("60cb6564fce49c00269d401f");
-    remove("60cb6564fce49c00269d401a");
-    remove("60cb6564fce49c00269d401a");
+    remove(2);
+    remove(3);
+    remove(4);
+    remove(5);
     cy.get('[data-cy="fillings"]')
       .children()
       .should(($children) => {
