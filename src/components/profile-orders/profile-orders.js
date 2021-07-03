@@ -5,19 +5,19 @@ import { useLocation } from "react-router-dom";
 import { WS_CONNECTION_START_AUTH } from "../../services/actions/socketAuth";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getIngredients } from "../../services/actions/card";
+// import { getIngredients } from "../../services/actions/card";
 
 import s from "./profile-orders.module.css";
 
 export function ProfileOrders() {
   const dispatch = useDispatch();
-  const { data, dataReceived } = useSelector((store) => store.card);
+  const { data } = useSelector((store) => store.card);
 
-  useEffect(() => {
-    if (!dataReceived) {
-      dispatch(getIngredients());
-    }
-  }, [dispatch, dataReceived]);
+  // useEffect(() => {
+  //   if (!dataReceived) {
+  //     dispatch(getIngredients());
+  //   }
+  // }, [dispatch, dataReceived]);
 
   useEffect(() => {
     dispatch({

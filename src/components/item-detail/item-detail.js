@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { WS_CONNECTION_START } from "../../services/actions/socket";
 import { WS_CONNECTION_START_AUTH } from "../../services/actions/socketAuth";
-import { getIngredients } from "../../services/actions/card";
+// import { getIngredients } from "../../services/actions/card";
 import { useParams } from "react-router-dom";
 import { useRouteMatch } from "react-router-dom";
 import { getStat } from "../../utils/helpers";
@@ -16,13 +16,13 @@ function ItemDetails() {
   const dispatch = useDispatch();
   const isProfile = !!useRouteMatch("/profile");
   const { id } = useParams();
-  const { data, dataReceived } = useSelector((store) => store.card);
+  const { data } = useSelector((store) => store.card);
 
-  React.useEffect(() => {
-    if (!dataReceived) {
-      dispatch(getIngredients());
-    }
-  }, [dispatch, dataReceived]);
+  // React.useEffect(() => {
+  //   if (!dataReceived) {
+  //     dispatch(getIngredients());
+  //   }
+  // }, [dispatch, dataReceived]);
 
   useEffect(() => {
     isProfile

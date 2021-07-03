@@ -6,17 +6,17 @@ import {useEffect} from 'react';
 
 import s from "./feed.module.css";
 import { WS_CONNECTION_START } from "../../services/actions/socket";
-import { getIngredients} from '../../services/actions/card'
+// import { getIngredients} from '../../services/actions/card'
 
 export function Feed() {  
   const dispatch = useDispatch();
-  const {data, dataReceived } = useSelector((store) => store.card);
+  const {data } = useSelector((store) => store.card);
 
-  useEffect(() => {
-    if (!dataReceived) {
-      dispatch(getIngredients());
-    }
-  }, [dispatch, dataReceived]);
+  // useEffect(() => {
+  //   if (!dataReceived) {
+  //     dispatch(getIngredients());
+  //   }
+  // }, [dispatch, dataReceived]);
     
   useEffect(() => {
     dispatch({

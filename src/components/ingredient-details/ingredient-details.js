@@ -2,18 +2,18 @@ import React from "react";
 import s from "./ingredient-details.module.css";
 import cn from "classnames";
 import { useDispatch, useSelector } from "react-redux";
-import { getIngredients } from "../../services/actions/card";
+// import { getIngredients } from "../../services/actions/card";
 import { useParams } from "react-router-dom";
 
 function IngredientsDetails() {
   const { id } = useParams();
-  const dispatch = useDispatch();
-  const { data, isLoading, hasError, dataReceived } = useSelector((store) => store.card);
-  React.useEffect(() => {
-    if (!dataReceived) {
-      dispatch(getIngredients());
-    }
-  }, [dispatch, dataReceived]);
+  // const dispatch = useDispatch();
+  const { data, isLoading, hasError } = useSelector((store) => store.card);
+  // React.useEffect(() => {
+  //   if (!dataReceived) {
+  //     dispatch(getIngredients());
+  //   }
+  // }, [dispatch, dataReceived]);
   const item = data.find((el) => el._id === id);
 
   // const orderIsLoading = useSelector(store => store.card.orderIsLoading)
