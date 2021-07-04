@@ -3,21 +3,28 @@ import Burger from "../burger/burger";
 
 import cn from "classnames";
 import s from "./burger-ready.module.css";
-import {	useLocation} from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-export function BurgerReady() {
-  const location = useLocation();
-  const burgers = [ 1, 2, 3, 4, 5]
+export function BurgerReady({ messages, data }) {
+  const location = useLocation();  
+  // console.log(messages);
+    
   return (
     <section className={cn(s.main, "mt-10")}>
       <h1 className="text text_type_main-large mb-5">Лента заказов</h1>
-      {burgers.map((element, index) => (
-        <Link key={index} className={s.link} to={{ pathname: `/feed/${index}`, state: { background: location}}}>
-          <Burger />
+      {messages.orders?.map((el) => (
+        <Link key={el.number} className={s.link} to={{ pathname: `/feed/${el.number}`, state: { background: location}}}>
+          <Burger data={data} el={ el } />
         </Link>
       ))}
     </section>
   );
 }
+
+BurgerReady.propTypes = {
+  // messages: PropTypes.array,
+  data: PropTypes.array.isRequired,
+};
 
 export default BurgerReady;

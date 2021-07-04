@@ -8,6 +8,7 @@ import { INCREASE_INGREDIENT, DECREASE_INGREDIENT, DELETE_ITEM, MOVE_ITEM,
 const initialState = {
   isLoading: false,
   hasError: false,
+  dataReceived: false,
   data: [],
   burger: {
     bun: null,
@@ -29,7 +30,7 @@ export const cardReducer = (state = initialState, action) => {
       };
     }
     case GET_INGREDIENTS_SUCCESS: {
-      return { ...state, hasError: false, data: action.data, isLoading: false };
+      return { ...state, hasError: false, data: action.data, isLoading: false, dataReceived: true, };
     }
     case GET_INGREDIENTS_FAILED: {
       return { ...state, hasError: true, isLoading: false };
@@ -42,7 +43,7 @@ export const cardReducer = (state = initialState, action) => {
       };
     }
     case CREATE_ORDER_SUCCESS: {
-      console.log(action.data);
+      // console.log(action.data);
       return { ...state, orderHasError: false, currentOrder: action.data, orderIsLoading: false };
     }
     case CREATE_ORDER_FAILED: {
@@ -56,6 +57,7 @@ export const cardReducer = (state = initialState, action) => {
       if (action.item.type === "bun") {
         return state;
       } else {
+        console.log(state.counts);
         return {
           ...state,
           counts: { ...state.counts, [action.item._id]: (state.counts[action.item._id] || 0) + 1 },

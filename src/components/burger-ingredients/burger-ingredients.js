@@ -4,11 +4,9 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import Cards from '../cards/cards';
 
 import cn from 'classnames';
-import {  useSelector, useDispatch } from 'react-redux';
+import {  useSelector } from 'react-redux';
 
 function BurgerIngredients() {
-  const dispatch = useDispatch();
-
   const [current, setCurrent] = React.useState("buns");
   const { data } = useSelector(store => store.card)
 

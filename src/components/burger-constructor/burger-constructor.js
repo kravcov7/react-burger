@@ -23,15 +23,15 @@ function BurgerConstructor() {
             type: ADD_INGREDIENTS_BUN,
             item,
           })
-        : dispatch({
-            type: ADD_INGREDIENTS_FILLINGS,
-            item,
-          }) &&
-          dispatch({
-            type: INCREASE_INGREDIENT,
-            item,
-          });
-    },
+          : dispatch({
+              type: ADD_INGREDIENTS_FILLINGS,
+              item,
+            })
+            dispatch({
+              type: INCREASE_INGREDIENT,
+              item,
+            });
+        },
     collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),

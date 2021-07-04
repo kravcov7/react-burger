@@ -1,44 +1,18 @@
-import React from "react";
-
-// import cn from "classnames";
 import s from "./burger-image.module.css";
-import bun01 from "../../images/bun-01.png";
+import PropTypes from 'prop-types';
 
-export function BurgerImage() {
+export function BurgerImage({ image }) {
   return (
     <section className={s.main}>
-      {/* <ul className={s.container}>
-        <li className={s.item} style={{ zIndex: 4 }}>
-          <div className={s.img}>
-            <img src={bun01} alt="фото" />
-          </div>
-        </li>
-        <li className={s.item} style={{ zIndex: 3 }}>
-          <div className={s.img}>
-            <img src={bun01} alt="фото" />
-          </div>
-        </li>
-        <li className={s.item} style={{ zIndex: 2 }}>
-          <div className={s.img}>
-            <img src={bun01} alt="фото" />
-          </div>
-        </li>
-        <li className={s.item} style={{ zIndex: 1 }}>
-          <div className={s.img}>
-            <img src={bun01} alt="фото" />
-          </div>
-        </li>
-        <li className={s.item} style={{ zIndex: 0 }}>
-          <div className={s.img}>
-            <img src={bun01} alt="фото" />
-          </div>
-        </li>
-      </ul> */}
-          <div className={s.img}>
-            <img src={bun01} alt="фото" />
-          </div>
+      <div className={s.img}>
+        <img className={s.icon} src={image} alt="фото" />
+      </div>
     </section>
   );
 }
+
+BurgerImage.propTypes = {
+  image: PropTypes.string.isRequired, 
+};
 
 export default BurgerImage;

@@ -13,22 +13,32 @@ import Profile from "../../pages/profile/profile";
 // import Ingredients from "../../pages/ingredients/ingredients";
 import ItemDetails from "../item-detail/item-detail";
 import { getRefreshToken } from "../../utils/token";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { ProtectedRoute } from "../protected-route";
 import Modal from "../../components/modal/modal";
 import IngredientsDetails from "../ingredient-details/ingredient-details";
 import OrderDetails from "../order-details/order-details";
+import { useDispatch, useSelector } from "react-redux";
+import { getIngredients } from "../../services/actions/card";
 
 // import ProfileOrders from "../profile-orders/profile-orders";
 
 function App() {
   const location = useLocation();
+  const dispatch = useDispatch();
   const history = useHistory();
   const background = (history.action === "PUSH" || history.action === "REPLACE") && location.state && location.state.background;
 
   const hasToken = !!getRefreshToken();
   const isforgotPasswordSaccess = useSelector((store) => store.auth.isforgotPasswordSaccess);
-  console.log("token = ", hasToken);
+
+  const { dataReceived } = useSelector((store) => store.card);
+  React.useEffect(() => {
+    if (!dataReceived) {
+      dispatch(getIngredients());
+    }
+  }, [dispatch, dataReceived]);
+
   return (
     <div className={s.container}>
       <AppHeader />
