@@ -1,7 +1,7 @@
 import React from "react";
 import {  Switch, Route, Redirect, useHistory, useLocation } from "react-router-dom";
 import AppHeader from "../app-header/app-header";
-import { BurgerBlock } from "../burger-block/burger-block";
+import BurgerBlock from "../burger-block/burger-block";
 import s from "./App.module.css";
 import { NotFound404 } from "../../pages/not-found-404/not-found-404";
 import Login from "../../pages/login/login";
@@ -15,7 +15,7 @@ import ItemDetails from "../item-detail/item-detail";
 import { getRefreshToken } from "../../utils/token";
 // import { useSelector } from "react-redux";
 import { ProtectedRoute } from "../protected-route";
-import Modal from "../../components/modal/modal";
+import Modal from "../modal/modal";
 import IngredientsDetails from "../ingredient-details/ingredient-details";
 import OrderDetails from "../order-details/order-details";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,15 +24,15 @@ import { getIngredients } from "../../services/actions/card";
 // import ProfileOrders from "../profile-orders/profile-orders";
 
 function App() {
-  const location = useLocation();
+  const location = useLocation<any>();
   const dispatch = useDispatch();
   const history = useHistory();
   const background = (history.action === "PUSH" || history.action === "REPLACE") && location.state && location.state.background;
 
   const hasToken = !!getRefreshToken();
-  const isforgotPasswordSaccess = useSelector((store) => store.auth.isforgotPasswordSaccess);
+  const isforgotPasswordSaccess = useSelector((store:any) => store.auth.isforgotPasswordSaccess);
 
-  const { dataReceived } = useSelector((store) => store.card);
+  const { dataReceived } = useSelector((store:any) => store.card);
   React.useEffect(() => {
     if (!dataReceived) {
       dispatch(getIngredients());

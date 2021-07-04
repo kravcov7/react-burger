@@ -3,33 +3,28 @@ import Orders from '../../components/orders/orders';
 import BurgerReady from '../../components/burger-ready/burger-ready';
 import { useDispatch, useSelector } from "react-redux";
 import {useEffect} from 'react';
-
 import s from "./feed.module.css";
 import { WS_CONNECTION_START } from "../../services/actions/socket";
-// import { getIngredients} from '../../services/actions/card'
+import { TOrder, TProduct } from "../../types";
 
-export function Feed() {  
+const Feed = () => {  
   const dispatch = useDispatch();
-  const {data } = useSelector((store) => store.card);
-
-  // useEffect(() => {
-  //   if (!dataReceived) {
-  //     dispatch(getIngredients());
-  //   }
-  // }, [dispatch, dataReceived]);
-    
+  const data: Array<TProduct> = useSelector((store: any) => store.card.data);
+      
   useEffect(() => {
     dispatch({
       type: WS_CONNECTION_START
     })
   }, [dispatch]);
 
-  const { messages } = useSelector((store) => store.ws);
+  const orders: Array<TOrder> = useSelector((store: any) => store.ws.messages.orders);
+  const total: string = useSelector((store: any) => store.ws.messages.total);
+  const totalToday: string = useSelector((store: any) => store.ws.messages.totalToday);
 
   return (
     <section className={cn(s.main, 'mt-10')}>
-      <BurgerReady data={ data } messages={messages} />
-      <Orders messages={messages} />
+      <BurgerReady data={ data } orders={orders} />
+      <Orders orders={orders} total={total} totalToday={totalToday} />
     </section>
   );
 }

@@ -1,24 +1,16 @@
-import React from "react";
 import s from "./ingredient-details.module.css";
 import cn from "classnames";
-import { useDispatch, useSelector } from "react-redux";
-// import { getIngredients } from "../../services/actions/card";
+import {  useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { TProduct } from "../../types";
 
-function IngredientsDetails() {
-  const { id } = useParams();
-  // const dispatch = useDispatch();
-  const { data, isLoading, hasError } = useSelector((store) => store.card);
-  // React.useEffect(() => {
-  //   if (!dataReceived) {
-  //     dispatch(getIngredients());
-  //   }
-  // }, [dispatch, dataReceived]);
+const IngredientsDetails =() => {
+  const { id } = useParams<any>();
+  const { isLoading, hasError } = useSelector((store: any) => store.card);
+  const data: Array<TProduct>  = useSelector((store: any) => store.card.data);
+
   const item = data.find((el) => el._id === id);
 
-  // const orderIsLoading = useSelector(store => store.card.orderIsLoading)
-  // const { name, image, carbohydrates, fat, proteins, calories } = item;
-  
   return (
     <div className={s.ingredient}>
       <h1 className={cn(s.title, "text", "text_type_main-large", "mb-5")}>Детали ингредиента</h1>

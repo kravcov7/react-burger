@@ -1,15 +1,20 @@
-import React, { useRef } from "react";
+import { useRef, FC } from "react";
 import styles from "./burger-constructor-elements.module.css";
-import cn from 'classnames'
-import PropTypes from 'prop-types';
-
+import cn from 'classnames';
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useDrag, useDrop, DropTargetMonitor } from 'react-dnd';
+import {TProduct} from '../../types';
+import { XYCoord } from 'dnd-core'
 
-import { useDrag, useDrop } from 'react-dnd';
+type TProps = {item: TProduct; index: number; moveItem: (dragIndex: number, hoverIndex: number) => void; deleteItem: () => void}
+type TDragItem = {
+  index: number
+  id: string
+}
 
-function BurgerConstructorElements({ item, index, moveItem, deleteItem}) {
+const BurgerConstructorElements: FC<TProps>= ({ item, index, moveItem, deleteItem}) => {
   const id = item._id
-  const ref = useRef(null);
+  const ref = useRef<HTMLLIElement>(null);
   
   const [, drop] = useDrop({
     accept: 'item',
@@ -18,7 +23,7 @@ function BurgerConstructorElements({ item, index, moveItem, deleteItem}) {
         handlerId: monitor.getHandlerId(),
 			};
 		},
-		hover(el, monitor) {
+		hover(el: TDragItem, monitor: DropTargetMonitor) {
       if (!ref.current) {
         return;
 			}
@@ -30,7 +35,7 @@ function BurgerConstructorElements({ item, index, moveItem, deleteItem}) {
 			const hoverBoundingRect = ref.current?.getBoundingClientRect();
 			const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
 			const clientOffset = monitor.getClientOffset();
-			const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+			const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top;
 			if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
         return;
 			}
@@ -59,27 +64,6 @@ function BurgerConstructorElements({ item, index, moveItem, deleteItem}) {
       <ConstructorElement text={item.name} price={item.price} thumbnail={item.image} handleClose={deleteItem} />
     </li>
   );
-}
-
-BurgerConstructorElements.propTypes = {
-	item: PropTypes.shape({
-		calories: PropTypes.number.isRequired,
-		carbohydrates: PropTypes.number.isRequired,
-		fat: PropTypes.number.isRequired,
-		image_large: PropTypes.string.isRequired,
-		image: PropTypes.string.isRequired,
-		image_mobile: PropTypes.string.isRequired,
-		name: PropTypes.string.isRequired,
-		price: PropTypes.number.isRequired,
-		productId: PropTypes.string.isRequired,
-		proteins: PropTypes.number.isRequired,
-		type: PropTypes.string.isRequired,
-		__v: PropTypes.number,
-		_id: PropTypes.string.isRequired,
-	}).isRequired,
-	moveItem: PropTypes.func.isRequired,
-	index: PropTypes.number.isRequired,
-	deleteItem: PropTypes.func.isRequired,
 }
 
 export default BurgerConstructorElements;

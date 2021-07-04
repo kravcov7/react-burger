@@ -1,7 +1,7 @@
 import s from "./burger-image.module.css";
-import PropTypes from 'prop-types';
+import { FC } from 'react';
 
-export function BurgerImage({ image }) {
+const BurgerImage: FC<{image: string}> = ({ image }) => {
   return (
     <section className={s.main}>
       <div className={s.img}>
@@ -10,9 +10,5 @@ export function BurgerImage({ image }) {
     </section>
   );
 }
-
-BurgerImage.propTypes = {
-  image: PropTypes.string.isRequired, 
-};
 
 export default BurgerImage;

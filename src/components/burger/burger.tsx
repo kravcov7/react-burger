@@ -1,14 +1,16 @@
-import React from "react";
-import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
+import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import cn from "classnames";
 import s from "./burger.module.css";
 import BurgerImage from "../burger-image/burger-image";
 import { getTimeOrders } from "../../utils/helpers";
 import { getStat } from "../../utils/helpers";
-import PropTypes from 'prop-types';
+import {TProduct, TOrder} from '../../types';
+import { FC } from "react";
 
-export function Burger({ el, data }) {
+type TProps = {el: TOrder; data: Array<TProduct>}
+
+const Burger: FC<TProps>=({ el, data }) => {
   const status = el.status;  
   const stat = getStat(status)
   
@@ -19,7 +21,6 @@ export function Burger({ el, data }) {
     .flat();
 
   const price = itemOrders?.reduce((acc, curr) => (acc += curr.price), 0);
-
   const dateOrders = getTimeOrders(el?.createdAt);
 
   return (
@@ -48,10 +49,5 @@ export function Burger({ el, data }) {
     </section>
   );
 }
-
-Burger.propTypes = {
-  el: PropTypes.object.isRequired,
-  data: PropTypes.array.isRequired,
-};
 
 export default Burger;

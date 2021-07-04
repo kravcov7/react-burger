@@ -11,13 +11,16 @@ import { ADD_INGREDIENTS_BUN, ADD_INGREDIENTS_FILLINGS, INCREASE_INGREDIENT, MOV
 import BurgerConstructorElements from "../burg-constr-elements/burger-constructor-elements";
 import ConstructorEmpty from "../constructor-empty/constuctor-empty";
 import { useLocation, useHistory } from 'react-router-dom';
+import {TProduct} from '../../types';
 
-function BurgerConstructor() {
+type TBurger = { bun: TProduct; fillings: Array<TProduct>}
+
+const BurgerConstructor = () => {
   const location = useLocation();
   const history = useHistory();
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: "product",
-    drop: (item) => {
+    drop: (item: TProduct) => {
       item.type === "bun"
         ? dispatch({
             type: ADD_INGREDIENTS_BUN,
@@ -26,7 +29,7 @@ function BurgerConstructor() {
           : dispatch({
               type: ADD_INGREDIENTS_FILLINGS,
               item,
-            })
+            }) 
             dispatch({
               type: INCREASE_INGREDIENT,
               item,
@@ -39,7 +42,7 @@ function BurgerConstructor() {
   }));
 
   const dispatch = useDispatch();
-  const { burger } = useSelector((store) => store.card);
+  const burger: TBurger = useSelector((store: any) => store.card.burger);
 
   const handleClick = () => {
     const ingredients = [...burger.fillings.map((el) => el._id), burger.bun, burger.bun];
@@ -50,8 +53,7 @@ function BurgerConstructor() {
       state: {
         background: location
       }
-    });
-    
+    });    
   };
 
   let sum = (burger.bun?.price || 0) * 2;

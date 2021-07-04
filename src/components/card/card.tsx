@@ -1,12 +1,14 @@
 import React from "react";
 import styles from "./card.module.css";
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
-
 import { useSelector } from "react-redux";
 import { useDrag } from "react-dnd";
+import { FC } from 'react';
+import { TProduct } from "../../types";
 
-const Card = React.memo(({ el }) => {
+type TProps = { el: TProduct }
+
+const Card:FC<TProps> = React.memo(({ el }) => {
   const [{ isDrag }, drag] = useDrag({
     type: "product",
     item: el,
@@ -14,9 +16,8 @@ const Card = React.memo(({ el }) => {
       isDrag: monitor.isDragging(),
     }),
   }); 
-
-  const { counts, burger } = useSelector((store) => store.card);
-  // console.log(counts);
+  
+  const { counts, burger } = useSelector((store: any) => store.card);
   const count = el.type==='bun' && burger.bun?._id===el._id ? 2 : counts[el._id];
   // count = el.type==='bun' && burger.bun?._id===el._id ? 2 : id;
   
@@ -32,9 +33,5 @@ const Card = React.memo(({ el }) => {
     </div>
   );
 })
-
-Card.propTypes = { 
-  el: PropTypes.object,
-};
 
 export default Card;

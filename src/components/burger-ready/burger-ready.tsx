@@ -1,19 +1,20 @@
 import { Link } from "react-router-dom";
 import Burger from "../burger/burger";
-
 import cn from "classnames";
 import s from "./burger-ready.module.css";
 import { useLocation } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { FC } from 'react';
+import { TOrder, TProduct } from "../../types";
 
-export function BurgerReady({ messages, data }) {
+type TProps = { orders: Array<TOrder>; data: Array<TProduct> }
+
+const BurgerReady:FC<TProps> = ({ orders, data }) => {
   const location = useLocation();  
-  // console.log(messages);
-    
+      
   return (
     <section className={cn(s.main, "mt-10")}>
       <h1 className="text text_type_main-large mb-5">Лента заказов</h1>
-      {messages.orders?.map((el) => (
+      {orders?.map((el) => (
         <Link key={el.number} className={s.link} to={{ pathname: `/feed/${el.number}`, state: { background: location}}}>
           <Burger data={data} el={ el } />
         </Link>
@@ -21,10 +22,5 @@ export function BurgerReady({ messages, data }) {
     </section>
   );
 }
-
-BurgerReady.propTypes = {
-  // messages: PropTypes.array,
-  data: PropTypes.array.isRequired,
-};
 
 export default BurgerReady;

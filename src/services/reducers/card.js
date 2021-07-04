@@ -43,7 +43,6 @@ export const cardReducer = (state = initialState, action) => {
       };
     }
     case CREATE_ORDER_SUCCESS: {
-      // console.log(action.data);
       return { ...state, orderHasError: false, currentOrder: action.data, orderIsLoading: false };
     }
     case CREATE_ORDER_FAILED: {

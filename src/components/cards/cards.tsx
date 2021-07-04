@@ -1,35 +1,30 @@
-import React from "react";
 import styles from "./cards.module.css";
-import PropTypes from "prop-types";
+import React from "react";
 import Card from "../card/card";
 import cn from "classnames";
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom';
+import { TProduct } from "../../types";
 
+type TProps = { title: string; ingredients: Array<TProduct> }
 
-function Cards({ title, ingredients, openModal, childRef }) {
+const Cards = React.forwardRef<HTMLHeadingElement, TProps> (({ title, ingredients }, ref) => {
   const location = useLocation()
+
   return (
     <>
-      <h2 className={cn("text", "text_type_main-medium", "mb-6", "mt-10")} ref={childRef}>
+      <h2 className={cn("text", "text_type_main-medium", "mb-6", "mt-10")} ref={ref}>
         {title}
       </h2>
       <div className={styles.cards}>
         {ingredients.map((el) => (
           <Link className={styles.link} key={el._id} to={{pathname: `/ingredients/${el._id}`, 
           state: {background: location}}}>
-            <Card el={el} openModal={openModal} />
+            <Card el={el} />
           </Link>
         ))}
       </div>
     </>
   );
-}
-
-Cards.propTypes = {
-  title: PropTypes.string,
-  openModal: PropTypes.func,
-  ingredients: PropTypes.array,
-  childRef: PropTypes.object,
-};
+})
 
 export default Cards;
