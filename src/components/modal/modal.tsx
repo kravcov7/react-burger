@@ -1,18 +1,18 @@
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import React from "react";
+import React, { FC }  from "react";
 import ReactDOM from "react-dom";
 import ModalOverlay from "../modal-overlay/modal-overlay";
 import s from './modal.module.css';
 import cn from 'classnames';
-import PropTypes from 'prop-types';
-
 import { useHistory } from "react-router-dom";
 
-function Modal({ children }) {
+const modalRoot: Element | null = document.getElementById("portal");
+
+const Modal:FC = ({ children }) => {
   const history = useHistory(); 
 
-  const closeEsc = (e) => {
-		if (e.keyCode === 27) close()			
+  const closeEsc = (e: KeyboardEvent) => {
+		if (e.code === 'Escape') close()			
 	}
 
   React.useEffect(() => {
@@ -26,7 +26,7 @@ function Modal({ children }) {
     history.goBack();
   }
   
-  return ReactDOM.createPortal(
+  return modalRoot && ReactDOM.createPortal(
     <>
       <div className={cn(s.modal, 'pr-15', 'pl-15', 'pt-20', 'pb-15')}>
         <div className={s.close} onClick={close}>
@@ -36,12 +36,8 @@ function Modal({ children }) {
       </div>
       <ModalOverlay close={close} />
     </>,
-    document.getElementById("portal")
+    modalRoot,
   );
-}
-
-Modal.propTypes = {
-	children: PropTypes.element
 }
 
 export default Modal;

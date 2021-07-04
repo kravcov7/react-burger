@@ -1,7 +1,10 @@
+import { TOrder } from "../types";
 import url from "./config";
-import { setCookie, getCookie } from "./cookie";
+import { setCookie, getCookie, deleteCookie } from "./cookie";
 
-export const resetPassword = ({ token, password }) => {
+type TPropsResetPassword = {token: string; password: string }
+
+export const resetPassword = ({ token, password }: TPropsResetPassword) => {
   fetch(`${url}/password-reset/reset`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -17,7 +20,9 @@ export const resetPassword = ({ token, password }) => {
     .then((res) => requestHandler(res));
 };
 
-export const register = ({ name, password, email }) => {
+type TPropsRegister = {name: string; password: string; email: string }
+
+export const register = ({ name, password, email }: TPropsRegister) => {
   fetch(`${url}/auth/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -33,7 +38,9 @@ export const register = ({ name, password, email }) => {
     .then((res) => requestHandler(res));
 };
 
-export const login = ({ name, password }) => {
+type TPropsLogin = Omit<TPropsRegister, 'email'> 
+
+export const login = ({ name, password }: TPropsLogin) => {
   fetch(`${url}/auth`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -49,7 +56,7 @@ export const login = ({ name, password }) => {
     .then((res) => requestHandler(res));
 };
 
-export const forgot = (email) => {
+export const forgot = (email: string) => {
   fetch(`${url}/password-reset`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -65,7 +72,7 @@ export const forgot = (email) => {
     .then((res) => requestHandler(res));
 };
 
-export const signUp = ({ email, password, name }) => {
+export const signUp = ({ email, password, name }: TPropsRegister) => {
   return fetch(`${url}/auth/register`, {
     method: "POST",
     mode: "cors",
@@ -80,7 +87,7 @@ export const signUp = ({ email, password, name }) => {
   .then((res) => requestHandler(res))
 };
 
-export const signIn = ({ name, password }) => {
+export const signIn = ({ name, password }: TPropsLogin) => {
   return fetch(`${url}/auth/login`, {
     method: "POST",
     mode: "cors",
@@ -92,7 +99,7 @@ export const signIn = ({ name, password }) => {
   .then((res) => requestHandler(res));
 };
 
-export const forgotPasswordR = (value) => {
+export const forgotPasswordR = (value: string) => {
   return fetch(`${url}/password-reset`, {
     method: "POST",
     mode: "cors",
@@ -105,10 +112,9 @@ export const forgotPasswordR = (value) => {
   }).then((res) => requestHandler(res));
 };
 
-const requestHandler = (res) => {
-  if (res.ok) return res.json();
-  if (res.json) return res.json().then((err) => Promise.reject(err));
-  return Promise.reject(res);
+
+const requestHandler = (res: Response) => {
+  return res.ok ? res.json() : Promise.reject(res)
 };
 
 export const refreshTokenR = () => {
@@ -119,27 +125,36 @@ export const refreshTokenR = () => {
   }).then(requestHandler);
 };
 
-export const fetchWithRefresh = async (url, options) => {
-  console.log(options);
-  try {
-    
+type TFetchWithRefresh = { success: boolean; message: string }
+
+export const fetchWithRefresh = async (url: string, options: RequestInit) => {
+  try {    
     const res = await fetch(url, options)
     return await requestHandler(res)
-  } catch(err) {
-    console.log(err.message);
-    if (err.message === 'jwt expired'){
-      const refreshData = await refreshTokenR();
-      localStorage.setItem('refreshToken', refreshData.refreshToken);
-      const accessToken = refreshData.accessToken.split("Bearer ")[1];
-      setCookie('token', accessToken)
-      options.headers.authorization = refreshData.refreshToken;
-      const res = await fetch(url, options)
-      return await requestHandler(res)
-    } else {
-      return Promise.reject(err)
-    }
-  }
+  } catch(err: any) {
+    return err.json()
+    .then((err: TFetchWithRefresh) => {
+      console.log(err)
+      if (err?.message === 'jwt expired') {
+        return refreshTokenR()
+          .then(res => {
+            localStorage.setItem('refreshToken', res.refreshToken)
+            const authToken = res.accessToken.split('Bearer ')[1];
+            setCookie('token', authToken);
+            (options.headers as { [key: string]: string }).Authorization = res.accessToken
+            return fetch(url, options).then((res) => requestHandler(res))
+          })
+      } else {
+        deleteCookie('token');
+        localStorage.removeItem('refreshToken');
+        // eslint-disable-next-line
+        location.reload()
+        return Promise.reject(err)
+      }
+    })
 }
+}
+
 
 export const getUser = () => {
   return fetchWithRefresh(`${url}/auth/user`, {    
@@ -154,7 +169,7 @@ export const getUser = () => {
   })
 }
 
-export const updateUserCookie = (data) => {
+export const updateUserCookie = (data: TPropsRegister ) => {
   console.log(getCookie('token'));
 	return fetch(`${url}/auth/user`, {
 		method: 'PATCH',

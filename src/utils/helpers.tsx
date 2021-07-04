@@ -1,13 +1,13 @@
-const getDaysOrders = (days) => (
+const getDaysOrders = (days: number) => (
   days === 0 ? 'Сегодня'
     : days === 1 ? 'Вчера'
       : days > 1 ? `${days} дня(-ей) назад`
         : 'Что-то пошло не так');
 
 //сформировать тату создания заказа для карточки
-export const getTimeOrders = (date) => {
-  const dayCreated = new Date(date);
-  const today = new Date();
+export const getTimeOrders = (date: string) => {
+  const dayCreated: any = new Date(date);
+  const today: any = new Date();
   today.setHours(0, 0, 0, 0);
   const diffTime = Math.ceil((today - dayCreated) / (60 * 60 * 24 * 1000));
   const hours = dayCreated.getHours() > 9 ? dayCreated.getHours() : `0${dayCreated.getHours()}`
@@ -16,4 +16,4 @@ export const getTimeOrders = (date) => {
   return `${getDaysOrders(diffTime)}, ${hours}:${min} i-GMT+${dayCreated.getTimezoneOffset() * (-1) / 60}`;
 };
 
-export const getStat = status => (status === "done") ? { text: "Выполнен", colorText: "green" } : status === "pending" ? { text: "Отменен", colorText: "red" } : { text: "Готовится", colorText: "white" };
+export const getStat = (status: string) => (status === "done") ? { text: "Выполнен", colorText: "green" } : status === "pending" ? { text: "Отменен", colorText: "red" } : { text: "Готовится", colorText: "white" };

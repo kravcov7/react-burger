@@ -15,7 +15,7 @@ const BurgerReady:FC<TProps> = ({ orders, data }) => {
     <section className={cn(s.main, "mt-10")}>
       <h1 className="text text_type_main-large mb-5">Лента заказов</h1>
       {orders?.map((el) => (
-        <Link key={el.number} className={s.link} to={{ pathname: `/feed/${el.number}`, state: { background: location}}}>
+        <Link key={el._id} className={s.link} to={{ pathname: `/feed/${el.number}`, state: { background: location}}}>
           <Burger data={data} el={ el } />
         </Link>
       ))}

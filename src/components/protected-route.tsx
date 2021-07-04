@@ -1,14 +1,16 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect, Route } from "react-router-dom";
-import { useEffect } from "react";
-import { getRefreshToken } from "./../utils/token";
+import { useEffect, FC } from "react";
+import { getRefreshToken } from "../utils/token";
 import { refreshToken } from '../services/actions/auth'
 
-export function ProtectedRoute({ children, ...rest }) {
+type TProps = {	path: string; exact?: boolean}
+
+export const ProtectedRoute: FC<TProps> = ({ children, ...rest }) => {
   const dispatch = useDispatch();
   const hasToken = !!getRefreshToken();
-  const isTokenUpdated = useSelector((store) => store.auth.isTokenUpdated);
-  const tokenUpdateDate = useSelector((store) => store.auth.tokenUpdateDate);
+  const isTokenUpdated = useSelector((store: any) => store.auth.isTokenUpdated);
+  const tokenUpdateDate = useSelector((store: any) => store.auth.tokenUpdateDate);
 
   useEffect(() => {
     if (hasToken && !isTokenUpdated) {

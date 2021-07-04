@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { SyntheticEvent, useState } from "react";
 import { Input, Button, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import cn from "classnames";
 import { Link } from "react-router-dom";
@@ -13,8 +13,8 @@ function ResetPassword() {
     token: "",
   });
 
-  const handleInputChange = (event) => {
-    const target = event.target;
+  const handleInputChange = (event: SyntheticEvent<HTMLInputElement>) => {
+    const target = event.target as HTMLInputElement;
     const value = target.value;
     const name = target.name;
 
@@ -24,7 +24,7 @@ function ResetPassword() {
     });
   };
 
-  const submit = (e) => {
+  const submit = (e: SyntheticEvent) => {
     e.preventDefault();
     resetPassword(state);
   };
@@ -47,7 +47,7 @@ function ResetPassword() {
         <h1 className="text text_type_main-large mb-6">Восстановление пароля</h1>
         <PasswordInput value={state.password} name={"password"} onChange={handleInputChange} />
         <Input type={"text"} placeholder={"Введите код из письма"} onChange={handleInputChange} value={state.token} name={"token"} error={false} errorText={"Ошибка"} size={"default"} />
-        <Button type="primary" size="large" className="mt-6">
+        <Button type="primary" size="large" >
           Сохранить
         </Button>
       </form>

@@ -14,7 +14,7 @@ function Login() {
     password: "",
   });
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: any) => {
     const target = event.target;
     const value = target.value;
     const name = target.name;
@@ -27,14 +27,13 @@ function Login() {
 
   const dispatch = useDispatch();
 
-  const submit = (e) => {
+  const submit = (e: any) => {
     e.preventDefault();
-    console.log(state);
     dispatch(login(state));
   };
 
   const hasToken = localStorage.getItem('refreshToken')
-  const user = useSelector(store => store.auth.name)
+  const user = useSelector((store: any) => store.auth.name)
 
   if (user || hasToken) {
     return (
@@ -52,7 +51,7 @@ function Login() {
         <h1 className="text text_type_main-large mb-6">Вход</h1>
         <Input type={"email"} placeholder={"E-mail"} onChange={handleInputChange} value={state.name} name={"name"} error={false} errorText={"Ошибка"} size={"default"} />
         <PasswordInput onChange={handleInputChange} value={state.password} name={"password"} />
-        <Button type="primary" size="large" className="mt-6">
+        <Button type="primary" size="large" >
           Войти
         </Button>
       </form>

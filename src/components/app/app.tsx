@@ -13,7 +13,6 @@ import Profile from "../../pages/profile/profile";
 // import Ingredients from "../../pages/ingredients/ingredients";
 import ItemDetails from "../item-detail/item-detail";
 import { getRefreshToken } from "../../utils/token";
-// import { useSelector } from "react-redux";
 import { ProtectedRoute } from "../protected-route";
 import Modal from "../modal/modal";
 import IngredientsDetails from "../ingredient-details/ingredient-details";

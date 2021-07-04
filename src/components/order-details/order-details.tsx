@@ -1,14 +1,12 @@
-import React from "react";
 import s from "./order-details.module.css";
 import cn from "classnames";
 import doneOrder from "../../images/graphics.svg";
 
 import { useSelector } from "react-redux";
 
-function OrderDetails() {
-  const { currentOrder, orderIsLoading, orderHasError } = useSelector((store) => store.card);
-  console.log(currentOrder);
-  
+const OrderDetails = () => {
+  const { currentOrder, orderIsLoading, orderHasError } = useSelector((store: any) => store.card);
+   
   return (
     <div className={s.order}>
       {orderIsLoading && "Загрузка..."}

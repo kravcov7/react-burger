@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { Input, Button, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import cn from "classnames";
 import { Link } from "react-router-dom";
@@ -15,7 +15,7 @@ function Register() {
     password: "",
   });
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: any) => {
     const target = event.target;
     const value = target.value;
     const name = target.name;
@@ -28,9 +28,8 @@ function Register() {
 
   const dispatch = useDispatch();
 
-  const submit = (e) => {
+  const submit = (e: SyntheticEvent) => {
     e.preventDefault();
-    console.log(state);
     dispatch(register(state));
   };
   
@@ -53,7 +52,7 @@ function Register() {
         <Input type={"text"} placeholder={"Имя"} onChange={handleInputChange} value={state.name} name={"name"} error={false} errorText={"Ошибка"} size={"default"} />
         <Input type={"email"} placeholder={"E-mail"} onChange={handleInputChange} value={state.email} name={"email"} error={false} errorText={"Ошибка"} size={"default"} />
         <PasswordInput onChange={handleInputChange} value={state.password} name={"password"} />
-        <Button type="primary" size="large" className="mt-6">
+        <Button type="primary" size="large" >
           Зарегистрироваться
         </Button>
       </form>

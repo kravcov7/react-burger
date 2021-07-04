@@ -2,7 +2,7 @@ import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-component
 import cn from "classnames";
 import { NavLink } from "react-router-dom";
 import { Switch, Route } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, SyntheticEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "../../services/actions/auth";
 import { updateUser } from '../../services/actions/auth';
@@ -12,7 +12,7 @@ import { logOut } from '../../services/actions/auth';
 import s from "./profile.module.css";
 import ProfileOrders from "../../components/profile-orders/profile-orders";
 
-export function Profile() {
+const Profile = () => {
   const [state, setState] = useState({
     name: "",
     email: "",
@@ -23,8 +23,8 @@ export function Profile() {
   });  
 
   const dispatch = useDispatch();
-  const currentUserName = useSelector(store => store.auth.name);
-	const currentUserEmail = useSelector(store => store.auth.email);
+  const currentUserName = useSelector((store: any) => store.auth.name);
+	const currentUserEmail = useSelector((store: any) => store.auth.email);
 
   useEffect(() => {
     dispatch(loadUser());
@@ -40,8 +40,8 @@ export function Profile() {
 		});
 	}, [currentUserName, currentUserEmail])
 
-  const handleInputChange = (event) => {
-    const target = event.target;
+  const handleInputChange = (event: SyntheticEvent<HTMLInputElement>): void => {
+    const target = event.target as HTMLInputElement;
     const value = target.value;
     const name = target.name;
     setState({
@@ -50,17 +50,19 @@ export function Profile() {
     });
   };  
 
-  const nameInputRef = React.useRef(null);
-  const emailInputRef = React.useRef(null);
-  const passwordInputRef = React.useRef(null);
+  const nameInputRef = React.useRef<HTMLInputElement>(null);
+  const emailInputRef = React.useRef<HTMLInputElement>(null);
+  const passwordInputRef = React.useRef<HTMLInputElement>(null);
 
   const activeNameInput = () => {
     setState({
       ...state,
       nameDisabled: state.nameDisabled ? false : true,
     });
-    nameInputRef.current.disabled = false;
-    setTimeout(() => nameInputRef.current.focus(), 0);
+    if (nameInputRef && nameInputRef.current) {
+      nameInputRef.current.disabled = false;
+    }
+    setTimeout(() => nameInputRef && nameInputRef.current && nameInputRef.current.focus(), 0);
   };
 
   const activeEmailInput = () => {
@@ -68,8 +70,10 @@ export function Profile() {
       ...state,
       emailDisabled: state.emailDisabled ? false : true,
     });
-    emailInputRef.current.disabled = false;
-    setTimeout(() => emailInputRef.current.focus(), 0);
+    if (emailInputRef && emailInputRef.current) {
+      emailInputRef.current.disabled = false;
+    }
+    setTimeout(() => emailInputRef && emailInputRef.current && emailInputRef.current.focus(), 0);
   };
 
   const activePasswordInput = () => {
@@ -77,25 +81,17 @@ export function Profile() {
       ...state,
       passwordDisabled: state.passwordDisabled ? false : true,
     });
-    passwordInputRef.current.disabled = false;
-    setTimeout(() => passwordInputRef.current.focus(), 0);
+    if (passwordInputRef && passwordInputRef.current) {
+      passwordInputRef.current.disabled = false;
+    }
+    setTimeout(() => passwordInputRef && passwordInputRef.current && passwordInputRef.current.focus(), 0);
   };
 
   const nameIcon = state.nameDisabled ? "EditIcon" : "CloseIcon";
   const emailIcon = state.emailDisabled ? "EditIcon" : "CloseIcon";
   const passwordIcon = state.passwordDisabled ? "EditIcon" : "CloseIcon";
 
-  // const handleClick = (e) => {
-  // 	e.preventDefault();
-  // 	setState({
-  // 		...state,
-  // 		name: currentUserName,
-  // 		email: currentUserEmail,
-  // 		password: ''
-  // 	});
-  // }
-
-  const submit = e => {
+  const submit = (e: any) => {
     e.preventDefault();
     let data = {};
 		data = state.name !== currentUserName ? { ...data, name: state.name } : data;
@@ -135,14 +131,14 @@ export function Profile() {
         <Switch>
           <Route path="/profile" exact>
             <form className={s.inputs} onSubmit={submit}>
-              <Input type={"text"} placeholder="Имя" size={"default"} onChange={handleInputChange} value={state.name} icon={"EditIcon"} name="name" errorText={"Ошибка"} disabled={state.nameDisabled} onIconClick={activeNameInput} icon={nameIcon} ref={nameInputRef} />
-              <Input type={"email"} placeholder="Почта" size={"default"} onChange={handleInputChange} value={state.email} name="email" errorText={"Неправильный email"} icon={emailIcon} disabled={state.emailDisabled} ref={emailInputRef} onIconClick={activeEmailInput} onIconClick={activeEmailInput} />
-              <Input name="password" type="password" placeholder="Пароль" size={"default"} onChange={handleInputChange} value={state.password} errorText={"Ошибка в пароле"} icon={passwordIcon} ref={passwordInputRef} onIconClick={activePasswordInput} disabled={state.passwordDisabled} onIconClick={activePasswordInput} />
+              <Input type={"text"} placeholder="Имя" size={"default"} onChange={handleInputChange} value={state.name}  name="name" errorText={"Ошибка"} disabled={state.nameDisabled} onIconClick={activeNameInput} icon={nameIcon} ref={nameInputRef} />
+              <Input type={"email"} placeholder="Почта" size={"default"} onChange={handleInputChange} value={state.email} name="email" errorText={"Неправильный email"} icon={emailIcon} disabled={state.emailDisabled} ref={emailInputRef} onIconClick={activeEmailInput} />
+              <Input name="password" type="password" placeholder="Пароль" size={"default"} onChange={handleInputChange} value={state.password} errorText={"Ошибка в пароле"} icon={passwordIcon} ref={passwordInputRef} onIconClick={activePasswordInput} disabled={state.passwordDisabled} />
               { state.name !== currentUserName || state.email !== currentUserEmail || state.password.length !== 0 ? <div className={s.button}>
-                <Button type="secondary" size="large" className="mt-6">
+                <Button type="secondary" size="large" >
                   Отмена
                 </Button>
-                <Button type="primary" size="large" className="mt-6">
+                <Button type="primary" size="large" >
                   Сохранить
                 </Button>
               </div> : null}

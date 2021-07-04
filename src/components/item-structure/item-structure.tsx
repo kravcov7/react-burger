@@ -2,9 +2,12 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import s from "./item-structure.module.css";
 import cn from "classnames";
 import BurgerImage from "../burger-image/burger-image";
-import PropTypes from 'prop-types';
+import { FC } from 'react';
+import { TProduct } from "../../types";
 
-function ItemStructure({ el, count }) {
+type TProps = { el: any; count: number }
+
+const ItemStructure:FC<TProps> =({ el, count }) => {
   
   return (
     <section className={s.main}>
@@ -15,15 +18,10 @@ function ItemStructure({ el, count }) {
       <div className={s.total}>
         <span className="mr-2 text text_type_digits-default">{count} X</span>
         <span className="mr-2 text text_type_digits-default">{el.price}</span>
-        <CurrencyIcon />
+        <CurrencyIcon type="primary" />
       </div>
     </section>
   );
 }
-
-ItemStructure.propTypes = {
-  el: PropTypes.object.isRequired,
-  count: PropTypes.number.isRequired,
-};
 
 export default ItemStructure;

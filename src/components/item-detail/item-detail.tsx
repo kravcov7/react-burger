@@ -7,22 +7,16 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { WS_CONNECTION_START } from "../../services/actions/socket";
 import { WS_CONNECTION_START_AUTH } from "../../services/actions/socketAuth";
-// import { getIngredients } from "../../services/actions/card";
 import { useParams } from "react-router-dom";
 import { useRouteMatch } from "react-router-dom";
 import { getStat } from "../../utils/helpers";
+import { TOrder, TProduct } from "../../types";
 
 function ItemDetails() {
   const dispatch = useDispatch();
   const isProfile = !!useRouteMatch("/profile");
-  const { id } = useParams();
-  const { data } = useSelector((store) => store.card);
-
-  // React.useEffect(() => {
-  //   if (!dataReceived) {
-  //     dispatch(getIngredients());
-  //   }
-  // }, [dispatch, dataReceived]);
+  const { id } = useParams<any>();
+  const { data } = useSelector((store: any) => store.card);
 
   useEffect(() => {
     isProfile
@@ -34,17 +28,18 @@ function ItemDetails() {
         });
   }, [dispatch]);
 
-  const { messages } = useSelector((store) => (isProfile ? store.wsAuth : store.ws));
+  const orders: Array<TOrder> = useSelector((store: any) => (isProfile ? store.wsAuth.messages.orders : store.ws.messages.orders));
+  // const { messages } = useSelector((store: any) => (isProfile ? store.wsAuth : store.ws));
     
-  const getItem = (arr, id) => {
+  const getItem = (arr: Array<TOrder>, id: string) => {
     return arr?.filter((el) => {
       return el.number === Number(id);
     })[0];
   };
-  let order = {};
-  order = getItem(messages.orders, id) || null;
+  // let order = {};
+  const order: TOrder = getItem(orders, id) || null;
 
-  const countItems = order?.ingredients.reduce((acc, curr) => {
+  const countItems = order?.ingredients.reduce((acc: any, curr: any) => {
     acc[curr] = (acc[curr] || 0) + 1;
     return acc;
   }, {});
@@ -52,7 +47,7 @@ function ItemDetails() {
 
   const itemOrders = items
     .map((el) => {
-      return data.filter((item) => item._id === el);
+      return data.filter((item: TProduct) => item._id === el);
     })
     .flat();
  
@@ -71,7 +66,6 @@ function ItemDetails() {
         <ul className={cn(s.ingrid)}>
           {itemOrders.map((el, index) => (
             <li key={index} className={cn(s.item, "mr-5")}>
-              {/* <ItemStructure count={countItems[el._id]} price={el.price} image={el.image_mobile} /> */}
               <ItemStructure count={countItems[el._id]} el={el} />
             </li>
           ))}
