@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 import { useRouteMatch } from "react-router-dom";
 import { getStat } from "../../utils/helpers";
 import { TOrder, TProduct } from "../../types";
+import { getTimeOrders } from "../../utils/helpers";
 
 function ItemDetails() {
   const dispatch = useDispatch();
@@ -54,6 +55,8 @@ function ItemDetails() {
   const status = order?.status;
   const stat = getStat(status);
 
+  const dateOrders = getTimeOrders(order?.createdAt);
+  
   const sum = itemOrders.reduce((acc, curr) => (acc += curr.price * countItems[curr._id]), 0);
 
   return (
@@ -71,7 +74,7 @@ function ItemDetails() {
           ))}
         </ul>
         <div className={s.total}>
-          <p className="text text_type_main-default text_color_inactive">Вчера, 13:50 i-GMT+3</p>
+          <p className="text text_type_main-default text_color_inactive">{dateOrders}</p>
           <div className={s.sum}>
             <p className="mr-2 text text_type_digits-default">{sum}</p>
             <CurrencyIcon type="primary" />
