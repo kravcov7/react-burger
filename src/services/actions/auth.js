@@ -1,33 +1,67 @@
 import {  setCookie, deleteCookie } from "../../utils/cookie";
 import {  getUser, signUp, signIn, forgotPasswordR, updateUserCookie, signOutCookie, refreshTokenR } from "../../utils/api";
 import { push } from 'connected-react-router';
-export const REGISTER_REQUEST = "REGISTER_REQUEST";
-export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
-export const REGISTER_FAILED = "REGISTER_FAILED";
+import { REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED, 
+	LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAILED, UPDATE_USER_REQUEST, UPDATE_USER_SUCCESS, UPDATE_USER_FAILED, 
+	LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILED, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_SUCCESS, FORGOT_PASSWORD_FAILED, 
+	REFRESH_TOKEN_REQUEST, REFRESH_TOKEN_SUCCESS, REFRESH_TOKEN_FAILED } from "../constants/auth";
 
-export const LOGIN_REQUEST = "LOGIN_REQUEST";
-export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-export const LOGIN_FAILED = "LOGIN_FAILED";
 
-export const FORGOT_PASSWORD_REQUEST = "FORGOT_PASSWORD_REQUEST";
-export const FORGOT_PASSWORD_FAILED = "FORGOT_PASSWORD_FAILED";
-export const FORGOT_PASSWORD_SUCCESS = "FORGOT_PASSWORD_SUCCESS";
-
-export const LOAD_USER_REQUEST = "LOAD_USER_REQUEST";
-export const LOAD_USER_SUCCESS = "LOAD_USER_SUCCESS";
-export const LOAD_USER_FAILED = "LOAD_USER_FAILED";
-
-export const UPDATE_USER_REQUEST = "UPDATE_USER_REQUEST";
-export const UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS";
-export const UPDATE_USER_FAILED = "UPDATE_USER_FAILED";
-
-export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
-export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
-export const LOGOUT_FAILED = "LOGOUT_FAILED";
-
-export const REFRESH_TOKEN_REQUEST = 'REFRESH_TOKEN_REQUEST';
-export const REFRESH_TOKEN_SUCCESS = 'REFRESH_TOKEN_SUCCESS';
-export const REFRESH_TOKEN_FAILED = 'REFRESH_TOKEN_FAILED';
+export interface IRegisterRequestAction {
+  readonly type: typeof REGISTER_REQUEST;
+}
+export interface IRegisterSuccessAction {
+  readonly type: typeof REGISTER_SUCCESS;
+	readonly user: any
+}
+export interface IRegisterFailedAction {
+  readonly type: typeof REGISTER_FAILED;
+}
+export interface ILoginRequestAction {
+  readonly type: typeof LOGIN_REQUEST;
+}
+export interface ILoginSuccessAction {
+  readonly type: typeof LOGIN_SUCCESS;
+}
+export interface ILoginFailedAction {
+  readonly type: typeof LOGIN_FAILED;
+}
+export interface IUpdateUserRequestAction {
+  readonly type: typeof UPDATE_USER_REQUEST;
+}
+export interface IUpdateUserSuccessAction {
+  readonly type: typeof UPDATE_USER_SUCCESS;
+}
+export interface IUpdateUserFailedAction {
+  readonly type: typeof UPDATE_USER_FAILED;
+}
+export interface ILogoutRequestAction {
+	readonly type: typeof LOGOUT_REQUEST;
+}
+export interface ILogoutSuccessAction {
+	readonly type: typeof LOGOUT_SUCCESS;
+}
+export interface ILogoutFailedAction {
+	readonly type: typeof LOGOUT_FAILED;
+}
+export interface IForgotPasswordRequestAction {
+  readonly type: typeof FORGOT_PASSWORD_REQUEST;
+}
+export interface IForgotPasswordSuccessAction {
+  readonly type: typeof FORGOT_PASSWORD_SUCCESS;
+}
+export interface IForgotPasswordFailedAction {
+  readonly type: typeof FORGOT_PASSWORD_FAILED;
+}
+export interface IRefreshTokenRequestAction {
+  readonly type: typeof REFRESH_TOKEN_REQUEST;
+}
+export interface IRefreshTokenSuccessAction {
+  readonly type: typeof REFRESH_TOKEN_SUCCESS;
+}
+export interface IRefreshTokenFailedAction {
+  readonly type: typeof REFRESH_TOKEN_FAILED;
+}
 
 export function register(newUser) {
   return function (dispatch) {
