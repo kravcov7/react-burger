@@ -17,6 +17,7 @@ export interface IRegisterSuccessAction {
 export interface IRegisterFailedAction {
   readonly type: typeof REGISTER_FAILED;
 }
+
 export interface ILoginRequestAction {
   readonly type: typeof LOGIN_REQUEST;
 }
@@ -26,6 +27,16 @@ export interface ILoginSuccessAction {
 export interface ILoginFailedAction {
   readonly type: typeof LOGIN_FAILED;
 }
+export interface ILoadUserRequestAction {
+  readonly type: typeof LOAD_USER_REQUEST;
+}
+export interface ILoadUserSuccessAction {
+  readonly type: typeof LOAD_USER_SUCCESS;
+}
+export interface ILoadUserFailedAction {
+  readonly type: typeof LOAD_USER_FAILED;
+}
+
 export interface IUpdateUserRequestAction {
   readonly type: typeof UPDATE_USER_REQUEST;
 }
@@ -62,6 +73,30 @@ export interface IRefreshTokenSuccessAction {
 export interface IRefreshTokenFailedAction {
   readonly type: typeof REFRESH_TOKEN_FAILED;
 }
+
+export type TAuthActions = 
+  | IRegisterRequestAction
+	| IRegisterSuccessAction
+	| IRegisterFailedAction
+	| ILoginRequestAction
+	| ILoginSuccessAction
+	| ILoginFailedAction
+	| ILoadUserRequestAction
+	| ILoadUserSuccessAction
+	| ILoadUserFailedAction
+	| IUpdateUserRequestAction
+	| IUpdateUserSuccessAction
+	| IUpdateUserFailedAction
+	| ILogoutRequestAction
+	| ILogoutSuccessAction
+	| ILogoutFailedAction
+	| IForgotPasswordRequestAction
+	| IForgotPasswordSuccessAction
+	| IForgotPasswordFailedAction
+	| IRefreshTokenRequestAction
+	| IRefreshTokenSuccessAction
+	| IRefreshTokenFailedAction
+
 
 export function register(newUser) {
   return function (dispatch) {

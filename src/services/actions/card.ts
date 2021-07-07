@@ -2,9 +2,63 @@ import url from "../../utils/config";
 import { getCookie } from "../../utils/cookie";
 
 import { INCREASE_INGREDIENT, DECREASE_INGREDIENT, DELETE_ITEM, MOVE_ITEM, 
-  GET_INGREDIENTS_FAILED, GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS, 
+   GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS, GET_INGREDIENTS_FAILED, 
   ADD_INGREDIENTS_BUN, ADD_INGREDIENTS_FILLINGS, CREATE_ORDER_FAILED, 
   CREATE_ORDER_SUCCESS, CREATE_ORDER_REQUEST } from "../constants/card";
+  
+
+export interface IIncreaseIngredientAction {
+  readonly type: typeof INCREASE_INGREDIENT;
+}
+export interface IDecreaseIngredientAction {
+  readonly type: typeof DECREASE_INGREDIENT;
+}
+export interface IDeleteItemAction {
+  readonly type: typeof DELETE_ITEM;
+}
+export interface IMoveItemAction {
+  readonly type: typeof MOVE_ITEM;
+}
+export interface IGetIngredientsRequestAction {
+  readonly type: typeof GET_INGREDIENTS_REQUEST;
+}
+export interface IGetIngredientsSuccessAction {
+  readonly type: typeof GET_INGREDIENTS_SUCCESS;
+}
+export interface IGetIngredientsFailedAction {
+  readonly type: typeof GET_INGREDIENTS_FAILED;
+}
+
+export interface IAddIngredientsBunAction {
+  readonly type: typeof ADD_INGREDIENTS_BUN;
+}
+export interface IAddIngredientsFillingsAction {
+  readonly type: typeof ADD_INGREDIENTS_FILLINGS;
+}
+export interface ICreateOrderFailedAction {
+  readonly type: typeof CREATE_ORDER_FAILED;
+}
+export interface ICreateOrderSuccessAction {
+  readonly type: typeof CREATE_ORDER_SUCCESS;
+}
+export interface ICreateOrderRequestAction {
+  readonly type: typeof CREATE_ORDER_REQUEST;
+}
+
+export type TCardsActions =
+  | IIncreaseIngredientAction
+  | IDecreaseIngredientAction
+  | IDeleteItemAction
+  | IMoveItemAction
+  | IGetIngredientsRequestAction
+  | IGetIngredientsRequestAction
+  | IGetIngredientsSuccessAction
+  | IGetIngredientsFailedAction
+  | IAddIngredientsBunAction
+  | IAddIngredientsFillingsAction
+  | ICreateOrderFailedAction
+  | ICreateOrderSuccessAction
+  | ICreateOrderRequestAction
 
 export const getIngredients = () => {
   return function (dispatch) {
