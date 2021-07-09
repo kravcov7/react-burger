@@ -1,3 +1,5 @@
+import { TOrder } from '../../types';
+import { TWSActionsActionsAuth } from '../actions/socketAuth';
 import {
   WS_USER_NAME_UPDATE_AUTH,
   WS_CONNECTION_SUCCESS_AUTH,
@@ -6,12 +8,20 @@ import {
   WS_GET_MESSAGE_AUTH
 } from '../constants/socketAuth';
 
-const initialState = {
+export type TWsReducerAuthInitialState = {
+  wsConnected: boolean;
+  orders: Array<TOrder>;
+  total: number;
+  totalToday: number
+};
+const initialState: TWsReducerAuthInitialState = {
   wsConnected: false,
-  messages: []
+  orders: [],
+  total: 0,
+  totalToday: 0
 };
 
-export const wsReducerAuth = (state = initialState, action) => {
+export const wsReducerAuth = (state = initialState, action: TWSActionsActionsAuth): TWsReducerAuthInitialState => {
   switch (action.type) {
     case WS_CONNECTION_SUCCESS_AUTH:
       return {
@@ -34,14 +44,11 @@ export const wsReducerAuth = (state = initialState, action) => {
     case WS_GET_MESSAGE_AUTH:
       return {
         ...state,
-        messages: action.payload,
+        orders: action.payload.orders,
+        total: action.payload.total,
+        totalToday: action.payload.totalToday
       };
-    case WS_USER_NAME_UPDATE_AUTH:
-      return {
-        ...state,
-        user: action.payload
-      };
-
+    
     default:
       return state;
   }

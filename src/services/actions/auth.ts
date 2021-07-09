@@ -6,13 +6,15 @@ import { REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILED, LOGIN_REQUEST, LOG
 	LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILED, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_SUCCESS, FORGOT_PASSWORD_FAILED, 
 	REFRESH_TOKEN_REQUEST, REFRESH_TOKEN_SUCCESS, REFRESH_TOKEN_FAILED } from "../constants/auth";
 
+import { AppDispatch, AppThunk, TUser } from '../../types';
+
 
 export interface IRegisterRequestAction {
   readonly type: typeof REGISTER_REQUEST;
 }
 export interface IRegisterSuccessAction {
   readonly type: typeof REGISTER_SUCCESS;
-	readonly user: any
+	readonly user: TUser
 }
 export interface IRegisterFailedAction {
   readonly type: typeof REGISTER_FAILED;
@@ -23,6 +25,7 @@ export interface ILoginRequestAction {
 }
 export interface ILoginSuccessAction {
   readonly type: typeof LOGIN_SUCCESS;
+	readonly user: TUser
 }
 export interface ILoginFailedAction {
   readonly type: typeof LOGIN_FAILED;
@@ -32,6 +35,7 @@ export interface ILoadUserRequestAction {
 }
 export interface ILoadUserSuccessAction {
   readonly type: typeof LOAD_USER_SUCCESS;
+	readonly user: TUser
 }
 export interface ILoadUserFailedAction {
   readonly type: typeof LOAD_USER_FAILED;
@@ -42,6 +46,7 @@ export interface IUpdateUserRequestAction {
 }
 export interface IUpdateUserSuccessAction {
   readonly type: typeof UPDATE_USER_SUCCESS;
+	readonly user: TUser
 }
 export interface IUpdateUserFailedAction {
   readonly type: typeof UPDATE_USER_FAILED;
@@ -69,6 +74,7 @@ export interface IRefreshTokenRequestAction {
 }
 export interface IRefreshTokenSuccessAction {
   readonly type: typeof REFRESH_TOKEN_SUCCESS;
+	
 }
 export interface IRefreshTokenFailedAction {
   readonly type: typeof REFRESH_TOKEN_FAILED;
@@ -98,14 +104,15 @@ export type TAuthActions =
 	| IRefreshTokenFailedAction
 
 
-export function register(newUser) {
-  return function (dispatch) {
+export const register: AppThunk = (newUser) => {
+  return function (dispatch: AppDispatch) {
     dispatch({
       type: REGISTER_REQUEST,
     });
     signUp(newUser)
       .then((res) => {
-        
+        console.log(res.user);
+				
         if (res && res.success) {
           const accessToken = res.accessToken.split("Bearer ")[1];
           const refreshToken = res.refreshToken;
@@ -130,8 +137,8 @@ export function register(newUser) {
   };
 }
 
-export const login = (state) => {
-	return function (dispatch) {
+export const login: AppThunk = (state) => {
+	return function (dispatch: AppDispatch) {
 		dispatch({
 			type: LOGIN_REQUEST
 		})
@@ -160,8 +167,8 @@ export const login = (state) => {
 	};
 }
 
-export const forgotPassword = (email) => {
-	return function (dispatch) {
+export const forgotPassword: AppThunk = (email) => {
+	return function (dispatch: AppDispatch) {
 		dispatch({
 			type: FORGOT_PASSWORD_REQUEST
 		})
@@ -180,8 +187,8 @@ export const forgotPassword = (email) => {
 	};
 }
 
-export const loadUser = () => {
-	return function (dispatch) {
+export const loadUser: AppThunk = () => {
+	return function (dispatch: AppDispatch) {
 		dispatch({
 			type: LOAD_USER_REQUEST
 		})
@@ -204,8 +211,8 @@ export const loadUser = () => {
 	};
 }
 
-export const updateUser = (data) => {
-	return function (dispatch) {
+export const updateUser: AppThunk = (data) => {
+	return function (dispatch: AppDispatch) {
 		dispatch({
 			type: UPDATE_USER_REQUEST
 		})
@@ -227,8 +234,8 @@ export const updateUser = (data) => {
 	};
 }
 
-export const logOut = () => {
-	return function (dispatch) {
+export const logOut: AppThunk = () => {
+	return function (dispatch: AppDispatch) {
 		dispatch({
 			type: LOGOUT_REQUEST
 		})
@@ -253,8 +260,8 @@ export const logOut = () => {
 	};
 }
 
-export const refreshToken = () => {
-	return function (dispatch) {
+export const refreshToken: AppThunk = () => {
+	return function (dispatch: AppDispatch) {
 		dispatch({
 			type: REFRESH_TOKEN_REQUEST,
 		});

@@ -17,21 +17,22 @@ import { ProtectedRoute } from "../protected-route";
 import Modal from "../modal/modal";
 import IngredientsDetails from "../ingredient-details/ingredient-details";
 import OrderDetails from "../order-details/order-details";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../hooks";
 import { getIngredients } from "../../services/actions/card";
+import { TLocationTemplate } from "../../types";
 
 // import ProfileOrders from "../profile-orders/profile-orders";
 
 function App() {
-  const location = useLocation<any>();
+  const location = useLocation<TLocationTemplate>();
   const dispatch = useDispatch();
   const history = useHistory();
   const background = (history.action === "PUSH" || history.action === "REPLACE") && location.state && location.state.background;
 
   const hasToken = !!getRefreshToken();
-  const isforgotPasswordSaccess = useSelector((store:any) => store.auth.isforgotPasswordSaccess);
+  const isforgotPasswordSaccess = useSelector((store) => store.auth.isforgotPasswordSaccess);
 
-  const { dataReceived } = useSelector((store:any) => store.card);
+  const { dataReceived } = useSelector((store) => store.card);
   React.useEffect(() => {
     if (!dataReceived) {
       dispatch(getIngredients());

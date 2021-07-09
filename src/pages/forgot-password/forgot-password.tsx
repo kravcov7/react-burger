@@ -3,7 +3,7 @@ import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-component
 import cn from "classnames";
 import { Link } from "react-router-dom";
 import { forgotPassword } from "../../services/actions/auth";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../hooks';
 import { Redirect } from 'react-router-dom';
 
 import s from "./forgot-password.module.css";

@@ -2,10 +2,10 @@ import s from "./order-details.module.css";
 import cn from "classnames";
 import doneOrder from "../../images/graphics.svg";
 
-import { useSelector } from "react-redux";
+import { useSelector } from "../../hooks";
 
 const OrderDetails = () => {
-  const { currentOrder, orderIsLoading, orderHasError } = useSelector((store: any) => store.card);
+  const { currentOrder, orderIsLoading, orderHasError } = useSelector((store) => store.card);
    
   return (
     <div className={s.order}>
@@ -13,7 +13,7 @@ const OrderDetails = () => {
       {orderHasError && "Произошла ошибка"}
       {!orderIsLoading && !orderHasError && (
         <>
-          <h1 className={cn(s.order__title, "text", "text_type_digits-large", "pt-6")}>{0 || currentOrder.number}</h1>
+          <h1 className={cn(s.order__title, "text", "text_type_digits-large", "pt-6")}>{0 || currentOrder?.number}</h1>
           <p className={cn(s.order__subtitle, "text", "text_type_main-medium", "pb-15")}>идентификатор заказа</p>
           <img className={cn(s.order__image, "pb-15")} src={doneOrder} alt="ll" />
           <p className={cn(s.order__subtitle, "text", "text_type_main-default")}>Ваш заказ начали готовить</p>

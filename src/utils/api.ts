@@ -131,7 +131,7 @@ export const fetchWithRefresh = async (url: string, options: RequestInit) => {
   try {    
     const res = await fetch(url, options)
     return await requestHandler(res)
-  } catch(err: any) {
+  } catch(err) {
     return err.json()
     .then((err: TFetchWithRefresh) => {
       console.log(err)

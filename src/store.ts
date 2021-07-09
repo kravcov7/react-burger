@@ -8,7 +8,13 @@ import { wsActionsAuth } from './services/actions/socketAuth';
 const wsUrl = 'wss://norma.nomoreparties.space/orders/all';
 const wsUrlAuth = 'wss://norma.nomoreparties.space/orders';
 
-const composeEnhancers = typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
+declare global {
+  interface Window {
+    REDUX_DEVTOOLS_EXTENSION_COMPOSE?: typeof compose;
+  }
+}
+
+export const composeEnhancers = window.REDUX_DEVTOOLS_EXTENSION_COMPOSE || compose;
 
 const enhancer = composeEnhancers(
   applyMiddleware(thunk, routerMiddleware(history), socketMiddleware(wsUrl, wsActions, false), socketMiddleware(wsUrlAuth, wsActionsAuth, true))

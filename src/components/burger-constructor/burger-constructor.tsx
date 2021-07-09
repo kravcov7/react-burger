@@ -5,15 +5,15 @@ import cn from "classnames";
 // import OrderDetails from "../order-details/order-details";
 import { useDrop } from "react-dnd";
 
-import { useSelector, useDispatch } from "react-redux";
-import { addOrder, DELETE_ITEM, DECREASE_INGREDIENT } from "../../services/actions/card";
-import { ADD_INGREDIENTS_BUN, ADD_INGREDIENTS_FILLINGS, INCREASE_INGREDIENT, MOVE_ITEM } from "../../services/actions/card";
+import { useSelector, useDispatch } from "../../hooks";
+import { addOrder } from "../../services/actions/card";
+import { ADD_INGREDIENTS_BUN, ADD_INGREDIENTS_FILLINGS, INCREASE_INGREDIENT, MOVE_ITEM, DELETE_ITEM, DECREASE_INGREDIENT } from "../../services/constants/card";
 import BurgerConstructorElements from "../burg-constr-elements/burger-constructor-elements";
 import ConstructorEmpty from "../constructor-empty/constuctor-empty";
 import { useLocation, useHistory } from 'react-router-dom';
 import {TProduct} from '../../types';
 
-type TBurger = { bun: TProduct; fillings: Array<TProduct>}
+type TBurger = { bun: TProduct | null; fillings: Array<TProduct>}
 
 const BurgerConstructor = () => {
   const location = useLocation();
@@ -42,7 +42,7 @@ const BurgerConstructor = () => {
   }));
 
   const dispatch = useDispatch();
-  const burger: TBurger = useSelector((store: any) => store.card.burger);
+  const burger: TBurger = useSelector((store) => store.card.burger);
 
   const handleClick = () => {
     const ingredients = [...burger.fillings.map((el) => el._id), burger.bun, burger.bun];

@@ -4,9 +4,9 @@ import s from "./item-detail.module.css";
 import cn from "classnames";
 import ItemStructure from "../item-structure/item-structure";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { WS_CONNECTION_START } from "../../services/actions/socket";
-import { WS_CONNECTION_START_AUTH } from "../../services/actions/socketAuth";
+import { useDispatch, useSelector } from "../../hooks";
+import { WS_CONNECTION_START } from "../../services/constants/socket";
+import { WS_CONNECTION_START_AUTH } from "../../services/constants/socketAuth";
 import { useParams } from "react-router-dom";
 import { useRouteMatch } from "react-router-dom";
 import { getStat } from "../../utils/helpers";
@@ -16,8 +16,8 @@ import { getTimeOrders } from "../../utils/helpers";
 function ItemDetails() {
   const dispatch = useDispatch();
   const isProfile = !!useRouteMatch("/profile");
-  const { id } = useParams<any>();
-  const { data } = useSelector((store: any) => store.card);
+  const { id } = useParams<{id: string}>();
+  const { data } = useSelector((store) => store.card);
 
   useEffect(() => {
     isProfile
@@ -29,8 +29,7 @@ function ItemDetails() {
         });
   }, [dispatch]);
 
-  const orders: Array<TOrder> = useSelector((store: any) => (isProfile ? store.wsAuth.messages.orders : store.ws.messages.orders));
-  // const { messages } = useSelector((store: any) => (isProfile ? store.wsAuth : store.ws));
+  const orders = useSelector((store) => (isProfile ? store.wsAuth.orders : store.ws.orders));
     
   const getItem = (arr: Array<TOrder>, id: string) => {
     return arr?.filter((el) => {
@@ -38,9 +37,9 @@ function ItemDetails() {
     })[0];
   };
   // let order = {};
-  const order: TOrder = getItem(orders, id) || null;
+  const order: TOrder | null = getItem(orders, id) || null;
 
-  const countItems = order?.ingredients.reduce((acc: any, curr: any) => {
+  const countItems = order?.ingredients.reduce((acc: {[name: string]: number}, curr) => {
     acc[curr] = (acc[curr] || 0) + 1;
     return acc;
   }, {});

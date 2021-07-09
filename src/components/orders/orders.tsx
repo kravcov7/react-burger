@@ -1,14 +1,14 @@
 import cn from "classnames";
 import s from "./orders.module.css";
 import { FC } from 'react';
-import { TOrder, TProduct } from "../../types";
+import { TOrder } from "../../types";
 
-type TProps = { orders: Array<TOrder>; total: string; totalToday: string}
+type TProps = { orders: Array<TOrder>; total: number; totalToday: number}
 
 const Orders: FC<TProps> = ({ orders, total, totalToday }) => {
   
-  const doneOrders: Array<TOrder> = orders?.filter((el: any) => el.status === "done");
-  const pendingOrders: Array<TOrder> = orders?.filter((el: any) => el.status !== "done"); 
+  const doneOrders: Array<TOrder> = orders?.filter((el) => el.status === "done");
+  const pendingOrders: Array<TOrder> = orders?.filter((el) => el.status !== "done"); 
 
   return (
     <section className="mt-25">

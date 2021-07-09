@@ -4,12 +4,12 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import Cards from '../cards/cards';
 
 import cn from 'classnames';
-import {  useSelector } from 'react-redux';
+import {  useSelector } from '../../hooks';
 import { TProduct } from "../../types";
 
 const BurgerIngredients = () => {
   const [current, setCurrent] = React.useState("buns");
-  const data: Array<TProduct> = useSelector((store: any) => store.card.data)
+  const data: Array<TProduct> = useSelector((store) => store.card.data)
 
   const bun: Array<TProduct> = data.filter((item) => item.type === "bun");
   const sauce: Array<TProduct> = data.filter((item) => item.type === "sauce");
