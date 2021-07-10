@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { PasswordInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import cn from "classnames";
 import { Link } from "react-router-dom";
 import { login } from "../../services/actions/auth";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../hooks';
 import { Redirect } from 'react-router-dom';
 
 import s from "./login.module.css";
@@ -14,8 +14,8 @@ function Login() {
     password: "",
   });
 
-  const handleInputChange = (event: any) => {
-    const target = event.target;
+  const handleInputChange = (event: SyntheticEvent) => {
+    const target = event.target as HTMLInputElement;
     const value = target.value;
     const name = target.name;
 
@@ -27,13 +27,13 @@ function Login() {
 
   const dispatch = useDispatch();
 
-  const submit = (e: any) => {
+  const submit = (e: SyntheticEvent) => {
     e.preventDefault();
     dispatch(login(state));
   };
 
   const hasToken = localStorage.getItem('refreshToken')
-  const user = useSelector((store: any) => store.auth.name)
+  const user = useSelector((store) => store.auth.name)
 
   if (user || hasToken) {
     return (

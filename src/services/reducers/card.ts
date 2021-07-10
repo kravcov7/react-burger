@@ -1,11 +1,27 @@
 import { v4 as uuidv4 } from "uuid";
+import { TOrder, TProduct } from "../../types";
+import { TCardsActions } from "../actions/card";
 
 import { INCREASE_INGREDIENT, DECREASE_INGREDIENT, DELETE_ITEM, MOVE_ITEM, 
   GET_INGREDIENTS_FAILED, GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS, 
   ADD_INGREDIENTS_BUN, ADD_INGREDIENTS_FILLINGS, CREATE_ORDER_FAILED, 
-  CREATE_ORDER_SUCCESS, CREATE_ORDER_REQUEST } from "../actions/card";
+  CREATE_ORDER_SUCCESS, CREATE_ORDER_REQUEST } from "../constants/card";
 
-const initialState = {
+export type TCardInitialState = {
+  isLoading: boolean;
+  hasError: boolean;
+  dataReceived: boolean;
+  data: Array<TProduct>,
+  burger: {
+    bun: null | TProduct,
+    fillings: Array<TProduct>,
+  },
+  counts: {[ name: string]: number},  
+  currentOrder: TOrder | null;
+  orderIsLoading: boolean;
+  orderHasError: boolean;
+};
+const initialState: TCardInitialState = {
   isLoading: false,
   hasError: false,
   dataReceived: false,
@@ -20,7 +36,7 @@ const initialState = {
   orderHasError: false,
 };
 
-export const cardReducer = (state = initialState, action) => {
+export const cardReducer = (state = initialState, action: TCardsActions): TCardInitialState => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {
       return {
@@ -43,6 +59,7 @@ export const cardReducer = (state = initialState, action) => {
       };
     }
     case CREATE_ORDER_SUCCESS: {
+            
       return { ...state, orderHasError: false, currentOrder: action.data, orderIsLoading: false };
     }
     case CREATE_ORDER_FAILED: {
@@ -56,7 +73,6 @@ export const cardReducer = (state = initialState, action) => {
       if (action.item.type === "bun") {
         return state;
       } else {
-        console.log(state.counts);
         return {
           ...state,
           counts: { ...state.counts, [action.item._id]: (state.counts[action.item._id] || 0) + 1 },

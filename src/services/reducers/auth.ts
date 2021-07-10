@@ -1,6 +1,28 @@
-import { REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAILED, UPDATE_USER_REQUEST, UPDATE_USER_SUCCESS, UPDATE_USER_FAILED, LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILED, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_SUCCESS, FORGOT_PASSWORD_FAILED, REFRESH_TOKEN_REQUEST, REFRESH_TOKEN_SUCCESS, REFRESH_TOKEN_FAILED } from "../actions/auth";
+import { REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED, 
+  LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAILED, UPDATE_USER_REQUEST, UPDATE_USER_SUCCESS, UPDATE_USER_FAILED, 
+  LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILED, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_SUCCESS, FORGOT_PASSWORD_FAILED, 
+  REFRESH_TOKEN_REQUEST, REFRESH_TOKEN_SUCCESS, REFRESH_TOKEN_FAILED } from "../constants/auth";
+import { TAuthActions } from "../actions/auth";
 
-const initialState = {
+type TAuthInitialState = {
+  email: string;
+  name: string;
+  registerRequest: boolean;
+  registerFailed: boolean;
+  loginRequest: boolean;
+  loginFailed: boolean;
+  loadUserRequest: boolean;
+  loadUserFailed: boolean;
+  logoutRequest: boolean;
+  logoutFailed: boolean;
+  forgotPasswordRequest: boolean;
+  forgotPasswordFailed: boolean;
+  isforgotPasswordRequest: boolean;
+  isforgotPasswordSaccess: boolean;
+  isTokenUpdated: boolean;
+  tokenUpdateDate: boolean;
+};
+const initialState: TAuthInitialState = {
   email: "",
   name: "",
   registerRequest: false,
@@ -16,10 +38,10 @@ const initialState = {
   isforgotPasswordRequest: false,
   isforgotPasswordSaccess: false,
   isTokenUpdated: false,
-  tokenUpdateDate: null,
+  tokenUpdateDate: false,
 };
 
-export const authReducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action: TAuthActions): TAuthInitialState => {
   switch (action.type) {
     case REGISTER_REQUEST: {
       return {

@@ -1,13 +1,13 @@
 import s from "./ingredient-details.module.css";
 import cn from "classnames";
-import {  useSelector } from "react-redux";
+import {  useSelector } from "../../hooks";
 import { useParams } from "react-router-dom";
 import { TProduct } from "../../types";
 
 const IngredientsDetails =() => {
-  const { id } = useParams<any>();
-  const { isLoading, hasError } = useSelector((store: any) => store.card);
-  const data: Array<TProduct>  = useSelector((store: any) => store.card.data);
+  const { id } = useParams<{id: string}>();
+  const { isLoading, hasError } = useSelector((store) => store.card);
+  const data: Array<TProduct>  = useSelector((store) => store.card.data);
 
   const item = data.find((el) => el._id === id);
 

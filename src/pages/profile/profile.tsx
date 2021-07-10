@@ -3,7 +3,7 @@ import cn from "classnames";
 import { NavLink } from "react-router-dom";
 import { Switch, Route } from "react-router-dom";
 import React, { useEffect, SyntheticEvent, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../hooks";
 import { loadUser } from "../../services/actions/auth";
 import { updateUser } from '../../services/actions/auth';
 import { logOut } from '../../services/actions/auth';
@@ -23,8 +23,8 @@ const Profile = () => {
   });  
 
   const dispatch = useDispatch();
-  const currentUserName = useSelector((store: any) => store.auth.name);
-	const currentUserEmail = useSelector((store: any) => store.auth.email);
+  const currentUserName = useSelector((store) => store.auth.name);
+	const currentUserEmail = useSelector((store) => store.auth.email);
 
   useEffect(() => {
     dispatch(loadUser());
@@ -91,7 +91,7 @@ const Profile = () => {
   const emailIcon = state.emailDisabled ? "EditIcon" : "CloseIcon";
   const passwordIcon = state.passwordDisabled ? "EditIcon" : "CloseIcon";
 
-  const submit = (e: any) => {
+  const submit = (e: SyntheticEvent) => {
     e.preventDefault();
     let data = {};
 		data = state.name !== currentUserName ? { ...data, name: state.name } : data;

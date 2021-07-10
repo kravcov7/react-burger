@@ -1,10 +1,14 @@
 import { getCookie } from '../../utils/cookie'
 
-export const socketMiddleware = (wsUrl, wsActions, isAuth) => {
-  return store => {
-    let socket = null;
+import { AnyAction, MiddlewareAPI } from 'redux';
+import { TWSAction } from '../../types';
 
-    return next => action => {
+
+export const socketMiddleware = (wsUrl: string, wsActions: TWSAction, isAuth: boolean) => ( store: MiddlewareAPI) =>{
+  
+    let socket: WebSocket | null = null;
+
+    return(next: (i: AnyAction) => void) => (action: AnyAction) => {
       // const { dispatch, getState } = store;
       const { dispatch } = store;
       const { type } = action;
@@ -46,6 +50,6 @@ export const socketMiddleware = (wsUrl, wsActions, isAuth) => {
       }
 
       next(action);
-    };
+    
   };
 };

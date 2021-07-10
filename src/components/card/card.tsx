@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./card.module.css";
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../hooks";
 import { useDrag } from "react-dnd";
 import { FC } from 'react';
 import { TProduct } from "../../types";
@@ -17,7 +17,7 @@ const Card:FC<TProps> = React.memo(({ el }) => {
     }),
   }); 
   
-  const { counts, burger } = useSelector((store: any) => store.card);
+  const { counts, burger } = useSelector((store) => store.card);
   const count = el.type==='bun' && burger.bun?._id===el._id ? 2 : counts[el._id];
   // count = el.type==='bun' && burger.bun?._id===el._id ? 2 : id;
   

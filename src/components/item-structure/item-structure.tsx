@@ -5,10 +5,10 @@ import BurgerImage from "../burger-image/burger-image";
 import { FC } from 'react';
 import { TProduct } from "../../types";
 
-type TProps = { el: any; count: number }
+type TProps = { el: TProduct; count: number }
 
 const ItemStructure:FC<TProps> =({ el, count }) => {
-  
+    
   return (
     <section className={s.main}>
       <div className={s.name}>

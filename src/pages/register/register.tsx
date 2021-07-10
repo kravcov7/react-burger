@@ -3,7 +3,7 @@ import { Input, Button, PasswordInput } from "@ya.praktikum/react-developer-burg
 import cn from "classnames";
 import { Link } from "react-router-dom";
 import { register } from "../../services/actions/auth";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../hooks';
 import { Redirect } from 'react-router-dom';
 
 import s from "./register.module.css";
@@ -15,8 +15,8 @@ function Register() {
     password: "",
   });
 
-  const handleInputChange = (event: any) => {
-    const target = event.target;
+  const handleInputChange = (event: SyntheticEvent) => {
+    const target = event.target as HTMLInputElement;
     const value = target.value;
     const name = target.name;
 
@@ -34,7 +34,7 @@ function Register() {
   };
   
   const hasToken = localStorage.getItem('refreshToken')
-  console.log(hasToken);
+  
   if (hasToken) {
     return (
       <Redirect
