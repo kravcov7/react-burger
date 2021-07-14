@@ -3,13 +3,14 @@ import cn from "classnames";
 import doneOrder from "../../images/graphics.svg";
 
 import { useSelector } from "../../hooks";
+import Preloader from "../preloader/preloader";
 
 const OrderDetails = () => {
   const { currentOrder, orderIsLoading, orderHasError } = useSelector((store) => store.card);
    
   return (
     <div className={s.order}>
-      {orderIsLoading && "Загрузка..."}
+      {orderIsLoading && <Preloader /> }
       {orderHasError && "Произошла ошибка"}
       {!orderIsLoading && !orderHasError && (
         <>

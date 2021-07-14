@@ -3,6 +3,7 @@ import cn from "classnames";
 import {  useSelector } from "../../hooks";
 import { useParams } from "react-router-dom";
 import { TProduct } from "../../types";
+import Preloader from "../preloader/preloader";
 
 const IngredientsDetails =() => {
   const { id } = useParams<{id: string}>();
@@ -14,7 +15,7 @@ const IngredientsDetails =() => {
   return (
     <div className={s.ingredient}>
       <h1 className={cn(s.title, "text", "text_type_main-large", "mb-5")}>Детали ингредиента</h1>
-      {isLoading && "Идет загрузка..."}
+      {isLoading && <Preloader /> }
       {hasError && "произошла ошибка"}
       {item && (
         <div className={s.container}>
