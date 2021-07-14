@@ -24,6 +24,7 @@
   flex-direction: row;
   list-style-type: none;
   padding-left: 0;
+  position: relative;
 }
 .link {
   text-decoration: none;
@@ -37,4 +38,16 @@
 }
 .status_color_white {
   color: #F2F2F3;
+}
+.overlay {
+  background: rgba(19, 19, 22, 0.6);
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 2px;
+  right: -15px;    
 }

@@ -20,10 +20,13 @@ const Burger: FC<TProps>=({ el, data }) => {
     })
     .flat();
 
+  let numZInd: any = 6
   const price = itemOrders?.reduce((acc, curr) => (acc += curr.price), 0);
   const dateOrders = getTimeOrders(el?.createdAt);
+  const count = itemOrders.length
+  const countLeftover = count - numZInd
   
-  let numZInd = 6
+  const burgerItem = itemOrders.slice(0, numZInd)
 
   return (
     <section className={s.main}>
@@ -36,12 +39,13 @@ const Burger: FC<TProps>=({ el, data }) => {
         <h2 className={cn(s[`status_color_${stat.colorText}`], "text text_type_main-default mb-26")}>{stat.text}</h2>
         <div className={s.footer}>
           <ul className={s.container}>
-            {itemOrders?.map((el, index) => {
+            {burgerItem?.map((el, index) => {
               numZInd -=1
               return <li key={index} className={s.item} style={{ zIndex: numZInd }}>
                 <BurgerImage image={el?.image_mobile} />
               </li>
             })}
+            { count> 6 ? (<div className={s.overlay}><span>{`+${countLeftover}`}</span></div>) : null}          
           </ul>
           <div className={s.price}>
             <div className="text text_type_digits-default mr-2">{price}</div>
