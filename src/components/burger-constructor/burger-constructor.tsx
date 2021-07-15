@@ -41,6 +41,13 @@ const BurgerConstructor = () => {
     }),
   }));
 
+  const isActive = canDrop && isOver;
+  let classModificator = isActive
+    ? 'burger-container_active'
+    : canDrop
+      ? 'burger-container_candrop'
+      : '';
+
   const dispatch = useDispatch();
   const burger: TBurger = useSelector((store) => store.card.burger);
 
@@ -71,7 +78,7 @@ const BurgerConstructor = () => {
   );
 
   return (
-    <section ref={drop} data-cy='drop-container' className={cn(styles.container)}>
+    <section ref={drop} data-cy='drop-container' className={cn(styles.container, styles[classModificator])}>
       {burger.bun || burger.fillings.length ? (
         <>
           {burger.bun && (

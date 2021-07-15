@@ -3,11 +3,20 @@
   align-items: center;	
 }
 
+.burger-container_active {
+  background-color: #1c1c21;
+}
+
+.burger-container_candrop {
+  border: 10px solid #1c1c21;
+}
+
 .container{
   display: flex;
   flex-direction: column;
   margin: 100px auto;  
   width: 100%;
+  border-radius: 30px;
   /* height: 100%; */
   /* max-height: 200px; */
 }
