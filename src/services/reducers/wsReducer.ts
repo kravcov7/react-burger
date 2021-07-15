@@ -1,7 +1,6 @@
 import { TOrder } from '../../types';
 import { TWSActionsActions } from '../actions/socket';
 import {
-  WS_USER_NAME_UPDATE,
   WS_CONNECTION_SUCCESS,
   WS_CONNECTION_ERROR,
   WS_CONNECTION_CLOSED,

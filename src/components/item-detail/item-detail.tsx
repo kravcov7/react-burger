@@ -1,5 +1,4 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import React from "react";
 import s from "./item-detail.module.css";
 import cn from "classnames";
 import ItemStructure from "../item-structure/item-structure";
@@ -27,7 +26,7 @@ function ItemDetails() {
       : dispatch({
           type: WS_CONNECTION_START,
         });
-  }, [dispatch]);
+  }, [dispatch, isProfile]);
 
   const orders = useSelector((store) => (isProfile ? store.wsAuth.orders : store.ws.orders));
     

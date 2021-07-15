@@ -1,7 +1,6 @@
 import { TOrder } from '../../types';
 import { TWSActionsActionsAuth } from '../actions/socketAuth';
 import {
-  WS_USER_NAME_UPDATE_AUTH,
   WS_CONNECTION_SUCCESS_AUTH,
   WS_CONNECTION_ERROR_AUTH,
   WS_CONNECTION_CLOSED_AUTH,

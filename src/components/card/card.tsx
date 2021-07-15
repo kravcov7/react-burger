@@ -9,12 +9,9 @@ import { TProduct } from "../../types";
 type TProps = { el: TProduct }
 
 const Card:FC<TProps> = React.memo(({ el }) => {
-  const [{ isDrag }, drag] = useDrag({
+  const [, drag] = useDrag({
     type: "product",
     item: el,
-    collect: (monitor) => ({
-      isDrag: monitor.isDragging(),
-    }),
   }); 
   
   const { counts, burger } = useSelector((store) => store.card);
@@ -22,7 +19,7 @@ const Card:FC<TProps> = React.memo(({ el }) => {
   // count = el.type==='bun' && burger.bun?._id===el._id ? 2 : id;
   
   return (
-    <div ref={drag} data-cy='ingredient' className={styles.card} key={el._id} >
+    <div ref={drag} data-cy='ingredient'  className={styles.card} key={el._id} >
       <img src={el.image} alt={el.name} />
       <p className={styles.price}>
         <span className="text text_type_digits-default mr-2">{el.price}</span>

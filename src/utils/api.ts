@@ -1,4 +1,3 @@
-import { TOrder } from "../types";
 import url from "./config";
 import { setCookie, getCookie, deleteCookie } from "./cookie";
 
