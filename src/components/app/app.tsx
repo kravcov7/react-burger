@@ -43,7 +43,7 @@ function App() {
     <div className={s.container}>
       <AppHeader />
       <Switch location={background || location}>
-        <Route path="/" exact={true}>
+        <Route path="/react-burger/" exact={true}>
           <BurgerBlock />
         </Route>
         <Route path="/login" exact={true}>

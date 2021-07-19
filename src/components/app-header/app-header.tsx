@@ -13,7 +13,7 @@ function AppHeader() {
     <header className={styles.header}>
       <nav className={styles.container}>
         <div className={cn(styles.block)}>
-          <NavLink exact to="/" className={cn(styles.link)} activeClassName={styles.active}>
+          <NavLink exact to="/react-burger/" className={cn(styles.link)} activeClassName={styles.active}>
             <BurgerIcon type={isConstructor  ? "primary" : "secondary"} />
             <span className={cn("pl-1", "mr-4", "text", "text_type_main-default")}>Конструктор</span>
           </NavLink>
